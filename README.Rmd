@@ -141,7 +141,7 @@ source2 <- decomp( x = intermediate_demand,
 The output data is as follows
 
 ```{r source-eval}
-str(source)
+dim(source)
 ```
 
 Discussion
