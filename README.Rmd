@@ -6,6 +6,9 @@ output: md_document
 bibliography: bibliography.bib
 ---
 
+```{r load-package, echo=FALSE}
+library(decompr)
+```
 
 Abstract
 ----------------
@@ -29,20 +32,87 @@ since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming
 to easily derive standard GVC indicators for statistical analysis.
 
+A sample dataset of Input-Output tables is included.
+In order to save space and speed up computations, the included dataset uses regional aggregates.
+
+Load the included dataset of WIOD regional Input-Output tables.
+```{r load-data}
+data(wiod)
+```
+
+A key step in loading the data is making sure that the dimensions of the data inputs are correct,
+in the sample data we have **G = 7** (generally countries, here regions) and **N = 43** (number of industries).
+```{r data-dimensions}
+dim(intermediate_demand) # (2 + GN + totals) x (2 + GN)
+dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
+```
+
+Note thata **G** and **N** are automatically inferred from the dimensions of the data.
+
+When importing data, be sure to specify **stringsAsFactors = FALSE** and to **header=FALSE**,
+as the Input-Output tables use two header lines (country and industry),
+
+
+
 Wang Wei Zhu
 -------------------
  * Small derivation
  * R demonstration using WIOD data
- * 
- 
+
+```{r load_tables}
+elements <- load_tables( x = intermediate_demand,
+                         y = final_demand         )
+```
+
+
+We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.
+```{r wwz}
+wwz <- wwz( elements )
+```
+
+In addition, a wrapper function called **decomp** is provided which performs both steps at once.
+Though it is recomended that the seperate functions be used for large data sets.
+
+```{r wwz-wrapper}
+wwz2 <- decomp( x = intermediate_demand,
+                y = final_demand,
+                method = "wwz"           )
+```
+
+Note that **wwz** is the default method.
+
+The output data is as follows
+
+```{r wwz-eval}
+str(wwz)
+```
+
+
 Source Decomposition
 ------------------------
  * Small derivation
  * R demonstration using WIOD data
 
-Input and Output Data
-----------------------
 
+We can now decompose the elements using the Source decomposition.
+```{r source}
+source <- kung_fu( elements )
+```
+
+In addition, a wrapper function called **decomp** is provided which performs both steps at once.
+Though it is recomended that the atomic functions be used for large data sets.
+
+```{r source-wrapper}
+source2 <- decomp( x = intermediate_demand,
+                y = final_demand,
+                method = "source"           )
+```
+
+The output data is as follows
+
+```{r source-eval}
+str(source)
+```
 
 Discussion
 ------------------------
