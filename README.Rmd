@@ -11,7 +11,7 @@ library(decompr)
 ```
 
 Abstract
-----------------
+===============
 The R package **decompr** implements algorithms for the analysis of Global Value Chains.
 Two methods for gross export flow decomposition using Inter-Country Input-Output tables are provided.
 The first method is the **Wang-Wei-Zhu** [-@wang2014quantifying] algorithm which splits bilateral gross exports into 16 value added components.
@@ -23,7 +23,7 @@ This article summarises the methodology of the algorithms and describes the form
 
 
 Introduction
-------------------
+================
 Global Value Chains (GVCs) have become a central factor in trade and development policy.
 Policy makers from different countries and institutions have placed them at the center of their agenda
 and continuously emphasize their growing importance for both international trade and economic development.
@@ -32,10 +32,12 @@ since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming
 to easily derive standard GVC indicators for statistical analysis.
 
-A sample dataset of Input-Output tables is included.
-In order to save space and speed up computations, the included dataset uses regional aggregates.
+Data
+=================
+A sample data set of Input-Output tables is included.
+In order to save space and speed up computations, the included data set uses regional aggregates.
 
-Load the included dataset of WIOD regional Input-Output tables.
+Load the included data set of WIOD regional Input-Output tables.
 ```{r load-data}
 data(wiod)
 ```
@@ -54,8 +56,8 @@ as the Input-Output tables use two header lines (country and industry),
 
 
 
-Wang Wei Zhu
--------------------
+Methods
+=================
  * Small derivation
  * R demonstration using WIOD data
 
@@ -64,7 +66,8 @@ elements <- load_tables( x = intermediate_demand,
                          y = final_demand         )
 ```
 
-
+Wang Wei Zhu decomposition
+------------------------------
 We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.
 ```{r wwz}
 wwz <- wwz( elements )
@@ -87,9 +90,8 @@ The output data is as follows
 str(wwz)
 ```
 
-
-Source Decomposition
-------------------------
+Source decomposition
+---------------------------------------
  * Small derivation
  * R demonstration using WIOD data
 
@@ -118,7 +120,7 @@ Discussion
 ------------------------
 
 
-Acknowledgement
+Acknowledgements
 --------------------
 FNS
 Fei Wang
