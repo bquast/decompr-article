@@ -1,5 +1,5 @@
 ---
-title: "decompr article"
+title: "decompr: trade flow decomposition for Global Value Chain analysis"
 author: "Bastiaan Quast and Victor Kümmritz"
 date: "Wednesday, November 26, 2014"
 output: md_document
@@ -32,34 +32,63 @@ since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming
 to easily derive standard GVC indicators for statistical analysis.
 
+As mentioned above, **decompr** uses Inter-Country Input-Output tables,
+such as those published by the OECD, WIOD, or national statistics bureaus.
+These tables state input-output relationships in gross terms
+between industries within and across countries.
+
+For instance, let us look at the example of the leather used in German manufactured car seats.
+The ICIOs quantify the value of inputs that the Turkish leather and textiles industry
+supplies to the German transport equipment industry.
+
+The problem of these gross trade flows,
+is that they do not reveal how much of the value was added in the supplying industry,
+and how much of the value was added in previous stages of production,
+performed by other industries or even countries.
+
+The decomposition of gross trade flows solves this problem,
+by reallocating the value of intermediate goods used by industries to the original producers.
+In our example, the use of Argentinian agricultural produce (raw hides)
+is subtracted from the Turkish leather industry and added to the Argintinian agricultural industry.
+
 Data
 =================
+
 A sample data set of Input-Output tables is included.
-In order to save space and speed up computations, the included data set uses regional aggregates.
+In order to save space and speed up computations, the included data set uses regional aggregates,
+instead of countries.
 
 Load the included data set of WIOD regional Input-Output tables.
+
 ```{r load-data}
 data(wiod)
 ```
 
 A key step in loading the data is making sure that the dimensions of the data inputs are correct,
-in the sample data we have **G = 7** (generally countries, here regions) and **N = 43** (number of industries).
+in the sample data we have **G = 7** (generally countries, here regions) and **N = 34** (number of industries).
+
 ```{r data-dimensions}
 dim(intermediate_demand) # (2 + GN + totals) x (2 + GN)
 dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
 ```
 
-Note thata **G** and **N** are automatically inferred from the dimensions of the data.
+Note thata **G** and **N** are automatically inferred by decompr from the dimensions of the data set.
 
 When importing data, be sure to specify **stringsAsFactors = FALSE** and to **header=FALSE**,
-as the Input-Output tables use two header lines (country and industry),
+as the Input-Output tables use two header lines (country and industry), e.g:
 
+```{r manual-import}
+final_demand <- read.csv( file             = "final_demand.csv",
+                          header           = FALSE,
+                          stringsAsFactors = FALSE               )
+
+```
 
 
 Methods
 =================
  * Small derivation
- * R demonstration using WIOD data
+
 
 ```{r load_tables}
 elements <- load_tables( x = intermediate_demand,
