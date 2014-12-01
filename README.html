@@ -52,17 +52,24 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-<div id="abstract" class="section level2">
-<h2>Abstract</h2>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
 <p>The R package <strong>decompr</strong> implements algorithms for the analysis of Global Value Chains. Two methods for gross export flow decomposition using Inter-Country Input-Output tables are provided. The first method is the <strong>Wang-Wei-Zhu</strong> (2014) algorithm which splits bilateral gross exports into 16 value added components. These components can broadly be divided into domestic and foreign value added. The second method concerns a <strong>source decomposition</strong> algorithm. This derives the value added origin of a country-industry’s exports by source country and source industry, by applying the basic Leontief insight to gross trade data. This article summarises the methodology of the algorithms and describes the format of the input and output data.</p>
 </div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <p>Global Value Chains (GVCs) have become a central factor in trade and development policy. Policy makers from different countries and institutions have placed them at the center of their agenda and continuously emphasize their growing importance for both international trade and economic development. However, analysing this phenomenon empirically requires complex matrix manipulations, since the relevant data is only available in the form of gross flows. This package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.</p>
-<p>A sample dataset of Input-Output tables is included. In order to save space and speed up computations, the included dataset uses regional aggregates.</p>
-<p>Load the included dataset of WIOD regional Input-Output tables.</p>
+<p>As mentioned above, <strong>decompr</strong> uses Inter-Country Input-Output tables, such as those published by the OECD, WIOD, or national statistics bureaus. These tables state input-output relationships in gross terms between industries within and across countries.</p>
+<p>For instance, let us look at the example of the leather used in German manufactured car seats. The ICIOs quantify the value of inputs that the Turkish leather and textiles industry supplies to the German transport equipment industry.</p>
+<p>The problem of these gross trade flows, is that they do not reveal how much of the value was added in the supplying industry, and how much of the value was added in previous stages of production, performed by other industries or even countries.</p>
+<p>The decomposition of gross trade flows solves this problem, by reallocating the value of intermediate goods used by industries to the original producers. In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish leather industry and added to the Argintinian agricultural industry.</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>A sample data set of Input-Output tables is included. In order to save space and speed up computations, the included data set uses regional aggregates, instead of countries.</p>
+<p>Load the included data set of WIOD regional Input-Output tables.</p>
 <pre><code>data(wiod)</code></pre>
-<p>A key step in loading the data is making sure that the dimensions of the data inputs are correct, in the sample data we have <strong>G = 7</strong> (generally countries, here regions) and <strong>N = 43</strong> (number of industries).</p>
+<p>A key step in loading the data is making sure that the dimensions of the data inputs are correct, in the sample data we have <strong>G = 7</strong> (generally countries, here regions) and <strong>N = 34</strong> (number of industries).</p>
 <pre><code>dim(intermediate_demand) # (2 + GN + totals) x (2 + GN)
 
 ## [1] 255 247
@@ -70,19 +77,23 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
 
 ## [1] 247  37</code></pre>
-<p>Note thata <strong>G</strong> and <strong>N</strong> are automatically inferred from the dimensions of the data.</p>
-<p>When importing data, be sure to specify <strong>stringsAsFactors = FALSE</strong> and to <strong>header=FALSE</strong>, as the Input-Output tables use two header lines (country and industry),</p>
+<p>Note thata <strong>G</strong> and <strong>N</strong> are automatically inferred by decompr from the dimensions of the data set.</p>
+<p>When importing data, be sure to specify <strong>stringsAsFactors = FALSE</strong> and to <strong>header=FALSE</strong>, as the Input-Output tables use two header lines (country and industry), e.g:</p>
+<pre><code>final_demand &lt;- read.csv( file             = &quot;final_demand.csv&quot;,
+                          header           = FALSE,
+                          stringsAsFactors = FALSE               )</code></pre>
 </div>
-<div id="wang-wei-zhu" class="section level2">
-<h2>Wang Wei Zhu</h2>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
 <ul>
 <li>Small derivation</li>
-<li>R demonstration using WIOD data</li>
 </ul>
 <!-- -->
 
 <pre><code>elements &lt;- load_tables( x = intermediate_demand,
                          y = final_demand         )</code></pre>
+<div id="wang-wei-zhu-decomposition" class="section level2">
+<h2>Wang Wei Zhu decomposition</h2>
 <p>We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.</p>
 <pre><code>wwz &lt;- wwz( elements )</code></pre>
 <p>In addition, a wrapper function called <strong>decomp</strong> is provided which performs both steps at once. Though it is recomended that the seperate functions be used for large data sets.</p>
@@ -99,7 +110,7 @@ dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
 ##   ..$ : chr [1:25] &quot;DVA_FIN&quot; &quot;DVA_INT&quot; &quot;DVA_INTrexI1&quot; &quot;DVA_INTrexF&quot; ...</code></pre>
 </div>
 <div id="source-decomposition" class="section level2">
-<h2>Source Decomposition</h2>
+<h2>Source decomposition</h2>
 <ul>
 <li>Small derivation</li>
 <li>R demonstration using WIOD data</li>
@@ -218,13 +229,14 @@ dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
 <div id="discussion" class="section level2">
 <h2>Discussion</h2>
 </div>
-<div id="acknowledgement" class="section level2">
-<h2>Acknowledgement</h2>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
 <p>FNS Fei Wang</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>Wang, Zhi, Shang-Jin Wei, and Kunfu Zhu. 2014. “Quantifying International Production Sharing at the Bilateral and Sector Levels.”</p>
+</div>
 </div>
 
 

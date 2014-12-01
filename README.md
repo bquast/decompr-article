@@ -1,5 +1,5 @@
 Abstract
---------
+========
 
 The R package **decompr** implements algorithms for the analysis of
 Global Value Chains. Two methods for gross export flow decomposition
@@ -14,7 +14,7 @@ data. This article summarises the methodology of the algorithms and
 describes the format of the input and output data.
 
 Introduction
-------------
+============
 
 Global Value Chains (GVCs) have become a central factor in trade and
 development policy. Policy makers from different countries and
@@ -27,17 +27,41 @@ researchers with little background in matrix algebra and linear
 programming to easily derive standard GVC indicators for statistical
 analysis.
 
-A sample dataset of Input-Output tables is included. In order to save
-space and speed up computations, the included dataset uses regional
-aggregates.
+As mentioned above, **decompr** uses Inter-Country Input-Output tables,
+such as those published by the OECD, WIOD, or national statistics
+bureaus. These tables state input-output relationships in gross terms
+between industries within and across countries.
 
-Load the included dataset of WIOD regional Input-Output tables.
+For instance, let us look at the example of the leather used in German
+manufactured car seats. The ICIOs quantify the value of inputs that the
+Turkish leather and textiles industry supplies to the German transport
+equipment industry.
+
+The problem of these gross trade flows, is that they do not reveal how
+much of the value was added in the supplying industry, and how much of
+the value was added in previous stages of production, performed by other
+industries or even countries.
+
+The decomposition of gross trade flows solves this problem, by
+reallocating the value of intermediate goods used by industries to the
+original producers. In our example, the use of Argentinian agricultural
+produce (raw hides) is subtracted from the Turkish leather industry and
+added to the Argintinian agricultural industry.
+
+Data
+====
+
+A sample data set of Input-Output tables is included. In order to save
+space and speed up computations, the included data set uses regional
+aggregates, instead of countries.
+
+Load the included data set of WIOD regional Input-Output tables.
 
     data(wiod)
 
 A key step in loading the data is making sure that the dimensions of the
 data inputs are correct, in the sample data we have **G = 7** (generally
-countries, here regions) and **N = 43** (number of industries).
+countries, here regions) and **N = 34** (number of industries).
 
     dim(intermediate_demand) # (2 + GN + totals) x (2 + GN)
 
@@ -47,23 +71,29 @@ countries, here regions) and **N = 43** (number of industries).
 
     ## [1] 247  37
 
-Note thata **G** and **N** are automatically inferred from the
-dimensions of the data.
+Note thata **G** and **N** are automatically inferred by decompr from
+the dimensions of the data set.
 
 When importing data, be sure to specify **stringsAsFactors = FALSE** and
 to **header=FALSE**, as the Input-Output tables use two header lines
-(country and industry),
+(country and industry), e.g:
 
-Wang Wei Zhu
-------------
+    final_demand <- read.csv( file             = "final_demand.csv",
+                              header           = FALSE,
+                              stringsAsFactors = FALSE               )
+
+Methods
+=======
 
 -   Small derivation
--   R demonstration using WIOD data
 
 <!-- -->
 
     elements <- load_tables( x = intermediate_demand,
                              y = final_demand         )
+
+Wang Wei Zhu decomposition
+--------------------------
 
 We can now decompose the elements using the Wang-Wei-Zhu (or source)
 decomposition.
@@ -89,7 +119,7 @@ The output data is as follows
     ##   ..$ : chr [1:1960] "Euro-zone.c1.Euro-zone" "Euro-zone.c1.Other EU" "Euro-zone.c1.NAFTA" "Euro-zone.c1.China" ...
     ##   ..$ : chr [1:25] "DVA_FIN" "DVA_INT" "DVA_INTrexI1" "DVA_INTrexF" ...
 
-Source Decomposition
+Source decomposition
 --------------------
 
 -   Small derivation
@@ -216,8 +246,8 @@ The output data is as follows
 Discussion
 ----------
 
-Acknowledgement
----------------
+Acknowledgements
+----------------
 
 FNS Fei Wang
 
