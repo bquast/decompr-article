@@ -77,7 +77,7 @@ Note thata **G** and **N** are automatically inferred by decompr from the dimens
 When importing data, be sure to specify **stringsAsFactors = FALSE** and to **header=FALSE**,
 as the Input-Output tables use two header lines (country and industry), e.g:
 
-```{r manual-import}
+```{r manual-import, eval=FALSE}
 final_demand <- read.csv( file             = "final_demand.csv",
                           header           = FALSE,
                           stringsAsFactors = FALSE               )
@@ -88,7 +88,6 @@ final_demand <- read.csv( file             = "final_demand.csv",
 Methods
 =================
  * Small derivation
-
 
 ```{r load_tables}
 elements <- load_tables( x = intermediate_demand,
