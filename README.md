@@ -42,11 +42,30 @@ much of the value was added in the supplying industry, and how much of
 the value was added in previous stages of production, performed by other
 industries or even countries.
 
-The decomposition of gross trade flows solves this problem, by
+The source decomposition of gross trade flows solves this problem, by
 reallocating the value of intermediate goods used by industries to the
 original producers. In our example, the use of Argentinian agricultural
 produce (raw hides) is subtracted from the Turkish leather industry and
 added to the Argintinian agricultural industry.
+
+The Wang-Wei-Zhu decomposition goes a step further by not only revealing
+the source of the value added, but also breaking down exports into
+different categories, based on final usage.
+
+-   domestic value added - absorbed abroad
+-   domestic value added - eventually reimported
+-   foreign value added
+-   pure double counted terms
+
+The decompr package implements the algorithms for these decompositions
+as R procedures.
+
+The next section introduces the data as it is used by the package, as
+well as an example data set provided by the WIOD. Section three
+summarises the theoretical derivation for the decompositions, and shows
+how these can be performed in R using the package. After which we
+conclude with a discussion of potential uses and limitations of this
+approach.
 
 Data
 ====
@@ -144,15 +163,15 @@ The output data is as follows
     ## [1] 245 245
 
 Discussion
-----------
+==========
 
 Acknowledgements
-----------------
+================
 
 FNS Fei Wang
 
 References
-----------
+==========
 
 Wang, Zhi, Shang-Jin Wei, and Kunfu Zhu. 2014. “Quantifying
 International Production Sharing at the Bilateral and Sector Levels.”
