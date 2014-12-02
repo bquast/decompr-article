@@ -76,6 +76,8 @@ A sample data set of Input-Output tables is included.
 In order to save space and speed up computations, the included data set uses regional aggregates,
 instead of countries.
 
+![Data format](figures/data_format.png)
+
 Load the included data set of WIOD regional Input-Output tables.
 
 ```{r load-data}
