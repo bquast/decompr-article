@@ -84,34 +84,39 @@ A key step in loading the data is making sure that the dimensions of the
 data inputs are correct, in the sample data we have **G = 7** (generally
 countries, here regions) and **N = 34** (number of industries).
 
-    dim(intermediate_demand) # (2 + GN + totals) x (2 + GN)
+    length(region_names)        # G
 
-    ## [1] 255 247
+    ## [1] 7
 
-    dim(final_demand)        # (2 + GN + totals) x (2 + G*5)
+    length(industry_names)      # N
 
-    ## [1] 247  37
+    ## [1] 35
 
-Note thata **G** and **N** are automatically inferred by decompr from
-the dimensions of the data set.
+    dim(   intermediate_demand) # (GN + totals) x GN
 
-When importing data, be sure to specify **stringsAsFactors = FALSE** and
-to **header=FALSE**, as the Input-Output tables use two header lines
-(country and industry), e.g:
+    ## [1] 245 245
 
-    final_demand <- read.csv( file             = "final_demand.csv",
-                              header           = FALSE,
-                              stringsAsFactors = FALSE               )
+    dim(   final_demand)        # (GN + totals) x G*5
+
+    ## [1] 245  35
+
+    length(output)              # GN
+
+    ## [1] 245
 
 Methods
 =======
 
 -   Small derivation
 
-<!-- -->
+The first step is to load the data and create the elements, there are
+all stored in a list (of class **decompr**).
 
-    elements <- load_tables( x = intermediate_demand,
-                             y = final_demand         )
+    elements <- load_tables_vectors( x = intermediate_demand,
+                                     y = final_demand,
+                                     k = region_names,
+                                     i = industry_names,
+                                     o = output               )
 
 Wang Wei Zhu decomposition
 --------------------------
@@ -127,6 +132,9 @@ functions be used for large data sets.
 
     wwz2 <- decomp( x = intermediate_demand,
                     y = final_demand,
+                    k = region_names,
+                    i = industry_names,
+                    o = output ,
                     method = "wwz"           )
 
 Note that **wwz** is the default method.
@@ -155,8 +163,11 @@ performs both steps at once. Though it is recomended that the atomic
 functions be used for large data sets.
 
     source2 <- decomp( x = intermediate_demand,
-                    y = final_demand,
-                    method = "source"           )
+                       y = final_demand,
+                       k = region_names,
+                       i = industry_names,
+                       o = output ,
+                       method = "source"           )
 
 The output data is as follows
 
