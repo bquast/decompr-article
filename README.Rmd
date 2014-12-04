@@ -51,7 +51,7 @@ by reallocating the value of intermediate goods used by industries to the origin
 In our example, the use of Argentinian agricultural produce (raw hides)
 is subtracted from the Turkish leather industry and added to the Argintinian agricultural industry.
 
-The Wang-Wei-Zhu decomposition goes a step further by not only revealing the source of the value added,
+The Wang-Wei-Zhu (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
 but also breaking down exports into different categories, based on its usage and final destination.
 
 * domestic value added in exports
