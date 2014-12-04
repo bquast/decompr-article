@@ -52,11 +52,10 @@ In our example, the use of Argentinian agricultural produce (raw hides)
 is subtracted from the Turkish leather industry and added to the Argintinian agricultural industry.
 
 The Wang-Wei-Zhu decomposition goes a step further by not only revealing the source of the value added,
-but also breaking down exports into different categories, based on final usage.
+but also breaking down exports into different categories, based on its usage and final destination.
 
-* domestic value added - absorbed abroad
-* domestic value added - eventually reimported
-* foreign value added
+* domestic value added in exports
+* foreign value added in exports
 * pure double counted terms
 
 The decompr package implements the algorithms for these decompositions as R procedures.
