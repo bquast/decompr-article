@@ -108,6 +108,35 @@ elements <- load_tables_vectors( x = intermediate_demand,
                                  o = output               )
 ```
 
+Leontief decomposition
+---------------------------------------
+ * Small derivation
+ * R demonstration using WIOD data
+
+
+We can now decompose the elements using the Source decomposition.
+```{r leontief}
+leontief <- kung_fu( elements )
+```
+
+In addition, a wrapper function called **decomp** is provided which performs both steps at once.
+Though it is recomended that the atomic functions be used for large data sets.
+
+```{r leontief-wrapper}
+leontief <- decomp( x = intermediate_demand,
+                   y = final_demand,
+                   k = region_names,
+                   i = industry_names,
+                   o = output ,
+                   method = "source"           )
+```
+
+The output data is as follows
+
+```{r source-eval}
+dim(leontief)
+```
+
 Wang Wei Zhu decomposition
 ------------------------------
 We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.
@@ -133,35 +162,6 @@ The output data is as follows
 
 ```{r wwz-eval}
 str(wwz)
-```
-
-Source decomposition
----------------------------------------
- * Small derivation
- * R demonstration using WIOD data
-
-
-We can now decompose the elements using the Source decomposition.
-```{r source}
-source <- kung_fu( elements )
-```
-
-In addition, a wrapper function called **decomp** is provided which performs both steps at once.
-Though it is recomended that the atomic functions be used for large data sets.
-
-```{r source-wrapper}
-source2 <- decomp( x = intermediate_demand,
-                   y = final_demand,
-                   k = region_names,
-                   i = industry_names,
-                   o = output ,
-                   method = "source"           )
-```
-
-The output data is as follows
-
-```{r source-eval}
-dim(source)
 ```
 
 Discussion
