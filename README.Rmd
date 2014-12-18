@@ -1,6 +1,6 @@
 ---
 title: "decompr: trade flow decomposition for Global Value Chain analysis"
-author: "Bastiaan Quast and Victor K??mmritz"
+author: "Bastiaan Quast and Victor Kummritz"
 date: "Wednesday, November 26, 2014"
 output: md_document
 bibliography: bibliography.bib
