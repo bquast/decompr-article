@@ -125,7 +125,7 @@ length(out )        # G*N
 <li>Small derivation</li>
 <li>R demonstration using WIOD data</li>
 </ul>
-<p>We can now decompose the elements using the Source decomposition.</p>
+<p>We can now decompose the elements using the Leontief decomposition.</p>
 <pre><code>lt &lt;- leontief( elements )</code></pre>
 <p>In addition, a wrapper function called <strong>decomp</strong> is provided which performs both steps at once. Though it is recomended that the atomic functions be used for large data sets.</p>
 <pre><code>lt2 &lt;- decomp( x = inter,
@@ -135,7 +135,7 @@ length(out )        # G*N
                o = out,
                method = &quot;leontief&quot; )</code></pre>
 <p>The output data is as follows</p>
-<pre><code>dim(lt)
+<pre><code>dim(lt )
 
 ## [1] 9 9
 
@@ -145,7 +145,7 @@ dim(lt2)
 </div>
 <div id="wang-wei-zhu-decomposition" class="section level2">
 <h2>Wang Wei Zhu decomposition</h2>
-<p>We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.</p>
+<p>We can now decompose the elements using the Wang-Wei-Zhu decomposition.</p>
 <pre><code>w &lt;- wwz( elements )</code></pre>
 <p>In addition, a wrapper function called <strong>decomp</strong> is provided which performs both steps at once. Though it is recomended that the seperate functions be used for large data sets.</p>
 <pre><code>w2 &lt;- decomp( x = inter,
@@ -156,7 +156,14 @@ dim(lt2)
               method = &quot;wwz&quot; )</code></pre>
 <p>Note that <strong>wwz</strong> is the default method.</p>
 <p>The output data is as follows</p>
-<pre><code>str(w)
+<pre><code>str(w )
+
+##  num [1:36, 1:25] 0 5.47 7.54 13.01 0 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:36] &quot;Argentina.Agriculture.Argentina&quot; &quot;Argentina.Agriculture.Turkey&quot; &quot;Argentina.Agriculture.Germany&quot; &quot;sub.TOTAL&quot; ...
+##   ..$ : chr [1:25] &quot;DVA_FIN&quot; &quot;DVA_INT&quot; &quot;DVA_INTrexI1&quot; &quot;DVA_INTrexF&quot; ...
+
+str(w2)
 
 ##  num [1:36, 1:25] 0 5.47 7.54 13.01 0 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 2

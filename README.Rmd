@@ -108,13 +108,15 @@ elements <- load_tables_vectors( x = inter,
                                  o = out         )
 ```
 
+
+
 Leontief decomposition
 ---------------------------------------
  * Small derivation
  * R demonstration using WIOD data
 
 
-We can now decompose the elements using the Source decomposition.
+We can now decompose the elements using the Leontief decomposition.
 ```{r leontief}
 lt <- leontief( elements )
 ```
@@ -134,13 +136,14 @@ lt2 <- decomp( x = inter,
 The output data is as follows
 
 ```{r source-eval}
-dim(lt)
+dim(lt )
 dim(lt2)
 ```
 
 Wang Wei Zhu decomposition
 ------------------------------
-We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.
+We can now decompose the elements using the Wang-Wei-Zhu decomposition.
+
 ```{r wwz}
 w <- wwz( elements )
 ```
@@ -162,7 +165,8 @@ Note that **wwz** is the default method.
 The output data is as follows
 
 ```{r wwz-eval}
-str(w)
+str(w )
+str(w2)
 ```
 
 Discussion

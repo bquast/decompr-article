@@ -124,7 +124,7 @@ Leontief decomposition
 -   Small derivation
 -   R demonstration using WIOD data
 
-We can now decompose the elements using the Source decomposition.
+We can now decompose the elements using the Leontief decomposition.
 
     lt <- leontief( elements )
 
@@ -141,7 +141,7 @@ functions be used for large data sets.
 
 The output data is as follows
 
-    dim(lt)
+    dim(lt )
 
     ## [1] 9 9
 
@@ -152,8 +152,7 @@ The output data is as follows
 Wang Wei Zhu decomposition
 --------------------------
 
-We can now decompose the elements using the Wang-Wei-Zhu (or source)
-decomposition.
+We can now decompose the elements using the Wang-Wei-Zhu decomposition.
 
     w <- wwz( elements )
 
@@ -172,7 +171,14 @@ Note that **wwz** is the default method.
 
 The output data is as follows
 
-    str(w)
+    str(w )
+
+    ##  num [1:36, 1:25] 0 5.47 7.54 13.01 0 ...
+    ##  - attr(*, "dimnames")=List of 2
+    ##   ..$ : chr [1:36] "Argentina.Agriculture.Argentina" "Argentina.Agriculture.Turkey" "Argentina.Agriculture.Germany" "sub.TOTAL" ...
+    ##   ..$ : chr [1:25] "DVA_FIN" "DVA_INT" "DVA_INTrexI1" "DVA_INTrexF" ...
+
+    str(w2)
 
     ##  num [1:36, 1:25] 0 5.47 7.54 13.01 0 ...
     ##  - attr(*, "dimnames")=List of 2
