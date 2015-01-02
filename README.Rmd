@@ -6,7 +6,7 @@ output: md_document
 bibliography: bibliography.bib
 ---
 
-```{r load-package, echo=FALSE}
+```{r load-package, echo=FALSE, message=FALSE}
 library(decompr)
 ```
 
