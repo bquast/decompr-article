@@ -1,3 +1,11 @@
+    ## If you use decompr for data analysis,
+    ## please cite R as well as decompr,
+    ## using citation() and citation("decompr") respectively.
+    ## 
+    ## The API for the decomp function has changed,
+    ## it now uses load_tables_vectors instead of load_tables,
+    ## for more info see http://qua.st/decompr/decompr-v2/.
+
 Abstract
 ========
 
@@ -8,7 +16,7 @@ is the **Wang-Wei-Zhu** (2014) algorithm which splits bilateral gross
 exports into 16 value added components. These components can broadly be
 divided into domestic and foreign value added. The second method
 concerns a **source decomposition** algorithm. This derives the value
-added origin of a country-industry’s exports by source country and
+added origin of a country-industry???s exports by source country and
 source industry, by applying the basic Leontief insight to gross trade
 data. This article summarises the methodology of the algorithms and
 describes the format of the input and output data.
@@ -48,13 +56,13 @@ original producers. In our example, the use of Argentinian agricultural
 produce (raw hides) is subtracted from the Turkish leather industry and
 added to the Argintinian agricultural industry.
 
-The Wang-Wei-Zhu decomposition goes a step further by not only revealing
-the source of the value added, but also breaking down exports into
-different categories, based on final usage.
+The Wang-Wei-Zhu (henceforth WWZ) decomposition goes a step further by
+not only revealing the source of the value added, but also breaking down
+exports into different categories, based on its usage and final
+destination.
 
--   domestic value added - absorbed abroad
--   domestic value added - eventually reimported
--   foreign value added
+-   domestic value added in exports
+-   foreign value added in exports
 -   pure double counted terms
 
 The decompr package implements the algorithms for these decompositions
@@ -78,31 +86,31 @@ aggregates, instead of countries.
 
 Load the included data set of WIOD regional Input-Output tables.
 
-    data(wiod)
+    data(leather)
 
 A key step in loading the data is making sure that the dimensions of the
 data inputs are correct, in the sample data we have **G = 7** (generally
 countries, here regions) and **N = 34** (number of industries).
 
-    length(region_names)        # G
+    length(countries )  # G
 
-    ## [1] 7
+    ## [1] 3
 
-    length(industry_names)      # N
+    length(industries ) # N
 
-    ## [1] 35
+    ## [1] 3
 
-    dim(   intermediate_demand) # (GN + totals) x GN
+    dim(   inter )      # (G*N) x G*N
 
-    ## [1] 245 245
+    ## [1] 9 9
 
-    dim(   final_demand)        # (GN + totals) x G*5
+    dim(   final )      # (G*N + totals) x G*5
 
-    ## [1] 245  35
+    ## [1] 9 3
 
-    length(output)              # GN
+    length(out )        # G*N
 
-    ## [1] 245
+    ## [1] 9
 
 Methods
 =======
@@ -112,11 +120,42 @@ Methods
 The first step is to load the data and create the elements, there are
 all stored in a list (of class **decompr**).
 
-    elements <- load_tables_vectors( x = intermediate_demand,
-                                     y = final_demand,
-                                     k = region_names,
-                                     i = industry_names,
-                                     o = output               )
+    elements <- load_tables_vectors( x = inter,
+                                     y = final,
+                                     k = countries,
+                                     i = industries,
+                                     o = out         )
+
+Leontief decomposition
+----------------------
+
+-   Small derivation
+-   R demonstration using WIOD data
+
+We can now decompose the elements using the Source decomposition.
+
+    lt <- leontief( elements )
+
+In addition, a wrapper function called **decomp** is provided which
+performs both steps at once. Though it is recomended that the atomic
+functions be used for large data sets.
+
+    lt2 <- decomp( x = inter,
+                   y = final,
+                   k = countries,
+                   i = industries,
+                   o = out,
+                   method = "leontief" )
+
+The output data is as follows
+
+    dim(lt)
+
+    ## [1] 9 9
+
+    dim(lt2)
+
+    ## [1] 9 9
 
 Wang Wei Zhu decomposition
 --------------------------
@@ -124,56 +163,29 @@ Wang Wei Zhu decomposition
 We can now decompose the elements using the Wang-Wei-Zhu (or source)
 decomposition.
 
-    wwz <- wwz( elements )
+    w <- wwz( elements )
 
 In addition, a wrapper function called **decomp** is provided which
 performs both steps at once. Though it is recomended that the seperate
 functions be used for large data sets.
 
-    wwz2 <- decomp( x = intermediate_demand,
-                    y = final_demand,
-                    k = region_names,
-                    i = industry_names,
-                    o = output ,
-                    method = "wwz"           )
+    w2 <- decomp( x = inter,
+                  y = final,
+                  k = countries,
+                  i = industries,
+                  o = out,
+                  method = "wwz" )
 
 Note that **wwz** is the default method.
 
 The output data is as follows
 
-    str(wwz)
+    str(w)
 
-    ##  num [1:1960, 1:25] 0 9199 756 265 239 ...
+    ##  num [1:36, 1:25] 0 5.47 7.54 13.01 0 ...
     ##  - attr(*, "dimnames")=List of 2
-    ##   ..$ : chr [1:1960] "Euro-zone.c1.Euro-zone" "Euro-zone.c1.Other EU" "Euro-zone.c1.NAFTA" "Euro-zone.c1.China" ...
+    ##   ..$ : chr [1:36] "Argentina.Agriculture.Argentina" "Argentina.Agriculture.Turkey" "Argentina.Agriculture.Germany" "sub.TOTAL" ...
     ##   ..$ : chr [1:25] "DVA_FIN" "DVA_INT" "DVA_INTrexI1" "DVA_INTrexF" ...
-
-Source decomposition
---------------------
-
--   Small derivation
--   R demonstration using WIOD data
-
-We can now decompose the elements using the Source decomposition.
-
-    source <- kung_fu( elements )
-
-In addition, a wrapper function called **decomp** is provided which
-performs both steps at once. Though it is recomended that the atomic
-functions be used for large data sets.
-
-    source2 <- decomp( x = intermediate_demand,
-                       y = final_demand,
-                       k = region_names,
-                       i = industry_names,
-                       o = output ,
-                       method = "source"           )
-
-The output data is as follows
-
-    dim(source)
-
-    ## [1] 245 245
 
 Discussion
 ==========
@@ -188,3 +200,4 @@ References
 
 Wang, Zhi, Shang-Jin Wei, and Kunfu Zhu. 2014. “Quantifying
 International Production Sharing at the Bilateral and Sector Levels.”
+National Bureau of Economic Research.

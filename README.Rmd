@@ -80,18 +80,18 @@ instead of countries.
 Load the included data set of WIOD regional Input-Output tables.
 
 ```{r load-data}
-data(wiod)
+data(leather)
 ```
 
 A key step in loading the data is making sure that the dimensions of the data inputs are correct,
 in the sample data we have **G = 7** (generally countries, here regions) and **N = 34** (number of industries).
 
 ```{r data-dimensions}
-length(region_names)        # G
-length(industry_names)      # N
-dim(   intermediate_demand) # (GN + totals) x GN
-dim(   final_demand)        # (GN + totals) x G*5
-length(output)              # GN
+length(countries )  # G
+length(industries ) # N
+dim(   inter )      # (G*N) x G*N
+dim(   final )      # (G*N + totals) x G*5
+length(out )        # G*N
 ```
 
 Methods
@@ -101,11 +101,11 @@ Methods
 The first step is to load the data and create the elements, there are all stored in a list (of class **decompr**).
 
 ```{r load_tables}
-elements <- load_tables_vectors( x = intermediate_demand,
-                                 y = final_demand,
-                                 k = region_names,
-                                 i = industry_names,
-                                 o = output               )
+elements <- load_tables_vectors( x = inter,
+                                 y = final,
+                                 k = countries,
+                                 i = industries,
+                                 o = out         )
 ```
 
 Leontief decomposition
@@ -116,44 +116,45 @@ Leontief decomposition
 
 We can now decompose the elements using the Source decomposition.
 ```{r leontief}
-leontief <- kung_fu( elements )
+lt <- leontief( elements )
 ```
 
 In addition, a wrapper function called **decomp** is provided which performs both steps at once.
 Though it is recomended that the atomic functions be used for large data sets.
 
 ```{r leontief-wrapper}
-leontief <- decomp( x = intermediate_demand,
-                   y = final_demand,
-                   k = region_names,
-                   i = industry_names,
-                   o = output ,
-                   method = "source"           )
+lt2 <- decomp( x = inter,
+               y = final,
+               k = countries,
+               i = industries,
+               o = out,
+               method = "leontief" )
 ```
 
 The output data is as follows
 
 ```{r source-eval}
-dim(leontief)
+dim(lt)
+dim(lt2)
 ```
 
 Wang Wei Zhu decomposition
 ------------------------------
 We can now decompose the elements using the Wang-Wei-Zhu (or source) decomposition.
 ```{r wwz}
-wwz <- wwz( elements )
+w <- wwz( elements )
 ```
 
 In addition, a wrapper function called **decomp** is provided which performs both steps at once.
 Though it is recomended that the seperate functions be used for large data sets.
 
 ```{r wwz-wrapper}
-wwz2 <- decomp( x = intermediate_demand,
-                y = final_demand,
-                k = region_names,
-                i = industry_names,
-                o = output ,
-                method = "wwz"           )
+w2 <- decomp( x = inter,
+              y = final,
+              k = countries,
+              i = industries,
+              o = out,
+              method = "wwz" )
 ```
 
 Note that **wwz** is the default method.
@@ -161,7 +162,7 @@ Note that **wwz** is the default method.
 The output data is as follows
 
 ```{r wwz-eval}
-str(wwz)
+str(w)
 ```
 
 Discussion
