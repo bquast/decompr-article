@@ -113,7 +113,7 @@ The application of the Leontief insight to ICIOs as opposed to national Input-Ou
 
 \begin{align}
 \begin{split}
-V (I-A)^{-1}E=&
+V (I- & A)^{-1} E =
 \begin{pmatrix}
 v_{i}^{k}& 0& 0& 0\\
 0& v_{j}^{k}& 0& 0\\
@@ -134,8 +134,9 @@ e_{i}^{k}& 0& 0& 0\\
 0& 0& e_{i}^{l}& 0\\
 0& 0& 0& e_{j}^{l}
 \end{pmatrix}
- \\
-=& 
+=
+\\
+&
 \begin{pmatrix}
 v_{i}^{k}b_{ii}^{kk}e_{i}^{k}& v_{i}^{k} b_{ij}^{kk}e_{j}^{k}& v_{i}^{k}b_{ii}^{kl}e_{i}^{l}& v_{i}^{k}b_{ij}^{kl}e_{j}^{l}\\
 v_{j}^{k}b_{ji}^{kk}e_{i}^{k}& v_{j}^{k}b_{jj}^{kk}e_{j}^{k}& v_{j}^{k}b_{ji}^{kl}e_{i}^{l}& v_{j}^{k}b_{jj}^{kl}e_{j}^{l}\\
