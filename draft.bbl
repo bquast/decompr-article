@@ -1,0 +1,108 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{cms}{cms}
+    \entry{dahuetal01}{article}{}
+      \name{labelname}{3}{}{%
+        {{uniquename=0,hash=17a15594338e70f299bc98db1a1d752a}{Hummels}{H\bibinitperiod}{David}{D\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=91e4d9dd27ecb33de0cd45b9d8b1386b}{Ishii}{I\bibinitperiod}{Jun}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=923bf2781e5ceb510a1d6eb241cc50d6}{Yi}{Y\bibinitperiod}{Kei-Mu}{K\bibinithyphendelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=17a15594338e70f299bc98db1a1d752a}{Hummels}{H\bibinitperiod}{David}{D\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=91e4d9dd27ecb33de0cd45b9d8b1386b}{Ishii}{I\bibinitperiod}{Jun}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=923bf2781e5ceb510a1d6eb241cc50d6}{Yi}{Y\bibinitperiod}{Kei-Mu}{K\bibinithyphendelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{fbc56989d1fc2f921bb39e4315bb53f4}
+      \strng{fullhash}{fbc56989d1fc2f921bb39e4315bb53f4}
+      \field{sortinit}{H}
+      \field{sortinithash}{95b2cb08933fe649b7e9f8beee2132b4}
+      \field{labelyear}{2001}
+      \field{labelmonth}{06}
+      \field{datelabelsource}{}
+      \field{labeltitle}{{The nature and growth of vertical specialization in world trade}}
+      \field{journaltitle}{Journal of International Economics}
+      \field{month}{06}
+      \field{number}{1}
+      \field{title}{{The nature and growth of vertical specialization in world trade}}
+      \field{volume}{54}
+      \field{year}{2001}
+      \field{pages}{75\bibrangedash 96}
+      \verb{url}
+      \verb http://ideas.repec.org/a/eee/inecon/v54y2001i1p75-96.html
+      \endverb
+      \keyw{Trade,GVCs}
+    \endentry
+    \entry{wale36}{article}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=7fba8a21a79da7f09bad272143e8adc7}{Leontief}{L\bibinitperiod}{Wassily}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=7fba8a21a79da7f09bad272143e8adc7}{Leontief}{L\bibinitperiod}{Wassily}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{7fba8a21a79da7f09bad272143e8adc7}
+      \strng{fullhash}{7fba8a21a79da7f09bad272143e8adc7}
+      \field{sortinit}{L}
+      \field{sortinithash}{c41a2b5886eeae464e75d1a9df4cd13e}
+      \field{labelyear}{1936}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Quantitative Input and Output Relations in the Economic System of the United States}
+      \field{journaltitle}{Review of Economics and Statistics}
+      \field{number}{3}
+      \field{title}{Quantitative Input and Output Relations in the Economic System of the United States}
+      \field{volume}{18}
+      \field{year}{1936}
+      \field{pages}{105\bibrangedash 125}
+      \keyw{Input--output tables}
+    \endentry
+    \entry{timmer2012world}{article}{}
+      \name{labelname}{7}{}{%
+        {{uniquename=0,hash=c6aa42844ce79e5698604c7ed234f42d}{Timmer}{T\bibinitperiod}{Marcel}{M\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=75b996426e87a2332cf1a66048be6639}{Erumban}{E\bibinitperiod}{A.\bibnamedelimi A.}{A\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0e56435b0bc1d8f40c4809413d808df6}{Gouma}{G\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0cbd438bf32e55a6a5def8ae1457c73f}{Los}{L\bibinitperiod}{B.}{B\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=a663414dd504571cd82ee36a30d761b7}{Temurshoev}{T\bibinitperiod}{U.}{U\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=cb3bc7bc3285894e128c10cec30cf8f9}{Vries}{V\bibinitperiod}{G.\bibnamedelimi J.}{G\bibinitperiod\bibinitdelim J\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{uniquename=0,hash=d963f3c95339eace4c6e8acb9a245ae0}{Arto}{A\bibinitperiod}{I.}{I\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{7}{}{%
+        {{uniquename=0,hash=c6aa42844ce79e5698604c7ed234f42d}{Timmer}{T\bibinitperiod}{Marcel}{M\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=75b996426e87a2332cf1a66048be6639}{Erumban}{E\bibinitperiod}{A.\bibnamedelimi A.}{A\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0e56435b0bc1d8f40c4809413d808df6}{Gouma}{G\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0cbd438bf32e55a6a5def8ae1457c73f}{Los}{L\bibinitperiod}{B.}{B\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=a663414dd504571cd82ee36a30d761b7}{Temurshoev}{T\bibinitperiod}{U.}{U\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=cb3bc7bc3285894e128c10cec30cf8f9}{Vries}{V\bibinitperiod}{G.\bibnamedelimi J.}{G\bibinitperiod\bibinitdelim J\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{uniquename=0,hash=d963f3c95339eace4c6e8acb9a245ae0}{Arto}{A\bibinitperiod}{I.}{I\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{8280d78716d9c388e705d70c5d7c645a}
+      \strng{fullhash}{916b9f493da1db1d8ec8c1c37d1b937c}
+      \field{sortinit}{T}
+      \field{sortinithash}{9378dd666f3c24d81538df53aa99e23d}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labeltitle}{The world input-output database (WIOD): contents, sources and methods}
+      \field{journaltitle}{WIOD Background document available at www. wiod. org}
+      \field{title}{The world input-output database (WIOD): contents, sources and methods}
+      \field{year}{2012}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
