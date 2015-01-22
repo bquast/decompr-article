@@ -27,7 +27,7 @@ the field. The R package \textit{decompr} solves this problem by implementing al
 which calculate standard indicators in an automated fashion. Two methods for gross export flow decomposition using 
 Inter-Country Input-Output tables are provided. The first method is the \textit{Wang-Wei-Zhu} algorithm which splits 
 bilateral gross exports into 16 value added components. These components can broadly be divided into domestic and 
-foreign value added. The second method concerns a decomposition based on the classical \citet{wale36} insight.
+foreign value added in exports. The second method concerns a decomposition based on the classical \citet{wale36} insight.
 It derives the value added origins of an industry's exports by source country and source industry, using easily available
 gross trade data. This article summarises the methodology of the algorithms, describes the format of the input and output data, 
 and exemplifies the usefulness of the two methods on the basis of a simple example data set.}
@@ -124,78 +124,101 @@ This goes on until value added is traced back to the original suppliers and can 
 \begin{equation}
 VB = V + VA + VAA + VAAA + ... = V (I+A+A^{2}+A^{3}+...),
 \end{equation}
-which as an infinite geometric series with the elements of $A<1$ simplifies to
+which, as an infinite geometric series with the elements of $A<1$, simplifies to
 
 \begin{equation}
 VB = V (I-A)^{-1},
 \end{equation}
-where \textit{V} is a N x N matrix with the diagonal representing the direct value added contribution of the industries, \textit{A} is the Input-Output coefficient matrix with dimension N x N, i.e. it gives the direct input flows between industries required for 1\$ of output, $B = (I-A)^{-1}$ is then the so called Leontief inverse, and \textit{T} indicates a matrix transpose operation. \textit{VB} gives thus a N x N matrix of so called value added multipliers, which denote the amount of value added that the production of an industry's 1\$ of output or exports brings about in all other industries. Looking from the perspective of the supplying industries, the matrix gives the value added origins of an industry's production. If we multiply it with a N x N matrix whose diagonal specifies each industry's total output, we get value added origins as absolute values instead of shares.
+where \textit{V} is a N x N matrix with the diagonal representing the direct value added contribution of the industries,
+\textit{A} is the Input-Output coefficient matrix with dimension N x N, i.e. it gives the direct input flows between
+industries required for 1\$ of output, $B = (I-A)^{-1}$ is then the so called Leontief inverse, and \textit{T} indicates
+a matrix transpose operation. \textit{VB} gives thus a N x N matrix of so called value added multipliers,
+which denote the amount of value added that the production of an industry's 1\$ of output or exports brings about
+in all other industries. Looking from the perspective of the supplying industries, the matrix gives the value added that
+they contribute to the using industry's production. If we multiply it with a N x N matrix whose diagonal specifies each
+industry's total output, we get value added origins as absolute values instead of shares.
 
-The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our source decomposition is straightforward. \textit{V} refers now to a vector of direct value added contribution of all industries across the different countries. Its dimension is correspondingly 1 x GN. \textit{A} is now of dimension GN x GN and gives the industry flows including cross border relationships. Since we are interested in the value added origins of exports we multiply these two matrices with a GN x GN matrix whose diagonal we fill with each industry's exports, $E$, such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$. In a simple example with two countries (\textit{k} and \textit{l}) and industries (\textit{i} and \textit{j}) we can zoom in to see the matrices' content:
+The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our source decomposition
+is straightforward. \textit{V} refers now to a vector of direct value added contribution of all industries across
+the different countries. Its dimension is correspondingly 1 x GN. \textit{A} is now of dimension GN x GN
+and gives the industry flows including cross border relationships. Since we are interested in the value added origins
+of exports we multiply these two matrices with a GN x GN matrix whose diagonal we fill with each industry's exports, $E$,
+such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$. In a simple example
+with two countries (\textit{k} and \textit{l}) and industries (\textit{i} and \textit{j}) we can zoom in to see
+the matrices' content:
 
 \begin{align}
 \begin{split}
-V (I- & A)^{-1} E =
+V (I- A &)^{-1} E=
 \begin{pmatrix}
-v_{i}^{k}& 0& 0& 0\\
-0& v_{j}^{k}& 0& 0\\
-0& 0& v_{i}^{l}& 0\\
-0& 0& 0& v_{j}^{l}
+v_{k}^{i}& 0& 0& 0\\
+0& v_{k}^{j}& 0& 0\\
+0& 0& v_{l}^{i}& 0\\
+0& 0& 0& v_{l}^{j}
 \end{pmatrix}
 *
 \begin{pmatrix}
-b_{ii}^{kk}& b_{ij}^{kk}& b_{ii}^{kl}& b_{ij}^{kl}\\
-b_{ji}^{kk}& b_{jj}^{kk}& b_{ji}^{kl}& b_{jj}^{kl}\\
-b_{ii}^{lk}& b_{ij}^{lk}& b_{ii}^{ll}& b_{ij}^{ll}\\
-b_{ji}^{lk}& b_{jj}^{lk}& b_{ji}^{ll}& b_{jj}^{ll}
+b_{kk}^{ii}& b_{kk}^{ij}& b_{kl}^{ii}& b_{kl}^{ij}\\
+b_{kk}^{ji}& b_{kk}^{jj}& b_{kl}^{ji}& b_{kl}^{jj}\\
+b_{lk}^{ii}& b_{lk}^{ij}& b_{ll}^{ii}& b_{ll}^{ij}\\
+b_{lk}^{ji}& b_{lk}^{jj}& b_{ll}^{ji}& b_{ll}^{jj}
 \end{pmatrix}
 *
 \begin{pmatrix}
-e_{i}^{k}& 0& 0& 0\\
-0& e_{j}^{k}& 0& 0\\
-0& 0& e_{i}^{l}& 0\\
-0& 0& 0& e_{j}^{l}
+e_{k}^{i}& 0& 0& 0\\
+0& e_{k}^{j}& 0& 0\\
+0& 0& e_{l}^{i}& 0\\
+0& 0& 0& e_{l}^{j}
 \end{pmatrix}
 =
 \\
 &
 \begin{pmatrix}
-v_{i}^{k}b_{ii}^{kk}e_{i}^{k}& v_{i}^{k} b_{ij}^{kk}e_{j}^{k}& v_{i}^{k}b_{ii}^{kl}e_{i}^{l}& v_{i}^{k}b_{ij}^{kl}e_{j}^{l}\\
-v_{j}^{k}b_{ji}^{kk}e_{i}^{k}& v_{j}^{k}b_{jj}^{kk}e_{j}^{k}& v_{j}^{k}b_{ji}^{kl}e_{i}^{l}& v_{j}^{k}b_{jj}^{kl}e_{j}^{l}\\
-v_{i}^{l}b_{ii}^{lk}e_{i}^{k}& v_{i}^{l}b_{ij}^{lk}e_{j}^{k}& v_{i}^{l}b_{ii}^{ll}e_{i}^{l}& v_{i}^{l}b_{ij}^{ll}e_{j}^{l}\\
-v_{j}^{l}b_{ji}^{lk}e_{i}^{k}& v_{j}^{l}b_{jj}^{lk}e_{j}^{k}& v_{j}^{l}b_{ji}^{ll}e_{i}^{l}& v_{j}^{l}b_{jj}^{ll}e_{j}^{l}
+v_{k}^{i}b_{kk}^{ii}e_{k}^{i}& v_{k}^{i} b_{kk}^{ij}e_{k}^{j}& v_{k}^{i}b_{kl}^{ii}e_{l}^{i}& v_{k}^{i}b_{kl}^{ij}e_{l}^{j}\\
+v_{k}^{j}b_{kk}^{ji}e_{k}^{i}& v_{k}^{j}b_{kk}^{jj}e_{k}^{j}& v_{k}^{j}b_{kl}^{ji}e_{l}^{i}& v_{k}^{j}b_{kl}^{jj}e_{l}^{j}\\
+v_{l}^{i}b_{lk}^{ii}e_{k}^{i}& v_{l}^{i}b_{lk}^{ij}e_{k}^{j}& v_{l}^{i}b_{ll}^{ii}e_{l}^{i}& v_{l}^{i}b_{ll}^{ij}e_{l}^{j}\\
+v_{l}^{j}b_{lk}^{ji}e_{k}^{i}& v_{l}^{j}b_{lk}^{jj}e_{k}^{j}& v_{l}^{j}b_{ll}^{ji}e_{l}^{i}& v_{l}^{j}b_{ll}^{jj}e_{l}^{j}
 \end{pmatrix}
 =
 \begin{pmatrix}
-vax_{ii}^{kk}& vax_{ij}^{kk}& vax_{ii}^{kl}& vax_{ij}^{kl}\\
-vax_{ji}^{kk}& vax_{jj}^{kk}& vax_{ji}^{kl}& vax_{jj}^{kl}\\
-vax_{ii}^{lk}& vax_{ij}^{lk}& vax_{ii}^{ll}& vax_{ij}^{ll}\\
-vax_{ji}^{lk}& vax_{jj}^{lk}& vax_{ji}^{ll}& vax_{jj}^{ll}
+vae_{kk}^{ii}& vae_{kk}^{ij}& vae_{kl}^{ii}& vae_{kl}^{ij}\\
+vae_{kk}^{ji}& vae_{kk}^{jj}& vae_{kl}^{ji}& vae_{kl}^{jj}\\
+vae_{lk}^{ii}& vae_{lk}^{ij}& vae_{ll}^{ii}& vae_{ll}^{ij}\\
+vae_{lk}^{ji}& vae_{lk}^{jj}& vae_{ll}^{ji}& vae_{ll}^{jj}
 \end{pmatrix}
 \end{split}
 \end{align}
-with
 \begin{align*}
-&v_{s}^{c} = \frac{va_{s}^{c}}{y_{s}^{c}} = 1 - \sum_{d}^{2}{a_{kc}^{ds}} - \sum_{d}^{2}{a_{lc}^{ds}} \hspace{2cm} (c \in k,l \hspace{.5cm} s \in i,k),\\
+&v_{c}^{s} = \frac{va_{c}^{s}}{y_{c}^{s}} = 1 - a_{kc}^{is} - a_{kc}^{js} - a_{lc}^{js} - a_{lc}^{is} \hspace{2cm} (c \in k,l \hspace{.5cm} s \in i,j),\\
 &\begin{pmatrix}
-b_{ii}^{kk}& b_{ij}^{kk}& b_{ii}^{kl}& b_{ij}^{kl}\\
-b_{ji}^{kk}& b_{jj}^{kk}& b_{ji}^{kl}& b_{jj}^{kl}\\
-b_{ii}^{lk}& b_{ij}^{lk}& b_{ii}^{ll}& b_{ij}^{ll}\\
-b_{ji}^{lk}& b_{jj}^{lk}& b_{ji}^{ll}& b_{jj}^{ll}
+b_{kk}^{ii}& b_{kk}^{ij}& b_{kl}^{ii}& b_{kl}^{ij}\\
+b_{kk}^{ji}& b_{kk}^{jj}& b_{kl}^{ji}& b_{kl}^{jj}\\
+b_{lk}^{ii}& b_{lk}^{ij}& b_{ll}^{ii}& b_{ll}^{ij}\\
+b_{lk}^{ji}& b_{lk}^{jj}& b_{ll}^{ji}& b_{ll}^{jj}
 \end{pmatrix}
 =
 \begin{pmatrix}
-1-a_{ii}^{kk}& -a_{ij}^{kk}& -a_{ii}^{kl}& -a_{ij}^{kl}\\
--a_{ji}^{kk}& 1-a_{jj}^{kk}& -a_{ji}^{kl}& -a_{jj}^{kl}\\
--a_{ii}^{lk}& -a_{ij}^{lk}& 1-a_{ii}^{ll}& -a_{ij}^{ll}\\
--a_{ji}^{lk}& -a_{jj}^{lk}& -a_{ji}^{ll}& 1-a_{jj}^{ll}
+1-a_{kk}^{ii}& -a_{kk}^{ij}& -a_{kl}^{ii}& -a_{kl}^{ij}\\
+-a_{kk}^{ji}& 1-a_{kk}^{jj}& -a_{kl}^{ji}& -a_{kl}^{jj}\\
+-a_{lk}^{ii}& -a_{lk}^{ij}& 1-a_{ll}^{ii}& -a_{ll}^{ij}\\
+-a_{lk}^{ji}& -a_{lk}^{jj}& -a_{ll}^{ji}& 1-a_{ll}^{jj}
 \end{pmatrix}^{-1},
 \end{align*}
 and
 \begin{equation*}
-a_{cf}^{su} = \frac{inp_{cf}^{su}}{y_{f}^{u}}  \hspace{2cm} (c,f \in k,l \hspace{.5cm} s,u \in i,k),
+a_{cf}^{su} = \frac{inp_{cf}^{su}}{y_{f}^{u}}  \hspace{2cm} (c,f \in k,l \hspace{.5cm} s,u \in i,j),
 \end{equation*}
-where $v_{s}^{c}$ gives the share of value added, $va_{s}^{c}$, in output , $y_{s}^{c}$, and $e_{s}^{c}$ indicates gross exports. Finally, $a_{cf}^{su}$ denotes the share of inputs , $inp_{cf}^{su}$, in output. The elements of the $V(I-A)^{-1}E$ or $vax$ matrix are our estimates for the country-industry level value added origins of each country-industry's exports. decompr implements this algorithm into R to automate the process of deriving the matrix. Equipped with it, researchers can calculate standard GVC indicators. Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level which can be derived by summing for each country and industry across the value added of all foreign countries and industries. Alternatively, the four dimensions of the matrix (source country, source industry, using country, using industry) allow for industry-level gravity-type estimations of value added trade flows.
+where \(v_{s}^{c}\) gives the share of industry \emph{s}'s value added,
+\(va_{c}^{s},\) in output, \(y_{s}^{c}\), and \(e_{k}^{i}\)
+indicates gross exports. Finally, \(a_{su}^{cf}\) denotes
+the share of inputs, \(inp_{su}^{cf}\), in output. 
+The elements of the $V(I-A)^{-1}E$ or $vae$ matrix are our estimates for the country-industry level value added
+origins of each country-industry's exports. \textit{decompr} implements this algorithm into R to automate the process of
+deriving the matrix. Equipped with it, researchers can calculate standard GVC indicators. 
+Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level which can be derived
+by summing for each country and industry across the value added of all foreign countries and industries.
+Alternatively, the four dimensions of the matrix (source country, source industry, using country, using industry)
+allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
 The first step is to load the data and create the elements, there are all stored in a list (of class **decompr**).
@@ -233,13 +256,32 @@ The both these method yield the same output, which we discuss in the following s
 lt
 @
 
-We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the value added origins of its exports by country and industry. To this end, we look at the results of the Leontief decomposition for our example data set (Table \ref{tab:leon}). In the first column we find the source countries and industries while the first row contains the using countries and industries. The first element, $28.52$, thus gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the Argentinian Agriculture industry. Similarly, the last element of this row, $4.12$, gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the German Transport Equipment industry.
+We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the
+value added origins of its exports by country and industry. To this end, we look at the results of the Leontief
+decomposition for our example data set (Table \ref{tab:leon}). In the first column we find the source countries and
+industries while the first row contains the using countries and industries. The first element, $28.52$, thus gives the
+amount of value added that the Argentinian Agriculture industry has contributed to the exports of the Argentinian
+Agriculture industry. Similarly, the last element of this row, $4.12$, gives the amount of value added that the
+Argentinian Agriculture industry has contributed to the exports of the German Transport Equipment industry.
 
-A key advantage of the decomposition becomes clear when we compare the decomposed values with the intermediate trade values of the non-decomposed IO table when multiplied with the exports over output ratio to create comparability (Table \ref{tab:noleon}). We see for instance that Argentina's Agriculture industry contributes significantly more value added to the German Transport Equipment industry than suggested by the non-decomposed IO table. The reason is that Argentina Agriculture industry is an important supplier to Turkey's Textile and Leather industry which is in turn an important supplier for the German Transport Equipment industry. The decomposition thus allows us to see how the value added flows along this Global Value Chain.
+A key advantage of the decomposition becomes clear when we compare the decomposed values with the intermediate trade
+values of the non-decomposed IO table when multiplied with the exports over output ratio to create
+comparability (Table \ref{tab:noleon}). We see for instance that Argentina's Agriculture industry
+contributes significantly more value added to the German Transport Equipment industry than suggested
+by the non-decomposed IO table. The reason is that Argentina's Agriculture industry is an important supplier
+to Turkey's Textile and Leather industry which is in turn an important supplier for the German Transport
+Equipment industry. The decomposition thus allows us to see how the value added flows along this Global Value Chain.
 
-We can also take look at specific industries. For instance, we find that the non-decomposed values of the Transport Equipment are for many elements larger than the value added elements while the opposite holds for Agriculture. This emphasises the fact that Transport Equipment is a downstream industry that produces mostly final goods. Agriculture on the other hand qualifies as an upstream industry that produces also many intermediate goods so that its value added in other industries is typically large.
+We can also take look at specific industries. For instance, we find that the non-decomposed values of the Transport
+Equipment are for many elements larger than the value added elements while the opposite holds for Agriculture.
+This emphasises the fact that Transport Equipment is a downstream industry that produces mostly final goods.
+Agriculture on the other hand qualifies as an upstream industry that produces also many intermediate goods so
+that its value added in other industries is typically large.
 
-Finally let's consider the countries of our specific example. We see that Germany has more instances in which the non-decomposed values are above the value added flows than Argentina and Turkey combined. Along the lines of the industry analysis, this shows that Germany focuses within this GVC on downstream tasks producing mostly final goods that contain value added from countries located more upstream. In our example these are Turkey and Argentina.
+Finally let's consider the countries of our specific example. We see that Germany has more instances in
+which the non-decomposed values are above the value added flows than Argentina and Turkey combined. Along
+the lines of the industry analysis, this shows that Germany focuses within this GVC on downstream tasks producing
+mostly final goods that contain value added from countries located more upstream. In our example these are Turkey and Argentina.
 
 \newpage
 \begin{table}[htbp] \scriptsize
