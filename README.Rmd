@@ -2,7 +2,6 @@
 title: "decompr: trade flow decomposition for Global Value Chain analysis"
 author: "Bastiaan Quast and Victor Kummritz"
 date: "Wednesday, November 26, 2014"
-output: md_document
 bibliography: bibliography.bib
 ---
 
@@ -15,7 +14,7 @@ Abstract
 The R package **decompr** implements algorithms for the analysis of Global Value Chains.
 Two methods for gross export flow decomposition using Inter-Country Input-Output tables are provided.
 The first method is the **Wang-Wei-Zhu** [-@wang2014quantifying] algorithm which splits bilateral gross exports into 16 value added components.
-These components can broadly be divided into domestic and foreign value added.
+These components can broadly be divided into domestic and foreign value added.[@wang2014quantifying]
 The second method concerns a **source decomposition** algorithm.
 This derives the value added origin of a country-industry???s exports by source country and source industry,
 by applying the basic Leontief insight to gross trade data.

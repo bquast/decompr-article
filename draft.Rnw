@@ -18,6 +18,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 \maketitle
 
 \vspace{\stretch{1}}
@@ -78,9 +79,9 @@ and shows how these can be performed in R using the package.
 After which we conclude with a discussion of potential uses and limitations of this approach.
 
 \section{Data}
-Two data sets are included in the package, namely
-the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world} and, 
-furthermore, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
+Two data sets are included in the package, one real world data set, and one minimal fictional data, for training surposes.
+The forme is the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world}. 
+The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
 the mechanics of the package.
 
 <<load-package, message=FALSE >>=
@@ -252,7 +253,7 @@ lt2 <- decomp( x = inter,
 The both these method yield the same output, which we discuss in the following subsection.
 
 \subsection{Output}
-<<lt-out, out.extra='angle=90' >>=
+<<lt-out >>=
 lt
 @
 

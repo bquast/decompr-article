@@ -102,6 +102,30 @@
       \field{title}{The world input-output database (WIOD): contents, sources and methods}
       \field{year}{2012}
     \endentry
+    \entry{wang2014quantifying}{article}{}
+      \name{labelname}{3}{}{%
+        {{uniquename=0,hash=af9f7c73a3775f453b93fd3e906dd877}{Wang}{W\bibinitperiod}{Zhi}{Z\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=df9b412d2c1af54f77ba4680babc92fc}{Wei}{W\bibinitperiod}{Shang-Jin}{S\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=1b5a3a3f7a792656a93e9927530c6415}{Zhu}{Z\bibinitperiod}{Kunfu}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=af9f7c73a3775f453b93fd3e906dd877}{Wang}{W\bibinitperiod}{Zhi}{Z\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=df9b412d2c1af54f77ba4680babc92fc}{Wei}{W\bibinitperiod}{Shang-Jin}{S\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=1b5a3a3f7a792656a93e9927530c6415}{Zhu}{Z\bibinitperiod}{Kunfu}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {National Bureau of Economic Research}%
+      }
+      \strng{namehash}{0b08ae4900935ce2c46bfeb1b518abdf}
+      \strng{fullhash}{0b08ae4900935ce2c46bfeb1b518abdf}
+      \field{sortinit}{W}
+      \field{sortinithash}{e560dae78a85a037c3da51c61467873a}
+      \field{labelyear}{2014}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Quantifying international production sharing at the bilateral and sector levels}
+      \field{title}{Quantifying international production sharing at the bilateral and sector levels}
+      \field{year}{2014}
+    \endentry
   \endsortlist
 \endrefsection
 \endinput
