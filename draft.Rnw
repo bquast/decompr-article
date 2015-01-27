@@ -2,14 +2,26 @@
 
 \usepackage[latin1]{inputenc}
 \usepackage{rotating}
+\usepackage{adjustbox}
 \usepackage{mathtools}
 \usepackage{threeparttable}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{changepage}
 \usepackage{lscape}
+\usepackage{pbox}
+\usepackage{array}
 \usepackage[natbib, authordate, backend=biber]{biblatex-chicago}
 \usepackage[hidelinks]{hyperref}
+
+\newcolumntype{R}[2]{
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}
+    l
+    <{\egroup}
+}
+\newcommand*\rot{\multicolumn{1}{R{45}{1em}}}
+\newcommand*\rotnt{\multicolumn{1}{R{90}{1em}}}
+
 
 \addbibresource{bibliography.bib}
 
@@ -103,6 +115,7 @@ that focus on upstream tasks, which means they focus on supplying other industri
 is specialized in downstream tasks, that is it serves mainly final demand. In our example the upstream industries are 
 Agriculture and Textiles while the downstream industry in Transport Equipment. Similarly, Argentina and Turkey represent 
 upstream countries with Germany being located downstream within this specific value chain.
+
 
 \section{Leontief decomposition}
 
@@ -253,10 +266,6 @@ lt2 <- decomp( x = inter,
 The both these method yield the same output, which we discuss in the following subsection.
 
 \subsection{Output}
-<<lt-out >>=
-lt
-@
-
 We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the
 value added origins of its exports by country and industry. To this end, we look at the results of the Leontief
 decomposition for our example data set (Table \ref{tab:leon}). In the first column we find the source countries and
@@ -285,11 +294,14 @@ the lines of the industry analysis, this shows that Germany focuses within this 
 mostly final goods that contain value added from countries located more upstream. In our example these are Turkey and Argentina.
 
 \newpage
+\begin{landscape}
+
 \begin{table}[htbp] \scriptsize
-    \begin{adjustwidth}{-1.15in}{-1.15in}  
-  \centering
+%    \begin{adjustwidth}{-1.15in}{-1.15in}  
+%  \centering
   \caption{Leontief Decomposition}
-    \begin{tabular}{lccccccccc}
+  \label{tab:leon}
+  \begin{tabular}{lccccccccc}
     \toprule
           & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
           & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
@@ -306,15 +318,18 @@ mostly final goods that contain value added from countries located more upstream
     Germany.Transport.Equipment & 0.67  & 0.65  & 0.26  & 1.29  & 1.49  & 0.57  & 1.73  & 1.51  & 34.74 \\
     \bottomrule
     \end{tabular}
-  \label{tab:leon}
-      \end{adjustwidth}
-\end{table}
 
-\begin{table}[htbp]\scriptsize
-    \begin{adjustwidth}{-1.15in}{-1.15in} 
-  \centering
+%      \end{adjustwidth}
+% \end{table}
+% 
+% \begin{table}[htbp]\scriptsize
+%    \begin{adjustwidth}{-1.15in}{-1.15in}
+
+\medskip
+%  \centering
   \caption{Non-decomposed Values}
-    \begin{tabular}{lccccccccc}
+  \label{tab:noleon}
+  \begin{tabular}{lrrrrrrrrr}
     \toprule
          & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
           & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
@@ -331,10 +346,10 @@ mostly final goods that contain value added from countries located more upstream
     Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
     \bottomrule
     \end{tabular}
-  \label{tab:noleon}
-        \end{adjustwidth}
-\end{table}
 
+%        \end{adjustwidth}
+\end{table}
+\end{landscape}
 
 \section{Wang-Wei-Zhu decomposition}
 
@@ -436,12 +451,12 @@ Finally, the three checksums give total exports, total final goods exports, and 
 
 \begin{landscape}
 \begin{table}[htbp]\scriptsize
-    \begin{adjustwidth}{-1.15in}{-1.15in}
+%    \begin{adjustwidth}{-1.15in}{-1.15in}
   \centering
   \caption{WWZ Decomposition}
-    \begin{tabular}{lccccccccccccccc}
+    \begin{tabular}{lrrrrrrrrrrrrrrr}
     \toprule
-    exporter.exportingind.importer & DVA\_FIN & DVA\_INT & DVA\_INTrexI1 & DVA\_INTrexF & DVA\_INTrexI2 & RDV\_INT & RDV\_FIN & RDV\_FIN2 & OVA\_FIN & MVA\_FIN & OVA\_INT & MVA\_INT & DDC\_FIN & DDC\_INT & ODC \\
+    exporter.exportingind.importer & \rot{DVA\_FIN} & \rot{DVA\_INT} & \rot{DVA\_INTrexI1} & \rot{DVA\_INTrexF} & \rot{DVA\_INTrexI2} & \rot{RDV\_INT} & \rot{RDV\_FIN} & \rot{RDV\_FIN2} & \rot{OVA\_FIN} & \rot{MVA\_FIN} & \rot{OVA\_INT} & \rot{MVA\_INT} & \rot{DDC\_FIN} & \rot{DDC\_INT} & \rot{ODC} \\
     \midrule
     Argentina.Agriculture.Argentina & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
     Argentina.Agriculture.Turkey & 5.47  & 2.68  & 1.14  & 1.41  & 0.50  & 0.17  & 0.71  & 0.35  & 0.41  & 0.21  & 0.20  & 0.10  & 0.06  & 0.07  & 0.34 \\
@@ -482,11 +497,47 @@ Finally, the three checksums give total exports, total final goods exports, and 
     \bottomrule
     \end{tabular}
   \label{tab:wwz}
-  \end{adjustwidth}
+%  \end{adjustwidth}
 \end{table}
 \end{landscape}
 
 \section{Conclusion}
+
+\appendix
+
+\begin{landscape}
+
+\section{Tables}
+
+\begin{table}[hb!]
+\scriptsize
+\centering
+\caption{Input Data}
+\label{tab:leather}
+\begin{tabular}{llrrrrrrrrrrrrrr}
+  \hline
+%&  & Argentina & Argentina & Argentina & Turkey & Turkey & Turkey & Germany & Germany & Germany & Argentina & Turkey & Germany &  \\
+%        countries& industries & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & final & final & final & output\\
+%         & & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+         & & \multicolumn{3}{c}{Argentina} & \multicolumn{3}{c}{Turkey} & \multicolumn{3}{c}{Germany} & \multicolumn{3}{c}{Final Demand} & Output \\
+\hline
+Country & Industry & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{Argentina} & \rotnt{Turkey} & \rotnt{Germany} \\
+\hline
+Argentina & Agriculture & 16.1 & 5.1 & 1.8 & 3.2 & 4.3 & 0.4 & 3.1 & 2.8 & 4.9 & 21.5 & 6.1 & 8.4 & 77.7 \\ 
+Argentina & Textile.and.Leather & 2.4 & 8 & 3.2 & 0.1 & 3.2 & 1.6 & 1.2 & 3.9 & 11.5 & 16.2 & 1.9 & 5.1 & 58.3 \\ 
+Argentina & Transport.Equipment & 0.9 & 0.5 & 4 & 0 & 0.1 & 0.3 & 0 & 0.4 & 0.5 & 11 & 0.5 & 0.8 & 19 \\ 
+Turkey & Agriculture & 1.1 & 1.9 & 0.2 & 18 & 13.2 & 6.1 & 9 & 3.1 & 8.9 & 7.5 & 29.5 & 14.2 & 112.7 \\ 
+Turkey & Textile.and.Leather & 0.3 & 2.8 & 0.1 & 6.1 & 28.1 & 6.3 & 2.1 & 2.5 & 25.6 & 8.9 & 24.9 & 16.9 & 124.6 \\ 
+Turkey & Transport.Equipment & 0 & 0.1 & 0.3 & 4.1 & 3.2 & 8.9 & 0.2 & 0 & 1.8 & 1.2 & 18.5 & 4.9 & 43.2 \\ 
+Germany & Agriculture & 1.2 & 4.2 & 0.3 & 4.1 & 1.2 & 0.6 & 29 & 19.5 & 17.9 & 9.2 & 17.9 & 51.2 & 156.3 \\ 
+Germany & Textile.and.Leather & 1.3 & 1.1 & 0 & 3.2 & 4.8 & 2.6 & 5.1 & 29.1 & 24.1 & 7.9 & 10.1 & 38.5 & 127.8 \\ 
+Germany & Transport.Equipment & 2.1 & 1.4 & 3 & 4.1 & 3.1 & 3.9 & 11.3 & 8.1 & 51.3 & 25.1 & 35.2 & 68.4 & 217 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\end{landscape}
+
+
 
 \printbibliography
 
