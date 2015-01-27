@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper,twoside]{article}
 
 \usepackage[latin1]{inputenc}
 \usepackage{rotating}
@@ -18,7 +18,6 @@
 
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 \maketitle
 
 \vspace{\stretch{1}}
@@ -92,6 +91,7 @@ library(decompr)
 <<load-data >>=
 # load the data
 data(leather)
+
 # list the objects in the data set
 ls()
 @
@@ -222,14 +222,14 @@ Alternatively, the four dimensions of the matrix (source country, source industr
 allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
-The first step is to load the data and create the elements, there are all stored in a list (of class **decompr**).
+The first step is to load the data and create the elements, there are all stored in a list (of class \textbf{decompr}).
 
 <<load_tables >>=
 decompr_object <- load_tables_vectors( x = inter,
                                        y = final,
                                        k = countries,
                                        i = industries,
-                                       o = out         )
+                                       o = out        )
 @
 
 We can now decompose the elements using the Leontief decomposition.
@@ -238,7 +238,7 @@ lt <- leontief( decompr_object )
 @
 
 
-In addition, a wrapper function called **decomp** is provided which performs both steps at once.
+In addition, a wrapper function called \textbf{decomp} is provided which performs both steps at once.
 Though it is recomended that the atomic functions be used for large data sets.
 
 <<leontief-wrapper >>=

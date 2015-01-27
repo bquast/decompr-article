@@ -1,4 +1,53 @@
-\documentclass{article}
+\documentclass[a4paper,twoside]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 
 \usepackage[latin1]{inputenc}
 \usepackage{rotating}
@@ -15,11 +64,8 @@
 
 \title{decompr: GVC decomposition in R}
 \author{Bastiaan Quast and Victor Kummritz}
-
-
-\usepackage{Sweave}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-\input{draft-concordance}
 \maketitle
 
 \vspace{\stretch{1}}
@@ -85,24 +131,29 @@ The forme is the WIOD regional Inter-Country Input Output tables for the year 20
 The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
 the mechanics of the package.
 
-\begin{Schunk}
-\begin{Sinput}
-> # load the package
-> library(decompr)
-\end{Sinput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# load the package}
+\hlkwd{library}\hlstd{(decompr)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
-\begin{Schunk}
-\begin{Sinput}
-> # load the data
-> data(leather)
-> # list the objects in the data set
-> ls()
-\end{Sinput}
-\begin{Soutput}
-[1] "countries"  "final"      "industries" "inter"      "out"       
-\end{Soutput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# load the data}
+\hlkwd{data}\hlstd{(leather)}
+
+\hlcom{# list the objects in the data set}
+\hlkwd{ls}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "countries"  "final"      "industries" "inter"      "out"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 The data is set up in order to illustrate the benefits of the decompositions. That is, we follow the flows of intermediate
 goods through a fictional GVC and show how the readily available gross trade flows differ from the decomposed value added
@@ -230,120 +281,148 @@ Alternatively, the four dimensions of the matrix (source country, source industr
 allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
-The first step is to load the data and create the elements, there are all stored in a list (of class **decompr**).
+The first step is to load the data and create the elements, there are all stored in a list (of class \textbf{decompr}).
 
-\begin{Schunk}
-\begin{Sinput}
-> decompr_object <- load_tables_vectors( x = inter,
-+                                        y = final,
-+                                        k = countries,
-+                                        i = industries,
-+                                        o = out         )
-\end{Sinput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{decompr_object} \hlkwb{<-} \hlkwd{load_tables_vectors}\hlstd{(} \hlkwc{x} \hlstd{= inter,}
+                                       \hlkwc{y} \hlstd{= final,}
+                                       \hlkwc{k} \hlstd{= countries,}
+                                       \hlkwc{i} \hlstd{= industries,}
+                                       \hlkwc{o} \hlstd{= out        )}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 We can now decompose the elements using the Leontief decomposition.
-\begin{Schunk}
-\begin{Sinput}
-> lt <- leontief( decompr_object )
-\end{Sinput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lt} \hlkwb{<-} \hlkwd{leontief}\hlstd{( decompr_object )}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
-In addition, a wrapper function called **decomp** is provided which performs both steps at once.
+In addition, a wrapper function called \textbf{decomp} is provided which performs both steps at once.
 Though it is recomended that the atomic functions be used for large data sets.
 
-\begin{Schunk}
-\begin{Sinput}
-> lt2 <- decomp( x = inter,
-+                y = final,
-+                k = countries,
-+                i = industries,
-+                o = out,
-+                method = "leontief" )
-\end{Sinput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lt2} \hlkwb{<-} \hlkwd{decomp}\hlstd{(} \hlkwc{x} \hlstd{= inter,}
+               \hlkwc{y} \hlstd{= final,}
+               \hlkwc{k} \hlstd{= countries,}
+               \hlkwc{i} \hlstd{= industries,}
+               \hlkwc{o} \hlstd{= out,}
+               \hlkwc{method} \hlstd{=} \hlstr{"leontief"} \hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 The both these method yield the same output, which we discuss in the following subsection.
 
 \subsection{Output}
-\begin{Schunk}
-\begin{Sinput}
-> lt
-\end{Sinput}
-\begin{Soutput}
-                              Argentina.Agriculture
-Argentina.Agriculture                   28.52278143
-Argentina.Textile.and.Leather            1.06206936
-Argentina.Transport.Equipment            0.21043693
-Turkey.Agriculture                       0.71952151
-Turkey.Textile.and.Leather               0.41201175
-Turkey.Transport.Equipment               0.03482652
-Germany.Agriculture                      0.92530356
-Germany.Textile.and.Leather              0.64666560
-Germany.Transport.Equipment              0.66638333
-                              Argentina.Textile.and.Leather
-Argentina.Agriculture                            2.79395126
-Argentina.Textile.and.Leather                   19.12053186
-Argentina.Transport.Equipment                    0.14228369
-Turkey.Agriculture                               1.34237213
-Turkey.Textile.and.Leather                       1.38523849
-Turkey.Transport.Equipment                       0.08553139
-Germany.Agriculture                              2.25142713
-Germany.Textile.and.Leather                      0.72785683
-Germany.Transport.Equipment                      0.65080723
-                              Argentina.Transport.Equipment Turkey.Agriculture
-Argentina.Agriculture                            0.35606694         1.81066955
-Argentina.Textile.and.Leather                    0.41813924         0.48370042
-Argentina.Transport.Equipment                    1.06369578         0.03329456
-Turkey.Agriculture                               0.11504126        34.92704803
-Turkey.Textile.and.Leather                       0.11764036         2.69291816
-Turkey.Transport.Equipment                       0.02667530         0.81210167
-Germany.Agriculture                              0.16222512         2.31122022
-Germany.Textile.and.Leather                      0.08244379         1.53837777
-Germany.Transport.Equipment                      0.25807221         1.29066963
-                              Turkey.Textile.and.Leather
-Argentina.Agriculture                          3.1173841
-Argentina.Textile.and.Leather                  1.8329024
-Argentina.Transport.Equipment                  0.0790545
-Turkey.Agriculture                             6.9994970
-Turkey.Textile.and.Leather                    40.1671410
-Turkey.Transport.Equipment                     0.9075189
-Germany.Agriculture                            2.0595825
-Germany.Textile.and.Leather                    2.5488967
-Germany.Transport.Equipment                    1.4880228
-                              Turkey.Transport.Equipment Germany.Agriculture
-Argentina.Agriculture                         0.35901126           1.2364172
-Argentina.Textile.and.Leather                 0.43058635           0.5937041
-Argentina.Transport.Equipment                 0.04024626           0.0231846
-Turkey.Agriculture                            1.47711579           2.5543089
-Turkey.Textile.and.Leather                    1.31799873           1.1093993
-Turkey.Transport.Equipment                    3.16041392           0.1151191
-Germany.Agriculture                           0.51211484          29.8763359
-Germany.Textile.and.Leather                   0.63316614           1.4593583
-Germany.Transport.Equipment                   0.56934671           1.7321726
-                              Germany.Textile.and.Leather
-Argentina.Agriculture                          1.30283802
-Argentina.Textile.and.Leather                  1.15375958
-Argentina.Transport.Equipment                  0.07482343
-Turkey.Agriculture                             1.52213499
-Turkey.Textile.and.Leather                     1.15207241
-Turkey.Transport.Equipment                     0.07448266
-Germany.Agriculture                            5.24719728
-Germany.Textile.and.Leather                   18.95868110
-Germany.Transport.Equipment                    1.51401054
-                              Germany.Transport.Equipment
-Argentina.Agriculture                           4.1208736
-Argentina.Textile.and.Leather                   4.7490351
-Argentina.Transport.Equipment                   0.1932621
-Turkey.Agriculture                              6.1806254
-Turkey.Textile.and.Leather                      9.5069032
-Turkey.Transport.Equipment                      0.6464733
-Germany.Agriculture                             9.6006931
-Germany.Textile.and.Leather                     8.1583150
-Germany.Transport.Equipment                    34.7438192
-\end{Soutput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lt}
+\end{alltt}
+\begin{verbatim}
+##                               Argentina.Agriculture
+## Argentina.Agriculture                   28.52278143
+## Argentina.Textile.and.Leather            1.06206936
+## Argentina.Transport.Equipment            0.21043693
+## Turkey.Agriculture                       0.71952151
+## Turkey.Textile.and.Leather               0.41201175
+## Turkey.Transport.Equipment               0.03482652
+## Germany.Agriculture                      0.92530356
+## Germany.Textile.and.Leather              0.64666560
+## Germany.Transport.Equipment              0.66638333
+##                               Argentina.Textile.and.Leather
+## Argentina.Agriculture                            2.79395126
+## Argentina.Textile.and.Leather                   19.12053186
+## Argentina.Transport.Equipment                    0.14228369
+## Turkey.Agriculture                               1.34237213
+## Turkey.Textile.and.Leather                       1.38523849
+## Turkey.Transport.Equipment                       0.08553139
+## Germany.Agriculture                              2.25142713
+## Germany.Textile.and.Leather                      0.72785683
+## Germany.Transport.Equipment                      0.65080723
+##                               Argentina.Transport.Equipment
+## Argentina.Agriculture                            0.35606694
+## Argentina.Textile.and.Leather                    0.41813924
+## Argentina.Transport.Equipment                    1.06369578
+## Turkey.Agriculture                               0.11504126
+## Turkey.Textile.and.Leather                       0.11764036
+## Turkey.Transport.Equipment                       0.02667530
+## Germany.Agriculture                              0.16222512
+## Germany.Textile.and.Leather                      0.08244379
+## Germany.Transport.Equipment                      0.25807221
+##                               Turkey.Agriculture
+## Argentina.Agriculture                 1.81066955
+## Argentina.Textile.and.Leather         0.48370042
+## Argentina.Transport.Equipment         0.03329456
+## Turkey.Agriculture                   34.92704803
+## Turkey.Textile.and.Leather            2.69291816
+## Turkey.Transport.Equipment            0.81210167
+## Germany.Agriculture                   2.31122022
+## Germany.Textile.and.Leather           1.53837777
+## Germany.Transport.Equipment           1.29066963
+##                               Turkey.Textile.and.Leather
+## Argentina.Agriculture                          3.1173841
+## Argentina.Textile.and.Leather                  1.8329024
+## Argentina.Transport.Equipment                  0.0790545
+## Turkey.Agriculture                             6.9994970
+## Turkey.Textile.and.Leather                    40.1671410
+## Turkey.Transport.Equipment                     0.9075189
+## Germany.Agriculture                            2.0595825
+## Germany.Textile.and.Leather                    2.5488967
+## Germany.Transport.Equipment                    1.4880228
+##                               Turkey.Transport.Equipment
+## Argentina.Agriculture                         0.35901126
+## Argentina.Textile.and.Leather                 0.43058635
+## Argentina.Transport.Equipment                 0.04024626
+## Turkey.Agriculture                            1.47711579
+## Turkey.Textile.and.Leather                    1.31799873
+## Turkey.Transport.Equipment                    3.16041392
+## Germany.Agriculture                           0.51211484
+## Germany.Textile.and.Leather                   0.63316614
+## Germany.Transport.Equipment                   0.56934671
+##                               Germany.Agriculture
+## Argentina.Agriculture                   1.2364172
+## Argentina.Textile.and.Leather           0.5937041
+## Argentina.Transport.Equipment           0.0231846
+## Turkey.Agriculture                      2.5543089
+## Turkey.Textile.and.Leather              1.1093993
+## Turkey.Transport.Equipment              0.1151191
+## Germany.Agriculture                    29.8763359
+## Germany.Textile.and.Leather             1.4593583
+## Germany.Transport.Equipment             1.7321726
+##                               Germany.Textile.and.Leather
+## Argentina.Agriculture                          1.30283802
+## Argentina.Textile.and.Leather                  1.15375958
+## Argentina.Transport.Equipment                  0.07482343
+## Turkey.Agriculture                             1.52213499
+## Turkey.Textile.and.Leather                     1.15207241
+## Turkey.Transport.Equipment                     0.07448266
+## Germany.Agriculture                            5.24719728
+## Germany.Textile.and.Leather                   18.95868110
+## Germany.Transport.Equipment                    1.51401054
+##                               Germany.Transport.Equipment
+## Argentina.Agriculture                           4.1208736
+## Argentina.Textile.and.Leather                   4.7490351
+## Argentina.Transport.Equipment                   0.1932621
+## Turkey.Agriculture                              6.1806254
+## Turkey.Textile.and.Leather                      9.5069032
+## Turkey.Transport.Equipment                      0.6464733
+## Germany.Agriculture                             9.6006931
+## Germany.Textile.and.Leather                     8.1583150
+## Germany.Transport.Equipment                    34.7438192
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the
 value added origins of its exports by country and industry. To this end, we look at the results of the Leontief
@@ -505,11 +584,13 @@ The higher resolution of the WWZ decomposition comes at the cost of a lower dime
 \subsection{Implementation}
 We can now decompose the elements using the Wang-Wei-Zhu decomposition.
 
-\begin{Schunk}
-\begin{Sinput}
-> w <- wwz(decompr_object)
-\end{Sinput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{w} \hlkwb{<-} \hlkwd{wwz}\hlstd{(decompr_object)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \subsection{Output}
 The output when using the WWZ algorithm is a matrix with dimensions GNGx19 whereby 19 is the 16 objects the WWZ algorithm decomposes exports into, plus three checksums. GNG represents source country, source industry and using country whereas these terms are slightly ambiguous here due to the complex nature of the decomposition. More specifically, the using country can also be the origin of the foreign value added in the exports of the source country to the using country (see for example T11 and T12). Therefore we use the terms exporter, exporting industry, and direct importer instead. This becomes clearer when we take a look at specific examples.
