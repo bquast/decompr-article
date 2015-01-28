@@ -319,7 +319,7 @@ mostly final goods that contain value added from countries located more upstream
     \hline
     \end{tabular}
 
-\medskip
+\bigskip \bigskip
 
   \caption{Non-decomposed Values}
   \label{tab:noleon}
@@ -511,9 +511,6 @@ Finally, the three checksums give total exports, total final goods exports, and 
 \label{tab:leather}
 \begin{tabular}{llrrrrrrrrrrrrrr}
   \hline
-%&  & Argentina & Argentina & Argentina & Turkey & Turkey & Turkey & Germany & Germany & Germany & Argentina & Turkey & Germany &  \\
-%        countries& industries & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & final & final & final & output\\
-%         & & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
          & & \multicolumn{3}{c}{Argentina} & \multicolumn{3}{c}{Turkey} & \multicolumn{3}{c}{Germany} & \multicolumn{3}{c}{Final Demand} & Output \\
 \hline
 Country & Industry & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{Argentina} & \rotnt{Turkey} & \rotnt{Germany} \\
