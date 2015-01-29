@@ -265,10 +265,7 @@ Depending on the choice of decomposition, all or some of these objects are used.
     \end{tabular}
 
 \end{table}
-
 \end{landscape}
-
-
 
 
 \section{Leontief decomposition}
@@ -411,16 +408,16 @@ The \textbf{decomp} function requires a method to be specified (see \textbf{help
 Note that the output produced by these two different processes is identical.
 
 \subsection{Output}
-We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the
+We can now analyse the output of the Leontief decomposition, which consists of a GNxGN matrix that gives for each country and industry the
 value added origins of its exports by country and industry.
-To this end, we look at the results of the Leontief decomposition for our example data set (Table \ref{tab:leon}).
+To this end, we look at the results of the Leontief decomposition for our example data set (\cref{tab:leon}).
 In the first column we find the source countries and industries while the first row contains the using countries and industries.
 The first element, $28.52$, thus gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the Argentinian Agriculture industry.
 Similarly, the last element of this row, $4.12$, gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the German Transport Equipment industry.
 
 A key advantage of the decomposition becomes clear when we compare the decomposed values with the intermediate trade
 values of the non-decomposed IO table when multiplied with the exports over output ratio to create
-comparability (Table \ref{tab:noleon}).
+comparability (\cref{tab:noleon}).
 We see for instance that Argentina's Agriculture industry contributes significantly more value added to the German Transport Equipment industry than suggested by the non-decomposed IO table.
 The reason is that Argentina's Agriculture industry is an important supplier to Turkey's Textile and Leather industry which is in turn an important supplier for the German Transport Equipment industry.
 The decomposition thus allows us to see how the value added flows along this Global Value Chain.
@@ -553,9 +550,9 @@ Both these processes will yield the same results.
 \subsection{Output}
 The output when using the WWZ algorithm is a matrix with dimensions GNGx19 whereby 19 is the 16 objects the WWZ algorithm decomposes exports into, plus three checksums. GNG represents source country, source industry and using country whereas these terms are slightly ambiguous here due to the complex nature of the decomposition. More specifically, the using country can also be the origin of the foreign value added in the exports of the source country to the using country (see for example T11 and T12). Therefore we use the terms exporter, exporting industry, and direct importer instead. This becomes clearer when we take a look at specific examples.
 
-Table \ref{tab:wwz} shows the results for the example data. The first column lists exporter, exporting industry, and direct importer. Note that the value added is domestic but not necessarily created in the exporting industry. When exporter and importer are identical, the values are zero since there are no exports. The first row lists the 16 components of bilateral exports at the sector level and three checksums.
+\Cref{tab:wwz} shows the results for the example data. The first column lists exporter, exporting industry, and direct importer. Note that the value added is domestic but not necessarily created in the exporting industry. When exporter and importer are identical, the values are zero since there are no exports. The first row lists the 16 components of bilateral exports at the sector level and three checksums.
 
-The first eight components relate to domestic value added of the exporting country contained in the sectoral exports of the exporting industry to the direct importer. For instance, the first non-zero element in Table \ref{tab:wwz} refers to $DVA\_FIN$ or domestic value added in final good exports. It shows that there are 5.47 units of domestic value added in the exports of final goods from Argentina's Agriculture industry to Turkey. In the same row the third term,  $DVA\_INTrexI1$, is slightly more complicated. As mentioned above it gives the amount of domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods. In our example this means that there are 1.14 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey that are re-exported by Turkey as intermediates to a third country which produces final goods with it. Terms six to eight concern domestic value added that eventually returns home. $RDV\_FIN2$ reveals for example that there are 0.35 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey that Turkey re-exports as intermediates to Argentina for the latter's final good production.
+The first eight components relate to domestic value added of the exporting country contained in the sectoral exports of the exporting industry to the direct importer. For instance, the first non-zero element in \cref{tab:wwz} refers to $DVA\_FIN$ or domestic value added in final good exports. It shows that there are 5.47 units of domestic value added in the exports of final goods from Argentina's Agriculture industry to Turkey. In the same row the third term,  $DVA\_INTrexI1$, is slightly more complicated. As mentioned above it gives the amount of domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods. In our example this means that there are 1.14 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey that are re-exported by Turkey as intermediates to a third country which produces final goods with it. Terms six to eight concern domestic value added that eventually returns home. $RDV\_FIN2$ reveals for example that there are 0.35 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey that Turkey re-exports as intermediates to Argentina for the latter's final good production.
 
 The following four terms apply to foreign value added in exports and separate on the one hand between the origin of the foreign value added ($MVA$ vs $OVA$) and on the other hand between the type of export (intermediate vs final good). MVA describes hereby foreign value added sourced by the exporting country from the direct importer. From the perspective of the latter, these terms are thus part of the $RDV$ (value added returning home) share. $OVA$ in contrast sums over the foreign value added sourced from all other countries. Going back to the example, this means that there 0.21 units of Turkish value added in the final goods exports of Argentina's Agriculture industry to Turkey.
 
