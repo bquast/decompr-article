@@ -8,6 +8,7 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{changepage}
+\usepackage{verbatim}
 \usepackage{lscape}
 \usepackage{pbox}
 \usepackage{array}
@@ -36,9 +37,9 @@
 \vspace{\stretch{1}}
 \abstract{Global Value Chains have become a central unit of analysis in research on international trade. However, 
 the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier to
-the field. The R package \textit{decompr} solves this problem by implementing algorithms for the analysis of Global Value Chains,
+the field. The R package \textbf{decompr} solves this problem by implementing algorithms for the analysis of Global Value Chains,
 which calculate standard indicators in an automated fashion. Two methods for gross export flow decomposition using 
-Inter-Country Input-Output tables are provided. The first method is the \textit{Wang-Wei-Zhu} algorithm which splits 
+Inter-Country Input-Output tables are provided. The first method is the \textbf{Wang-Wei-Zhu} algorithm which splits 
 bilateral gross exports into 16 value added components. These components can broadly be divided into domestic and 
 foreign value added in exports. The second method concerns a decomposition based on the classical \citet{wale36} insight.
 It derives the value added origins of an industry's exports by source country and source industry, using easily available
@@ -54,7 +55,7 @@ since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming
 to easily derive standard GVC indicators for statistical analysis.
 
-\textit{decompr} uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD, 
+\textbf{decompr} uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD, 
 the World Input Output Database (WIOD),  or national statistics bureaus, as input. 
 These tables state supply and demand relationships in gross terms between industries within and across countries.
 
@@ -67,12 +68,12 @@ is that they do not reveal how much of the value was added in the supplying indu
 and how much of the value was added in previous stages of production,
 performed by other industries or even countries.
 
-The \textit{Leontief} decomposition of gross trade flows solves this problem
+The \textbf{Leontief} decomposition of gross trade flows solves this problem
 by reallocating the value of intermediate goods used by industries to the original producers.
 In our example, the use of Argentinian agricultural produce (raw hides)
 is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
 
-The \textit{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
+The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
 but also breaking down exports into different categories, based on its final usage and destination. It implements the 
 theoretical work of \citet{wang2014quantifying}. The main categories are:
 
@@ -82,7 +83,27 @@ theoretical work of \citet{wang2014quantifying}. The main categories are:
  \item pure double counted terms
 \end{enumerate}
 
-The decompr package implements the algorithms for these decompositions as R procedures.
+\subsection{Package Details}
+The \textbf{decompr} package implements the algorithms for these decompositions as R procedures and provides example data sets.
+The R procedures are implemented as functions, the included functions are listed below.
+
+\begin{itemize}
+ \item \textbf{load\_tables\_vectors}; transforms the input objects to an object used for the decompositions (class: decompr)
+ \item \textbf{leontief}; takes a decompr object and applies the Leontief decomposition
+ \item \textbf{wwz}; takes a decompr object and applies the Wang-Wei-Zhu decomposition
+ \item \textbf{vertical\_specialisation}; takes a decompr object and returns a measure of vertical specialisation (also works with vertical\_specialization)
+ \item \textbf{leontief\_output}; takes a decompr object and applies the Leontief decomposition using final output
+ \item \textbf{decomp}; a wrapper function which integrates the use of \textbf{load\_tables\_vectors} with the various decompositions, using a argument \textbf{method} to specify the desired decomposition (default \textbf{leontief}) 
+\end{itemize}
+
+For legacy purposes, several depracated functions / methods are available under their original names.
+In addition to this, two example data sets are included.
+
+\begin{itemize}
+  \item \textbf{World Input-Output Database} \parencite{timmer2012world}
+  \item \textbf{Leather}; a fictional three-country, three-sector data set
+\end{itemize}
+
 
 The next section introduces the data as it is used by the package,
 as well as an example data set provided by the WIOD.
@@ -91,6 +112,7 @@ and shows how these can be performed in R using the package.
 After which we conclude with a discussion of potential uses and limitations of this approach.
 
 \section{Data}
+\label{sec:data}
 Two data sets are included in the package, one real world data set, and one minimal fictional data, for training surposes.
 The forme is the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world}. 
 The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
@@ -117,23 +139,38 @@ is specialized in downstream tasks, that is it serves mainly final demand. In ou
 Agriculture and Textiles while the downstream industry in Transport Equipment. Similarly, Argentina and Turkey represent 
 upstream countries with Germany being located downstream within this specific value chain.
 
+The first step of the analytic process is to load the input object and create a \textbf{decompr} class object which contains the data structures for the decompositions. This step is not need when using the \textbf{decomp} wrapper function, more on this later.
+
+<<load_tables_vectors >>=
+# create the decompr object
+decompr_object <- load_tables_vectors( x = inter,
+                                       y = final,
+                                       k = countries,
+                                       i = industries,
+                                       o = out        )
+
+# inspect the content of the decompr object
+ls(decompr_object)
+@
+
+As can be seen above, a \textbf{decompr} class object is in fact a list containing thirty different objects. Depending on the choice of decomposition, all or some of these objects are used.
 
 \section{Leontief decomposition}
 
-Let us now turn to the actual algorithms starting with the \textit{Leontief} decomposition. We shortly describe the theoretical
-derivation of the method to expose the inner steps of the \textit{decompr} package. Then we turn to the technical implementation
+Let us now turn to the actual algorithms starting with the \textbf{Leontief} decomposition. We shortly describe the theoretical
+derivation of the method to expose the inner steps of the \textbf{decompr} package. Then we turn to the technical implementation
 and finish with a description of the output.
 
 \subsection{Theoretical derivation}
 
 The tools to derive the source decomposition date back to \citet{wale36} who showed that, with a set of simple calculations, 
 national Input-Output tables based on gross terms give the true value added flows between industries. 
-The idea behind this insight is that the production of industry \textit{i}'s output requires inputs of other industries 
-and \textit{i}'s own value added. The latter is the direct contribution of \textit{i}'s output to domestic value added. 
-The former refers to the first round of \textit{i}'s indirect contribution to domestic value added since the input from 
-other industries that \textit{i} requires for its own production triggers the creation of value added in the supplying 
+The idea behind this insight is that the production of industry \textbf{i}'s output requires inputs of other industries 
+and \textbf{i}'s own value added. The latter is the direct contribution of \textbf{i}'s output to domestic value added. 
+The former refers to the first round of \textbf{i}'s indirect contribution to domestic value added since the input from 
+other industries that \textbf{i} requires for its own production triggers the creation of value added in the supplying 
 industries. As the supplying industries usually depend on inputs from other industries, this sets in motion a second round 
-of indirect value added creation in the supplying industries of the suppliers, which is also caused by \textit{i}'s production. 
+of indirect value added creation in the supplying industries of the suppliers, which is also caused by \textbf{i}'s production. 
 This goes on until value added is traced back to the original suppliers and can mathematically be expressed as 
 
 \begin{equation}
@@ -144,22 +181,22 @@ which, as an infinite geometric series with the elements of $A<1$, simplifies to
 \begin{equation}
 VB = V (I-A)^{-1},
 \end{equation}
-where \textit{V} is a N x N matrix with the diagonal representing the direct value added contribution of the industries,
-\textit{A} is the Input-Output coefficient matrix with dimension N x N, i.e. it gives the direct input flows between
-industries required for 1\$ of output, $B = (I-A)^{-1}$ is then the so called Leontief inverse, and \textit{T} indicates
-a matrix transpose operation. \textit{VB} gives thus a N x N matrix of so called value added multipliers,
+where \textbf{V} is a N x N matrix with the diagonal representing the direct value added contribution of the industries,
+\textbf{A} is the Input-Output coefficient matrix with dimension N x N, i.e. it gives the direct input flows between
+industries required for 1\$ of output, $B = (I-A)^{-1}$ is then the so called Leontief inverse, and \textbf{T} indicates
+a matrix transpose operation. \textbf{VB} gives thus a N x N matrix of so called value added multipliers,
 which denote the amount of value added that the production of an industry's 1\$ of output or exports brings about
 in all other industries. Looking from the perspective of the supplying industries, the matrix gives the value added that
 they contribute to the using industry's production. If we multiply it with a N x N matrix whose diagonal specifies each
 industry's total output, we get value added origins as absolute values instead of shares.
 
 The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our source decomposition
-is straightforward. \textit{V} refers now to a vector of direct value added contribution of all industries across
-the different countries. Its dimension is correspondingly 1 x GN. \textit{A} is now of dimension GN x GN
+is straightforward. \textbf{V} refers now to a vector of direct value added contribution of all industries across
+the different countries. Its dimension is correspondingly 1 x GN. \textbf{A} is now of dimension GN x GN
 and gives the industry flows including cross border relationships. Since we are interested in the value added origins
 of exports we multiply these two matrices with a GN x GN matrix whose diagonal we fill with each industry's exports, $E$,
 such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$. In a simple example
-with two countries (\textit{k} and \textit{l}) and industries (\textit{i} and \textit{j}) we can zoom in to see
+with two countries (\textbf{k} and \textbf{l}) and industries (\textbf{i} and \textbf{j}) we can zoom in to see
 the matrices' content:
 
 \begin{align}
@@ -228,7 +265,7 @@ where \(v_{s}^{c}\) gives the share of industry \emph{s}'s value added,
 indicates gross exports. Finally, \(a_{su}^{cf}\) denotes
 the share of inputs, \(inp_{su}^{cf}\), in output. 
 The elements of the $V(I-A)^{-1}E$ or $vae$ matrix are our estimates for the country-industry level value added
-origins of each country-industry's exports. \textit{decompr} implements this algorithm into R to automate the process of
+origins of each country-industry's exports. \textbf{decompr} implements this algorithm into R to automate the process of
 deriving the matrix. Equipped with it, researchers can calculate standard GVC indicators. 
 Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level which can be derived
 by summing for each country and industry across the value added of all foreign countries and industries.
@@ -236,24 +273,14 @@ Alternatively, the four dimensions of the matrix (source country, source industr
 allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
-The first step is to load the data and create the elements, there are all stored in a list (of class \textbf{decompr}).
-
-<<load_tables >>=
-decompr_object <- load_tables_vectors( x = inter,
-                                       y = final,
-                                       k = countries,
-                                       i = industries,
-                                       o = out        )
-@
-
-We can now decompose the elements using the Leontief decomposition.
+As described, in \cref{sec:data}, the first step of our analytic process is to construct a \textbf{decompr} object using the \textbf{load\_tables\_vectors} function. After this, we can use the \textbf{leontief} function to apply to Leontief decomposition.
 <<leontief >>=
 lt <- leontief( decompr_object )
 @
 
-
-In addition, a wrapper function called \textbf{decomp} is provided which performs both steps at once.
-Though it is recomended that the atomic functions be used for large data sets.
+In addition, a wrapper function called \textbf{decomp} is provided which integrates both elements of the workflow into a single function.
+We recomended that the atomic functions be used for large data sets, however, for small data sets this is an easy way to derive the results immediatly.
+The \textbf{decomp} function requires a method to be specified (see \textbf{help("decomp) for details}), is none is provided, the function will default to \textbf{leontief}.
 
 <<leontief-wrapper >>=
 lt2 <- decomp( x = inter,
@@ -264,7 +291,7 @@ lt2 <- decomp( x = inter,
                method = "leontief" )
 @
 
-The both these method yield the same output, which we discuss in the following subsection.
+Note that the output produced by these two different processes is identical.
 
 \subsection{Output}
 We can now analyse the output which consists of a GNxGN matrix that gives for each country and industry the
@@ -348,6 +375,7 @@ mostly final goods that contain value added from countries located more upstream
 
 
 \section{Wang-Wei-Zhu decomposition}
+The Wang-Wei-Zhu decomposition ...
 
 \subsection{Theoretical derivation}
 
@@ -374,63 +402,77 @@ E^{kl}
 + (\sum_{t \neq k,l}^G  V^{t} B^{tk} )^{T} *  \left(A^{kl} L^{ll} E^{l*} \right) ,
 \end{split}
 \end{align}
-where $F^{kl}$ is the final demand in $l$ for goods of $k$ and $L^{ll}$ refers to the national Leontief inverse as opposed to the Inter-Country inverse $B$. As can be seen from equation (\ref{eq:wwz}), the Wang-Wei-Zhu decomposition splits gross exports into 16 terms with three main categories given by domestic value added in exports (\textit{DViX\_B}), foreign value added in exports (\textit{FVA}), and purely double counted terms (\textit{PDC}). The main categories are further divided according to their final destination so that the final decomposition is given by:
+where $F^{kl}$ is the final demand in $l$ for goods of $k$ and $L^{ll}$ refers to the national Leontief inverse as opposed to the Inter-Country inverse $B$. As can be seen from equation (\ref{eq:wwz}), the Wang-Wei-Zhu decomposition splits gross exports into 16 terms with three main categories given by domestic value added in exports (\textbf{DViX\_B}), foreign value added in exports (\textbf{FVA}), and purely double counted terms (\textbf{PDC}). The main categories are further divided according to their final destination so that the final decomposition is given by:
 \begin{itemize}
-\item Domestic Value Added absorbed abroad (\textit{VAX\_G}, T1-5)
+\item Domestic Value Added absorbed abroad (\textbf{VAX\_G}, T1-5)
 \begin{itemize}
-\item Domestic Value added in final exports (\textit{DVA\_FIN}, T1)
+\item Domestic Value added in final exports (\textbf{DVA\_FIN}, T1)
 \item Domestic Value added in intermediate exports
 \begin{itemize}
-\item Domestic Value added in intermediate exports absorbed by direct importers (\textit{DVA\_INT}, T2)
-\item Domestic Value added in intermediate exports re-exported to third countries (\textit{DVA\_INTrex}, T3-5)
+\item Domestic Value added in intermediate exports absorbed by direct importers (\textbf{DVA\_INT}, T2)
+\item Domestic Value added in intermediate exports re-exported to third countries (\textbf{DVA\_INTrex}, T3-5)
 \begin{itemize}
-\item Domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods (\textit{DVA\_INTrexI1}, T3)
-\item Domestic Value added in intermediate exports re-exported to third countries as  final goods (\textit{DVA\_INTrexF}, T4)
-\item Domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce exports (\textit{DVA\_INTrexI2}, T5)
+\item Domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods (\textbf{DVA\_INTrexI1}, T3)
+\item Domestic Value added in intermediate exports re-exported to third countries as  final goods (\textbf{DVA\_INTrexF}, T4)
+\item Domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce exports (\textbf{DVA\_INTrexI2}, T5)
 \end{itemize}
 \end{itemize}
 \end{itemize}
-\item Domestic Value Added returning home (\textit{RDV\_B}, T6-8)
+\item Domestic Value Added returning home (\textbf{RDV\_B}, T6-8)
 \begin{itemize}
-\item Domestic Value Added returning home as final goods (\textit{RDV\_FIN}, T6)
-\item Domestic Value Added returning home as final goods through third countries (\textit{RDV\_FIN2}, T7)
-\item Domestic Value Added returning home as intermediate goods (\textit{RDV\_INT}, T8)
+\item Domestic Value Added returning home as final goods (\textbf{RDV\_FIN}, T6)
+\item Domestic Value Added returning home as final goods through third countries (\textbf{RDV\_FIN2}, T7)
+\item Domestic Value Added returning home as intermediate goods (\textbf{RDV\_INT}, T8)
 \end{itemize}
-\item Foreign Value added (\textit{FVA}, T11-12/14-15 )
+\item Foreign Value added (\textbf{FVA}, T11-12/14-15 )
 \begin{itemize}
-\item Foreign Value added in final good exports (\textit{FVA\_FIN}, T11/14)
+\item Foreign Value added in final good exports (\textbf{FVA\_FIN}, T11/14)
 \begin{itemize}
-\item Foreign Value added in final good exports sourced from direct importer (\textit{MVA\_FIN}, T11)
-\item Foreign Value added in final good exports sourced from other countries (\textit{OVA\_FIN}, T14)
+\item Foreign Value added in final good exports sourced from direct importer (\textbf{MVA\_FIN}, T11)
+\item Foreign Value added in final good exports sourced from other countries (\textbf{OVA\_FIN}, T14)
 \end{itemize}
-\item Foreign Value added in intermediate good exports (\textit{FVA\_INT}, T12/15)
+\item Foreign Value added in intermediate good exports (\textbf{FVA\_INT}, T12/15)
 \begin{itemize}
-\item Foreign Value added in intermediate good exports sourced from direct importer (\textit{MVA\_INT}, T12)
-\item Foreign Value added in intermediate good exports sourced from other countries(\textit{OVA\_INT}, T15)
+\item Foreign Value added in intermediate good exports sourced from direct importer (\textbf{MVA\_INT}, T12)
+\item Foreign Value added in intermediate good exports sourced from other countries(\textbf{OVA\_INT}, T15)
 \end{itemize}
 \end{itemize}
-\item Pure Double Counting (\textit{PDC}, T9-10/13/16)
+\item Pure Double Counting (\textbf{PDC}, T9-10/13/16)
 \begin{itemize}
-\item Pure double counting from domestic source (\textit{DDC}, T9-10)
+\item Pure double counting from domestic source (\textbf{DDC}, T9-10)
 \begin{itemize}
-\item Due to final goods exports production (\textit{DDF}, T9)
-\item Due to intermediate goods exports production (\textit{DDI}, T10)
+\item Due to final goods exports production (\textbf{DDF}, T9)
+\item Due to intermediate goods exports production (\textbf{DDI}, T10)
 \end{itemize}
-\item Pure double counting from foreign source (\textit{FDC}, T13/16)
+\item Pure double counting from foreign source (\textbf{FDC}, T13/16)
 \begin{itemize}
-\item Due to direct importer exports production (\textit{FDF}, T13)
-\item Due to other countries' exports production (\textit{FDI}, T16)
+\item Due to direct importer exports production (\textbf{FDF}, T13)
+\item Due to other countries' exports production (\textbf{FDI}, T16)
 \end{itemize}
 \end{itemize}
 \end{itemize}
 The higher resolution of the WWZ decomposition comes at the cost of a lower dimension (source country, using country, using industry) since the current, highly aggregated, ICIOs render a four-dimensional decomposition unfeasible. This means that the two methods are complementary and imply a trade-off between detail and disaggregation.
 
 \subsection{Implementation}
-We can now decompose the elements using the Wang-Wei-Zhu decomposition.
+As with the \textbf{leontief} function, the \textbf{wwz} function also takes a \textbf{decompr} class object as its input, the procedure for this is described in \cref{sec:data}.
+After having created this \textbf{decompr} object, we can apply the Wang-Wei-Zhu decomposition using the \textbf{wwz} function.
 
 <<wwz >>=
 w <- wwz(decompr_object)
 @
+
+Furthermore, it is also possible to derive the results of the Wang-Wei-Zhu decomposition directly, using the \textbf{decomp} function.
+
+<<wwz2 >>=
+w2 <-  decomp( x = inter,
+               y = final,
+               k = countries,
+               i = industries,
+               o = out,
+               method = "wwz" )
+@
+
+Both these processes will yield the same results.
 
 \subsection{Output}
 The output when using the WWZ algorithm is a matrix with dimensions GNGx19 whereby 19 is the 16 objects the WWZ algorithm decomposes exports into, plus three checksums. GNG represents source country, source industry and using country whereas these terms are slightly ambiguous here due to the complex nature of the decomposition. More specifically, the using country can also be the origin of the foreign value added in the exports of the source country to the using country (see for example T11 and T12). Therefore we use the terms exporter, exporting industry, and direct importer instead. This becomes clearer when we take a look at specific examples.
