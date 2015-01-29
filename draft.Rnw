@@ -109,13 +109,13 @@ The next section introduces the data as it is used by the package,
 as well as an example data set provided by the WIOD.
 Section three summarises the theoretical derivation for the decompositions,
 and shows how these can be performed in R using the package.
-After which we conclude with a discussion of potential uses and limitations of this approach.
+We conclude with a discussion of potential uses and limitations of this approach.
 
 \section{Data}
 \label{sec:data}
-Two data sets are included in the package, one real world data set, and one minimal fictional data, for training surposes.
-The forme is the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world}. 
-The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
+Two data sets are included in the package, one real world data set, and one minimal fictional data for training purposes.
+The former is the WIOD regional Inter-Country Input Output table for the year 2011 \parencite{timmer2012world}. 
+The latter is a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
 the mechanics of the package.
 
 <<load-package, message=FALSE >>=
