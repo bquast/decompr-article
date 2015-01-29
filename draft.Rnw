@@ -375,7 +375,11 @@ mostly final goods that contain value added from countries located more upstream
 
 
 \section{Wang-Wei-Zhu decomposition}
-The Wang-Wei-Zhu decomposition ...
+The Wang-Wei-Zhu decomposition builds upon the Leontief insight but uses, in addition, further valuable information
+provided in ICIOS. More specifically, the Leontief decomposition traces the value added back to where it originates
+but ICIOS also contain data on how the value added is subsequently used. This information is extracted by the
+Wang-Wei-Zhu decomposition, which thereby allows a much more detailed look at the structures of international
+production networks and the respective positions of countries and industries within them.
 
 \subsection{Theoretical derivation}
 
