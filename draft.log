@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.1.16)  29 JAN 2015 13:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.1.16)  29 JAN 2015 13:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -802,38 +802,39 @@ Package color Info: Redefining color shadecolor on input line 353.
  [6] [7] [8
 
 ]
-Overfull \hbox (37.78146pt too wide) in paragraph at lines 476--476
+Overfull \hbox (37.78146pt too wide) in paragraph at lines 481--481
 [] 
- []
-
-
-Overfull \hbox (3.78171pt too wide) in paragraph at lines 487--488
-[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
- []
-
-
-Overfull \hbox (3.78171pt too wide) in paragraph at lines 488--489
-[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
- []
-
-
-Overfull \hbox (3.78171pt too wide) in paragraph at lines 489--490
-[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
  []
 
 [9
 
 ]
-Overfull \hbox (9.641pt too wide) in paragraph at lines 495--496
+Overfull \hbox (3.78171pt too wide) in paragraph at lines 492--493
+[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
+ []
+
+
+Overfull \hbox (3.78171pt too wide) in paragraph at lines 493--494
+[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
+ []
+
+
+Overfull \hbox (3.78171pt too wide) in paragraph at lines 494--495
+[]\OT1/cmr/m/n/9 Domestic Value added in in-ter-me-di-ate ex-ports re-exported
+ []
+
+
+Overfull \hbox (9.641pt too wide) in paragraph at lines 500--501
 []\OT1/cmr/m/n/9 Domestic Value Added re-turn-ing home as fi-nal goods (\OT1/cm
 r/bx/n/9 RDV[]FIN\OT1/cmr/m/n/9 ,
  []
 
-Package color Info: Redefining color shadecolor on input line 533.
-Package color Info: Redefining color shadecolor on input line 543.
-[10] [11] [12]
+Package color Info: Redefining color shadecolor on input line 538.
+[10]
+Package color Info: Redefining color shadecolor on input line 548.
+ [11] [12]
 
-LaTeX Warning: Float too large for page by 16.03804pt on input line 619.
+LaTeX Warning: Float too large for page by 16.03804pt on input line 622.
 
 [13] [14
 
@@ -841,19 +842,19 @@ LaTeX Warning: Float too large for page by 16.03804pt on input line 619.
 ] [15
 
 ]
-Overfull \hbox (4.22672pt too wide) in paragraph at lines 660--660
+Overfull \hbox (4.22672pt too wide) in paragraph at lines 663--663
 \OT1/cmr/m/n/10 database (WIOD): con-tents, sources and meth-ods.'' \OT1/cmr/m/
 it/10 WIOD Back-
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 661.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 664.
 [16
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 661.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 664.
  (./draft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 661.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 661.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 664.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 664.
 Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: FC4B9E9C71FDBCC6FB19D2178B13FFC1;735.
 Package logreq Info: Writing requests to 'draft.run.xml'.
@@ -883,10 +884,10 @@ ype1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
 .pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on draft.pdf (16 pages, 261480 bytes).
+Output written on draft.pdf (16 pages, 261800 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
+ 249 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
  46 named destinations out of 1000 (max. 500000)
  105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

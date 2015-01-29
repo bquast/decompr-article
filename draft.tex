@@ -183,10 +183,10 @@ The later, is a fictional 3-country 3-sector data set, which we will use through
 \end{knitrout}
 
 The data is set up in order to illustrate the benefits of the decompositions.
-That is, we follow the flows of intermediate goods through a fictional GVC and show how the readily available gross trade flows differ from the decomposed value added flows.
-To this end, we construct the elements of the input-output tables such that we have two countries and two industries that focus on upstream tasks, which means they focus on supplying other industries, and one industry and one country that is specialized in downstream tasks, that is it serves mainly final demand.
+We do this by following the flows of intermediate goods through a fictional GVC and showing how the readily available gross trade flows differ from the decomposed value added flows.
+To this end, we construct the elements of the input-output tables such that we have two countries and two industries that focus on upstream tasks, which means they focus on supplying other industries, and one industry and one country that is specialized in downstream tasks,i.e.~it serves mainly final demand.
 In our example the upstream industries are Agriculture and Textiles while the downstream industry in Transport Equipment.
-Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain.
+Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain (see \cref{tab:leather}.
 
 The first step of the analytic process is to load the input object and create a \textbf{decompr} class object which contains the data structures for the decompositions.
 This step is not need when using the \textbf{decomp} wrapper function, more on this later.
@@ -447,11 +447,16 @@ mostly final goods that contain value added from countries located more upstream
 
 \section{Wang-Wei-Zhu decomposition}
 \label{sec:wwz}
-The Wang-Wei-Zhu decomposition ...
+The Wang-Wei-Zhu decomposition builds upon the Leontief insight but uses, in addition, further valuable information
+provided in ICIOS.
+More specifically, the Leontief decomposition traces the value added back to where it originates but ICIOS also contain data on how the value added is subsequently used.
+This information is extracted by the Wang-Wei-Zhu decomposition, which thereby allows a much more detailed look at the structures of international production networks and the respective positions of countries and industries within them.
 
 \subsection{Theoretical derivation}
 
-The derivation of the Wang-Wei-Zhu decomposition is significantly more technical than the source decomposition since it splits gross exports up more finely. This is why we present here only the final equation for a two country one industry model (equation 22 in WWZ) and refer the interested reader to the original paper by Wang, Wei, and Zhu (2014). The key idea is to use the Leontief insight and extend it using additional information from ICIOs on the final usage and destination of the exports (e.g. re-imported vs. absorbed abroad).
+The derivation of the Wang-Wei-Zhu decomposition is significantly more technical than the source decomposition since it splits gross exports up more finely.
+This is why we present here only the final equation for a two country one industry model (equation 22 in WWZ) and refer the interested reader to the original paper by Wang, Wei, and Zhu (2014).
+The key idea is to use the Leontief insight and extend it using additional information from ICIOs on the final usage and destination of the exports (e.g. re-imported vs. absorbed abroad).
 \begin{align}
 \label{eq:wwz}
 \begin{split}
@@ -569,9 +574,9 @@ Finally, the three checksums give total exports, total final goods exports, and 
 
 \begin{landscape}
 \begin{table}[htbp]\scriptsize
-%    \begin{adjustwidth}{-1.15in}{-1.15in}
   \centering
   \caption{WWZ Decomposition}
+    \label{tab:wwz}
     \begin{tabular}{lrrrrrrrrrrrrrrr}
     \toprule
     exporter.exportingind.importer & \rot{DVA\_FIN} & \rot{DVA\_INT} & \rot{DVA\_INTrexI1} & \rot{DVA\_INTrexF} & \rot{DVA\_INTrexI2} & \rot{RDV\_INT} & \rot{RDV\_FIN} & \rot{RDV\_FIN2} & \rot{OVA\_FIN} & \rot{MVA\_FIN} & \rot{OVA\_INT} & \rot{MVA\_INT} & \rot{DDC\_FIN} & \rot{DDC\_INT} & \rot{ODC} \\
@@ -614,8 +619,6 @@ Finally, the three checksums give total exports, total final goods exports, and 
     sub.TOTAL & 40.64 & 5.64  & 0.33  & 0.87  & 0.06  & 1.34  & 1.80  & 0.12  & 9.36  & 10.30 & 1.36  & 1.49  & 0.99  & 0.71  & 1.29 \\
     \bottomrule
     \end{tabular}
-  \label{tab:wwz}
-%  \end{adjustwidth}
 \end{table}
 \end{landscape}
 
