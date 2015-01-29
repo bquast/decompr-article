@@ -13,6 +13,7 @@
 \usepackage{array}
 \usepackage[natbib, authordate, backend=biber]{biblatex-chicago}
 \usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
 
 \newcolumntype{R}[2]{
     >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}
@@ -34,7 +35,7 @@
 
 \vspace{\stretch{1}}
 \abstract{Global Value Chains have become a central unit of analysis in research on international trade. However, 
-the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier
+the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier to
 the field. The R package \textit{decompr} solves this problem by implementing algorithms for the analysis of Global Value Chains,
 which calculate standard indicators in an automated fashion. Two methods for gross export flow decomposition using 
 Inter-Country Input-Output tables are provided. The first method is the \textit{Wang-Wei-Zhu} algorithm which splits 
@@ -75,11 +76,11 @@ The \textit{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by 
 but also breaking down exports into different categories, based on its final usage and destination. It implements the 
 theoretical work of \citet{wang2014quantifying}. The main categories are:
 
-\begin{itemize}
+\begin{enumerate}
  \item domestic value added in exports
  \item foreign value added in exports
  \item pure double counted terms
-\end{itemize}
+\end{enumerate}
 
 The decompr package implements the algorithms for these decompositions as R procedures.
 
@@ -299,9 +300,31 @@ mostly final goods that contain value added from countries located more upstream
 
 \scriptsize
 
+  \caption{Non-decomposed Values}
+  \label{tab:noleon}
+  \begin{tabular}{lrrrrrrrrr}
+    \hline
+         & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
+          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
+          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+    \hline
+    Argentina.Agriculture & 6.88  & 2.49  & 0.25  & 1.30  & 2.04  & 0.08  & 0.77  & 0.68  & 1.76 \\
+    Argentina.Textile.and.Leather & 1.03  & 3.91  & 0.44  & 0.04  & 1.52  & 0.31  & 0.30  & 0.95  & 4.13 \\
+    Argentina.Transport.Equipment & 0.38  & 0.24  & 0.55  & 0.00  & 0.05  & 0.06  & 0.00  & 0.10  & 0.18 \\
+    Turkey.Agriculture & 0.47  & 0.93  & 0.03  & 7.33  & 6.27  & 1.20  & 2.23  & 0.75  & 3.19 \\
+    Turkey.Textile.and.Leather & 0.13  & 1.37  & 0.01  & 2.48  & 13.35 & 1.24  & 0.52  & 0.61  & 9.19 \\
+    Turkey.Transport.Equipment & 0.00  & 0.05  & 0.04  & 1.67  & 1.52  & 1.75  & 0.05  & 0.00  & 0.65 \\
+    Germany.Agriculture & 0.51  & 2.05  & 0.04  & 1.67  & 0.57  & 0.12  & 7.18  & 4.73  & 6.43 \\
+    Germany.Textile.and.Leather & 0.56  & 0.54  & 0.00  & 1.30  & 2.28  & 0.51  & 1.26  & 7.06  & 8.65 \\
+    Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
+    \hline
+    \end{tabular}
+
+\bigskip \bigskip
+
   \caption{Leontief Decomposition}
   \label{tab:leon}
-  \begin{tabular}{lccccccccc}
+  \begin{tabular}{lrrrrrrrrr}
     \hline
           & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
           & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
@@ -319,28 +342,6 @@ mostly final goods that contain value added from countries located more upstream
     \hline
     \end{tabular}
 
-\bigskip \bigskip
-
-  \caption{Non-decomposed Values}
-  \label{tab:noleon}
-  \begin{tabular}{lccccccccc}
-    \hline
-         & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
-          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
-          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
-    \hline
-    Argentina.Agriculture & 6.88  & 2.49  & 0.25  & 1.30  & 2.04  & 0.08  & 0.77  & 0.68  & 1.76 \\
-    Argentina.Textile.and.Leather & 1.03  & 3.91  & 0.44  & 0.04  & 1.52  & 0.31  & 0.30  & 0.95  & 4.13 \\
-    Argentina.Transport.Equipment & 0.38  & 0.24  & 0.55  & 0.00  & 0.05  & 0.06  & 0.00  & 0.10  & 0.18 \\
-    Turkey.Agriculture & 0.47  & 0.93  & 0.03  & 7.33  & 6.27  & 1.20  & 2.23  & 0.75  & 3.19 \\
-    Turkey.Textile.and.Leather & 0.13  & 1.37  & 0.01  & 2.48  & 13.35 & 1.24  & 0.52  & 0.61  & 9.19 \\
-    Turkey.Transport.Equipment & 0.00  & 0.05  & 0.04  & 1.67  & 1.52  & 1.75  & 0.05  & 0.00  & 0.65 \\
-    Germany.Agriculture & 0.51  & 2.05  & 0.04  & 1.67  & 0.57  & 0.12  & 7.18  & 4.73  & 6.43 \\
-    Germany.Textile.and.Leather & 0.56  & 0.54  & 0.00  & 1.30  & 2.28  & 0.51  & 1.26  & 7.06  & 8.65 \\
-    Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
-    \hline
-    \end{tabular}
-    
 \end{table}
 
 \end{landscape}
