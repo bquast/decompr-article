@@ -83,25 +83,25 @@
 \maketitle
 
 \vspace{\stretch{1}}
-\abstract{Global Value Chains have become a central unit of analysis in research on international trade. However, 
-the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier to
-the field. The R package \textbf{decompr} solves this problem by implementing algorithms for the analysis of Global Value Chains,
+\abstract{Global Value Chains have become a central unit of analysis in research on international trade.
+However, the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier to
+the field.
+The R package \textbf{decompr} solves this problem by implementing algorithms for the analysis of Global Value Chains,
 which calculate standard indicators in an automated fashion. Two methods for gross export flow decomposition using 
-Inter-Country Input-Output tables are provided. The first method is the \textbf{Wang-Wei-Zhu} algorithm which splits 
-bilateral gross exports into 16 value added components. These components can broadly be divided into domestic and 
-foreign value added in exports. The second method concerns a decomposition based on the classical \citet{wale36} insight.
+Inter-Country Input-Output tables are provided.
+The first method is the \textbf{Wang-Wei-Zhu} algorithm which splits bilateral gross exports into 16 value added components. These components can broadly be divided into domestic and foreign value added in exports.
+The second method concerns a decomposition based on the classical \citet{wale36} insight.
 It derives the value added origins of an industry's exports by source country and source industry, using easily available
-gross trade data. This article summarises the methodology of the algorithms, describes the format of the input and output data, 
+gross trade data.
+This article summarises the methodology of the algorithms, describes the format of the input and output data, 
 and exemplifies the usefulness of the two methods on the basis of a simple example data set.}
 \pagebreak
 
 \section{Introduction}
 The analysis of Global Value Chains (GVCs) has become a central topic in research on trade and development policy.
-Both policy makers and academia increasingly value the growth opportunities GVCs offer to world trade and, especially, 
-to developing countries. However, analysing this phenomenon empirically requires complex matrix manipulations,
-since the relevant data is only available in the form of gross flows.
-This package enables researchers with little background in matrix algebra and linear programming
-to easily derive standard GVC indicators for statistical analysis.
+Both policy makers and academia increasingly value the growth opportunities GVCs offer to world trade and, especially, to developing countries.
+However, analysing this phenomenon empirically requires complex matrix manipulations, since the relevant data is only available in the form of gross flows.
+This package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.
 
 \textbf{decompr} uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD, 
 the World Input Output Database (WIOD),  or national statistics bureaus, as input. 
@@ -111,19 +111,15 @@ For instance, let us look at the example of the leather used in German manufactu
 The ICIOs quantify the value of inputs that the Turkish leather and textiles industry
 supplies to the German transport equipment industry.
 
-The problem of these gross trade flows,
-is that they do not reveal how much of the value was added in the supplying industry,
-and how much of the value was added in previous stages of production,
-performed by other industries or even countries.
+The problem of these gross trade flows, is that they do not reveal how much of the value was added in the supplying industry,
+and how much of the value was added in previous stages of production, performed by other industries or even countries.
 
-The \textbf{Leontief} decomposition of gross trade flows solves this problem
-by reallocating the value of intermediate goods used by industries to the original producers.
-In our example, the use of Argentinian agricultural produce (raw hides)
-is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
+The \textbf{Leontief} decomposition of gross trade flows solves this problem by reallocating the value of intermediate goods used by industries to the original producers.
+In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
 
 The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
-but also breaking down exports into different categories, based on its final usage and destination. It implements the 
-theoretical work of \citet{wang2014quantifying}. The main categories are:
+but also breaking down exports into different categories, based on its final usage and destination.
+It implements the theoretical work of \citet{wang2014quantifying}. The main categories are:
 
 \begin{enumerate}
  \item domestic value added in exports
@@ -153,18 +149,15 @@ In addition to this, two example data sets are included.
 \end{itemize}
 
 
-The next section introduces the data as it is used by the package,
-as well as an example data set provided by the WIOD.
-Section three summarises the theoretical derivation for the decompositions,
-and shows how these can be performed in R using the package.
-After which we conclude with a discussion of potential uses and limitations of this approach.
+The next section introduces the data as it is used by the package, as well as an example data set provided by the WIOD.
+Section three summarises the theoretical derivation for the decompositions, and shows how these can be performed in R using the package.
+We conclude with a discussion of potential uses and limitations of this approach.
 
 \section{Data}
 \label{sec:data}
 Two data sets are included in the package, one real world data set, and one minimal fictional data, for training surposes.
 The forme is the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world}. 
-The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
-the mechanics of the package.
+The later, a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify the mechanics of the package.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -190,13 +183,11 @@ the mechanics of the package.
 \end{kframe}
 \end{knitrout}
 
-The data is set up in order to illustrate the benefits of the decompositions. That is, we follow the flows of intermediate
-goods through a fictional GVC and show how the readily available gross trade flows differ from the decomposed value added
-flows. To this end, we construct the elements of the input-output tables such that we have two countries and two industries
-that focus on upstream tasks, which means they focus on supplying other industries, and one industry and one country that
-is specialized in downstream tasks, that is it serves mainly final demand. In our example the upstream industries are 
-Agriculture and Textiles while the downstream industry in Transport Equipment. Similarly, Argentina and Turkey represent 
-upstream countries with Germany being located downstream within this specific value chain.
+The data is set up in order to illustrate the benefits of the decompositions.
+That is, we follow the flows of intermediate goods through a fictional GVC and show how the readily available gross trade flows differ from the decomposed value added flows.
+To this end, we construct the elements of the input-output tables such that we have two countries and two industries that focus on upstream tasks, which means they focus on supplying other industries, and one industry and one country that is specialized in downstream tasks, that is it serves mainly final demand.
+In our example the upstream industries are Agriculture and Textiles while the downstream industry in Transport Equipment.
+Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain.
 
 The first step of the analytic process is to load the input object and create a \textbf{decompr} class object which contains the data structures for the decompositions. This step is not need when using the \textbf{decomp} wrapper function, more on this later.
 
