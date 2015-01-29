@@ -115,8 +115,8 @@ We conclude with a discussion of potential uses and limitations of this approach
 \label{sec:data}
 Two data sets are included in the package, one real world data set, and one minimal fictional data for training purposes.
 The former is the WIOD regional Inter-Country Input Output table for the year 2011 \parencite{timmer2012world}. 
-The latter is a fictional 3-country 3-sector data set is included, which we will use throughout this article to exemplify
-the mechanics of the package.
+The latter is a fictional 3-country 3-sector data set, which we will use throughout this article to exemplify
+the mechanics of the package. The data can be accessed as follows:
 
 <<load-package, message=FALSE >>=
 # load the package
