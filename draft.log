@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.1.16)  29 JAN 2015 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.1.16)  29 JAN 2015 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -771,13 +771,13 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 136.
-
+ [2]
 Overfull \hbox (0.27196pt too wide) in paragraph at lines 139--140
 \OT1/cmr/m/n/9 sure of ver-ti-cal spe-cial-i-sa-tion (also works with ver-ti-ca
 l[]specialization) 
  []
 
-[2]
+
 Overfull \hbox (39.0393pt too wide) in paragraph at lines 141--142
 []\OT1/cmr/bx/n/9 decomp\OT1/cmr/m/n/9 ; a wrap-per func-tion which in-te-grate
 s the use of \OT1/cmr/bx/n/9 load[]tables[]vectors
@@ -796,8 +796,9 @@ Overfull \hbox (7.39655pt too wide) in paragraph at lines 182--182
 ut"[] 
  []
 
+[3]
 Package color Info: Redefining color shadecolor on input line 197.
-[3] [4] [5]
+ [4] [5]
 Overfull \hbox (3.94215pt too wide) in paragraph at lines 370--370
 [] 
  []
@@ -875,7 +876,7 @@ ype1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
 .pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on draft.pdf (14 pages, 260807 bytes).
+Output written on draft.pdf (14 pages, 260802 bytes).
 PDF statistics:
  236 PDF objects out of 1000 (max. 8388607)
  200 compressed objects within 2 object streams
