@@ -541,6 +541,14 @@ Finally, the three checksums give total exports, total final goods exports, and 
 \section{Conclusion}
 \label{sec:conclusion}
 
+GVCs describe the increasingly international organization of production structures.
+As more and more regional trade agreements come into force, 
+which drive down trade costs and harmonize product standards,
+it becomes more and more attractive for firms to outsource certain tasks of their production lines.
+Research on international trade analysing this development evolves quickly and reveals important implications of GVCs for economic growth and competitiveness.  
+\textbf{decompr} aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
+The purpose is to accelerate the research and, especially, to make it accesible to a wider audience.
+
 \newpage
 \printbibliography
 
