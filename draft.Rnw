@@ -549,6 +549,17 @@ Research on international trade analysing this development evolves quickly and r
 \textbf{decompr} aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
 The purpose is to accelerate the research and, especially, to make it accesible to a wider audience.
 
+% Baast, enter part on how the package is flexible and can be adapted
+
+Since GVCs constitute a fairly new field of research, there are many ways forward for its analysis. 
+The next central step is to examine both in theory and empirically how GVC participation affects real economic activity. 
+More specifically, it is very relevant to look at how, for instance, 
+employment and economic growth react when countries join GVCs and what the factors are that determine a successful relationship. 
+From the standpoint of developing and emerging countries a very interesting question is if GVCs simplify industrialization 
+and the formation of comparative advantage 
+while high-income countries might look for an additional push for their stagnating post-crisis economies. 
+We hope that \textbf{decompr} can play a part in this field and promote it.
+
 \newpage
 \printbibliography
 
