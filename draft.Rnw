@@ -153,6 +153,8 @@ ls(decompr_object)
 @
 
 As can be seen above, a \textbf{decompr} class object is in fact a list containing thirty different objects.
+For example, \textbf{Eint} is an object that collects the intermediate goods exports of the industries,
+while \textbf{G} refers to the number of countries that are analysed.
 Depending on the choice of decomposition, all or some of these objects are used.
 
 
