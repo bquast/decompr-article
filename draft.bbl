@@ -50,6 +50,34 @@
       \endverb
       \keyw{Trade,GVCs}
     \endentry
+    \entry{rojoguno12}{article}{}
+      \name{labelname}{2}{}{%
+        {{uniquename=0,hash=76d9005a30cff4c228a2dfaaee0206d4}{Johnson}{J\bibinitperiod}{Robert\bibnamedelima C.}{R\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5035cad68fb360bdd719a6a459c68140}{Noguera}{N\bibinitperiod}{Guillermo}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=76d9005a30cff4c228a2dfaaee0206d4}{Johnson}{J\bibinitperiod}{Robert\bibnamedelima C.}{R\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5035cad68fb360bdd719a6a459c68140}{Noguera}{N\bibinitperiod}{Guillermo}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{d0b996ec5899da30dda5930439742278}
+      \strng{fullhash}{d0b996ec5899da30dda5930439742278}
+      \field{sortinit}{J}
+      \field{sortinithash}{f75b22df8c340a961dce37019e29107f}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labeltitle}{{Accounting for intermediates: Production sharing and trade in value added}}
+      \field{abstract}{We combine input–output and bilateral trade data to compute the value added content of bilateral trade. The ratio of value added to gross exports (VAX ratio) is a measure of the intensity of production sharing. Across countries, export composition drives VAX ratios, with exporters of Manufactures having lower ratios. Across sectors, the VAX ratio for Manufactures is low relative to Services, primarily because Services are used as an intermediate to produce manufacturing exports. Across bilateral partners, VAX ratios vary widely and contain information on both bilateral and triangular production chains. We document specifically that bilateral production linkages, not variation in the composition of exports, drive variation in bilateral VAX ratios. Finally, bilateral imbalances measured in value added differ from gross trade imbalances. Most prominently, the U.S.–China imbalance in 2004 is 30–40\% smaller when measured in value added.}
+      \field{journaltitle}{Journal of International Economics}
+      \field{number}{2}
+      \field{title}{{Accounting for intermediates: Production sharing and trade in value added}}
+      \field{volume}{86}
+      \field{year}{2012}
+      \field{pages}{224\bibrangedash 236}
+      \verb{url}
+      \verb http://ideas.repec.org/a/eee/inecon/v86y2012i2p224-236.html
+      \endverb
+      \keyw{Production sharing; Vertical specialization; Domestic content; Value added; Input–output tables}
+    \endentry
     \entry{wale36}{article}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=7fba8a21a79da7f09bad272143e8adc7}{Leontief}{L\bibinitperiod}{Wassily}{W\bibinitperiod}{}{}{}{}}%

@@ -99,28 +99,34 @@ and exemplifies the usefulness of the two methods on the basis of a simple examp
 
 \section{Introduction}
 \epigraph{Hello?\\...\\ is it me you're looking for?}{Lionel Richie}
-Global Value Chains (GVCs) have become a central topic in research on trade and development policy.
-Both policy makers and academia increasingly value the growth opportunities GVCs offer to global trade and, especially, to developing countries.
-However, analysing this phenomenon empirically requires complex matrix manipulations, since the relevant data is only available in the form of gross flows.
+Global Value Chains (GVCs) refer to the quickly expanding internationalization of production networks.
+Most goods we use nowadays consist of parts that are sourced from different corners of the planet 
+and are assembled across different continents. A popular example of this development is the Iphone,
+which uses inputs from at least five countries (USA, China, Germany, Taiwan, South Korea) and is assembled in two (USA and China).
+This has made GVCs a central topic in research on trade and development policy.
+Both policy makers and academia increasingly value the growth opportunities GVCs offer to global trade and, 
+especially, to developing countries.
+However, analysing this phenomenon empirically requires complex matrix manipulations, 
+since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.
 
 The \textbf{decompr} package uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD and WTO (TiVA), % CITE!! 
 the World Input Output Database \parencite{timmer2012world},  or national statistics bureaus, as input.
 These tables state supply and demand relationships in gross terms between industries within and across countries.
-
 For instance, let us look at the example of the leather used in German manufactured car seats.
 The ICIOs quantify the value of inputs that the Turkish leather and textiles industry
 supplies to the German transport equipment industry.
 
-The problem of these gross trade flows, is that they do not reveal how much of the value was added in the supplying industry,
+The problem of these tables measuring gross trade flows, 
+is that they do not reveal how much of the value was added in the supplying industry,
 and how much of the value was added in previous stages of production, performed by other industries or even countries.
-
 The \textbf{Leontief} decomposition of gross trade flows solves this problem by reallocating the value of intermediate goods used by industries to the original producers.
 In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
 
-The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added, but also breaking down exports into different categories, according to final usage and destination.
+The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
+but also breaking down exports into different categories, according to final usage and destination.
 It implements the theoretical work of \textcite{wang2014quantifying}.
-The high-level divisions in this framework are listed below.
+The main categories in this framework are listed below.
 
 \begin{enumerate}
  \item domestic value added in exports
@@ -218,6 +224,8 @@ This step is not need when using the \textbf{decomp} wrapper function, more on t
 \end{knitrout}
 
 As can be seen above, a \textbf{decompr} class object is in fact a list containing thirty different objects.
+For example, \textbf{Eint} is an object that collects the intermediate goods exports of the industries,
+while \textbf{G} refers to the number of countries that are analysed.
 Depending on the choice of decomposition, all or some of these objects are used.
 
 
@@ -391,8 +399,11 @@ a_{cf}^{su} = \frac{inp_{cf}^{su}}{y_{f}^{u}}  \hspace{2cm} (c,f \in k,l \hspace
 where \(v_{s}^{c}\) gives the share of industry \emph{s}'s value added, \(va_{c}^{s},\) in output, \(y_{s}^{c}\), and \(e_{k}^{i}\) indicates gross exports. Finally, \(a_{su}^{cf}\) denotes the share of inputs, \(inp_{su}^{cf}\), in output.
 The elements of the $V(I-A)^{-1}E$ or $vae$ matrix are our estimates for the country-industry level value added
 origins of each country-industry's exports.
-\textbf{decompr} implements this algorithm into R to automate the process of deriving the matrix. Equipped with it, researchers can calculate standard GVC indicators.
-Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level which can be derived by summing for each country and industry across the value added of all foreign countries and industries.
+\textbf{decompr} implements this algorithm into R to automate the process of deriving the matrix. 
+Equipped with it, researchers can calculate standard GVC indicators.
+Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level, 
+which can be derived by summing for each country and industry across the value added of all foreign countries and industries,
+and \citet{rojoguno12}'s so-called VAX ratio.
 Alternatively, the four dimensions of the matrix (source country, source industry, using country, using industry) allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
@@ -627,6 +638,25 @@ Finally, the three checksums give total exports, total final goods exports, and 
 
 \section{Conclusion}
 \label{sec:conclusion}
+
+GVCs describe the increasingly international organization of production structures.
+As more and more regional trade agreements come into force, 
+which drive down trade costs and harmonize product standards,
+it becomes more and more attractive for firms to outsource certain tasks of their production lines.
+Research on international trade analysing this development evolves quickly and reveals important implications of GVCs for economic growth and competitiveness.  
+\textbf{decompr} aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
+The purpose is to accelerate the research and, especially, to make it accesible to a wider audience.
+
+% Baast, enter part on how the package is flexible and can be adapted
+
+Since GVCs constitute a fairly new field of research, there are many ways forward for its analysis. 
+The next central step is to examine both in theory and empirically how GVC participation affects real economic activity. 
+More specifically, it is very relevant to look at how, for instance, 
+employment and economic growth react when countries join GVCs and what the factors are that determine a successful relationship. 
+From the standpoint of developing and emerging countries a very interesting question is if GVCs simplify industrialization 
+and the formation of comparative advantage 
+while high-income countries might look for an additional push for their stagnating post-crisis economies. 
+We hope that \textbf{decompr} can play a part in this field and promote it.
 
 \newpage
 \printbibliography
