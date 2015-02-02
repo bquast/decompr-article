@@ -51,28 +51,34 @@ and exemplifies the usefulness of the two methods on the basis of a simple examp
 
 \section{Introduction}
 \epigraph{Hello?\\...\\ is it me you're looking for?}{Lionel Richie}
-Global Value Chains (GVCs) have become a central topic in research on trade and development policy.
-Both policy makers and academia increasingly value the growth opportunities GVCs offer to global trade and, especially, to developing countries.
-However, analysing this phenomenon empirically requires complex matrix manipulations, since the relevant data is only available in the form of gross flows.
+Global Value Chains (GVCs) refer to the quickly expanding internationalization of production networks.
+Most goods we use nowadays consist of parts that are sourced from different corners of the planet 
+and are assembled across different continents. A popular example of this development is the Iphone,
+which uses inputs from at least five countries (USA, China, Germany, Taiwan, South Korea) and is assembled in two (USA and China).
+This has made GVCs a central topic in research on trade and development policy.
+Both policy makers and academia increasingly value the growth opportunities GVCs offer to global trade and, 
+especially, to developing countries.
+However, analysing this phenomenon empirically requires complex matrix manipulations, 
+since the relevant data is only available in the form of gross flows.
 This package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.
 
 The \textbf{decompr} package uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD and WTO (TiVA), % CITE!! 
 the World Input Output Database \parencite{timmer2012world},  or national statistics bureaus, as input.
 These tables state supply and demand relationships in gross terms between industries within and across countries.
-
 For instance, let us look at the example of the leather used in German manufactured car seats.
 The ICIOs quantify the value of inputs that the Turkish leather and textiles industry
 supplies to the German transport equipment industry.
 
-The problem of these gross trade flows, is that they do not reveal how much of the value was added in the supplying industry,
+The problem of these tables measuring gross trade flows, 
+is that they do not reveal how much of the value was added in the supplying industry,
 and how much of the value was added in previous stages of production, performed by other industries or even countries.
-
 The \textbf{Leontief} decomposition of gross trade flows solves this problem by reallocating the value of intermediate goods used by industries to the original producers.
 In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
 
-The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added, but also breaking down exports into different categories, according to final usage and destination.
+The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
+but also breaking down exports into different categories, according to final usage and destination.
 It implements the theoretical work of \textcite{wang2014quantifying}.
-The high-level divisions in this framework are listed below.
+The main categories in this framework are listed below.
 
 \begin{enumerate}
  \item domestic value added in exports
