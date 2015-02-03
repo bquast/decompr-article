@@ -155,6 +155,10 @@ In addition to this, two example data sets are included.
   \item \textbf{Leather}; a fictional three-country, three-sector data set
 \end{itemize}
 
+Trade flow analysis often involves studying development of a certain variable (set) over time, thus taking the panel form.
+However, no existing trade flow analysis explicitly exploints the time dimsion, making the analysis effectively a repeated cross-section.
+As a design decision, the time dimension is therefore not implemented in the package itself.
+In stead, we provide examples of how the repeated analysis can be easily implemented using decompr.
 
 \Cref{sec:data} introduces the data as it is used by the package, as well as an example data set provided by the WIOD.
 After which \cref{sec:leontief,sec:wwz} summarise the theoretical derivation for the two decompositions, and show how these can be performed in R using \textbf{decompr}.
@@ -196,6 +200,30 @@ To this end, we construct the elements of the input-output tables such that we h
 In our example the upstream industries are Agriculture and Textiles while the downstream industry in Transport Equipment.
 Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain (see \cref{tab:leather}.
 
+\begin{sidewaystable}
+\scriptsize
+  \caption{Example Input-Output Table: Leather}
+  \label{tab:leather}
+  \begin{tabular}{llrrrrrrrrrrrrrr}
+  \hline
+         & & \multicolumn{3}{c}{Argentina} & \multicolumn{3}{c}{Turkey} & \multicolumn{3}{c}{Germany} & \multicolumn{3}{c}{Final Demand} & Output \\
+\hline
+Country & Industry & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{Argentina} & \rotnt{Turkey} & \rotnt{Germany} \\
+\hline
+Argentina & Agriculture & 16.1 & 5.1 & 1.8 & 3.2 & 4.3 & 0.4 & 3.1 & 2.8 & 4.9 & 21.5 & 6.1 & 8.4 & 77.7 \\ 
+Argentina & Textile.and.Leather & 2.4 & 8.0 & 3.2 & 0.1 & 3.2 & 1.6 & 1.2 & 3.9 & 11.5 & 16.2 & 1.9 & 5.1 & 58.3 \\ 
+Argentina & Transport.Equipment & 0.9 & 0.5 & 4.0 & 0.0 & 0.1 & 0.3 & 0.0 & 0.4 & 0.5 & 11 & 0.5 & 0.8 & 19.0 \\ 
+Turkey & Agriculture & 1.1 & 1.9 & 0.2 & 18.0 & 13.2 & 6.1 & 9.0 & 3.1 & 8.9 & 7.5 & 29.5 & 14.2 & 112.7 \\ 
+Turkey & Textile.and.Leather & 0.3 & 2.8 & 0.1 & 6.1 & 28.1 & 6.3 & 2.1 & 2.5 & 25.6 & 8.9 & 24.9 & 16.9 & 124.6 \\ 
+Turkey & Transport.Equipment & 0.0 & 0.1 & 0.3 & 4.1 & 3.2 & 8.9 & 0.2 & 0.0 & 1.8 & 1.2 & 18.5 & 4.9 & 43.2 \\ 
+Germany & Agriculture & 1.2 & 4.2 & 0.3 & 4.1 & 1.2 & 0.6 & 29.0 & 19.5 & 17.9 & 9.2 & 17.9 & 51.2 & 156.3 \\ 
+Germany & Textile.and.Leather & 1.3 & 1.1 & 0.0 & 3.2 & 4.8 & 2.6 & 5.1 & 29.1 & 24.1 & 7.9 & 10.1 & 38.5 & 127.8 \\ 
+Germany & Transport.Equipment & 2.1 & 1.4 & 3.0 & 4.1 & 3.1 & 3.9 & 11.3 & 8.1 & 51.3 & 25.1 & 35.2 & 68.4 & 217.0 \\ 
+   \hline
+\end{tabular}
+
+\end{sidewaystable}
+
 The first step of the analytic process is to load the input object and create a \textbf{decompr} class object which contains the data structures for the decompositions.
 This step is not need when using the \textbf{decomp} wrapper function, more on this later.
 
@@ -228,70 +256,6 @@ For example, \textbf{Eint} is an object that collects the intermediate goods exp
 while \textbf{G} refers to the number of countries that are analysed.
 Depending on the choice of decomposition, all or some of these objects are used.
 
-
-\begin{sidewaystable}
-\scriptsize
-  \caption{Example Input-Output Table: Leather}
-  \label{tab:leather}
-  \begin{tabular}{llrrrrrrrrrrrrrr}
-  \hline
-         & & \multicolumn{3}{c}{Argentina} & \multicolumn{3}{c}{Turkey} & \multicolumn{3}{c}{Germany} & \multicolumn{3}{c}{Final Demand} & Output \\
-\hline
-Country & Industry & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{Argentina} & \rotnt{Turkey} & \rotnt{Germany} \\
-\hline
-Argentina & Agriculture & 16.1 & 5.1 & 1.8 & 3.2 & 4.3 & 0.4 & 3.1 & 2.8 & 4.9 & 21.5 & 6.1 & 8.4 & 77.7 \\ 
-Argentina & Textile.and.Leather & 2.4 & 8.0 & 3.2 & 0.1 & 3.2 & 1.6 & 1.2 & 3.9 & 11.5 & 16.2 & 1.9 & 5.1 & 58.3 \\ 
-Argentina & Transport.Equipment & 0.9 & 0.5 & 4.0 & 0.0 & 0.1 & 0.3 & 0.0 & 0.4 & 0.5 & 11 & 0.5 & 0.8 & 19.0 \\ 
-Turkey & Agriculture & 1.1 & 1.9 & 0.2 & 18.0 & 13.2 & 6.1 & 9.0 & 3.1 & 8.9 & 7.5 & 29.5 & 14.2 & 112.7 \\ 
-Turkey & Textile.and.Leather & 0.3 & 2.8 & 0.1 & 6.1 & 28.1 & 6.3 & 2.1 & 2.5 & 25.6 & 8.9 & 24.9 & 16.9 & 124.6 \\ 
-Turkey & Transport.Equipment & 0.0 & 0.1 & 0.3 & 4.1 & 3.2 & 8.9 & 0.2 & 0.0 & 1.8 & 1.2 & 18.5 & 4.9 & 43.2 \\ 
-Germany & Agriculture & 1.2 & 4.2 & 0.3 & 4.1 & 1.2 & 0.6 & 29.0 & 19.5 & 17.9 & 9.2 & 17.9 & 51.2 & 156.3 \\ 
-Germany & Textile.and.Leather & 1.3 & 1.1 & 0.0 & 3.2 & 4.8 & 2.6 & 5.1 & 29.1 & 24.1 & 7.9 & 10.1 & 38.5 & 127.8 \\ 
-Germany & Transport.Equipment & 2.1 & 1.4 & 3.0 & 4.1 & 3.1 & 3.9 & 11.3 & 8.1 & 51.3 & 25.1 & 35.2 & 68.4 & 217.0 \\ 
-   \hline
-\end{tabular}
-
-
-  \caption{Non-decomposed Values}
-  \label{tab:noleon}
-  \begin{tabular}{lrrrrrrrrr}
-    \hline
-         & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
-          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
-          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
-    \hline
-    Argentina.Agriculture & 6.88  & 2.49  & 0.25  & 1.30  & 2.04  & 0.08  & 0.77  & 0.68  & 1.76 \\
-    Argentina.Textile.and.Leather & 1.03  & 3.91  & 0.44  & 0.04  & 1.52  & 0.31  & 0.30  & 0.95  & 4.13 \\
-    Argentina.Transport.Equipment & 0.38  & 0.24  & 0.55  & 0.00  & 0.05  & 0.06  & 0.00  & 0.10  & 0.18 \\
-    Turkey.Agriculture & 0.47  & 0.93  & 0.03  & 7.33  & 6.27  & 1.20  & 2.23  & 0.75  & 3.19 \\
-    Turkey.Textile.and.Leather & 0.13  & 1.37  & 0.01  & 2.48  & 13.35 & 1.24  & 0.52  & 0.61  & 9.19 \\
-    Turkey.Transport.Equipment & 0.00  & 0.05  & 0.04  & 1.67  & 1.52  & 1.75  & 0.05  & 0.00  & 0.65 \\
-    Germany.Agriculture & 0.51  & 2.05  & 0.04  & 1.67  & 0.57  & 0.12  & 7.18  & 4.73  & 6.43 \\
-    Germany.Textile.and.Leather & 0.56  & 0.54  & 0.00  & 1.30  & 2.28  & 0.51  & 1.26  & 7.06  & 8.65 \\
-    Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
-    \hline
-    \end{tabular}
-
-  \caption{Leontief Decomposition}
-  \label{tab:leon}
-  \begin{tabular}{lrrrrrrrrr}
-    \hline
-          & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
-          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
-          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
-    \hline
-    Argentina.Agriculture & 28.52 & 2.79  & 0.36  & 1.81  & 3.12  & 0.36  & 1.24  & 1.30  & 4.12 \\
-    Argentina.Textile.and.Leather & 1.06  & 19.12 & 0.42  & 0.48  & 1.83  & 0.43  & 0.59  & 1.15  & 4.75 \\
-    Argentina.Transport.Equipment & 0.21  & 0.14  & 1.06  & 0.03  & 0.08  & 0.04  & 0.02  & 0.07  & 0.19 \\
-    Turkey.Agriculture & 0.72  & 1.34  & 0.12  & 34.93 & 7.00  & 1.48  & 2.55  & 1.52  & 6.18 \\
-    Turkey.Textile.and.Leather & 0.41  & 1.39  & 0.12  & 2.69  & 40.17 & 1.32  & 1.11  & 1.15  & 9.51 \\
-    Turkey.Transport.Equipment & 0.03  & 0.09  & 0.03  & 0.81  & 0.91  & 3.16  & 0.12  & 0.07  & 0.65 \\
-    Germany.Agriculture & 0.93  & 2.25  & 0.16  & 2.31  & 2.06  & 0.51  & 29.88 & 5.25  & 9.60 \\
-    Germany.Textile.and.Leather & 0.65  & 0.73  & 0.08  & 1.54  & 2.55  & 0.63  & 1.46  & 18.96 & 8.16 \\
-    Germany.Transport.Equipment & 0.67  & 0.65  & 0.26  & 1.29  & 1.49  & 0.57  & 1.73  & 1.51  & 34.74 \\
-    \hline
-    \end{tabular}
-\end{sidewaystable}
 
 \section{Leontief decomposition}
 \label{sec:leontief}
@@ -441,7 +405,56 @@ value added origins of its exports by country and industry.
 To this end, we look at the results of the Leontief decomposition for our example data set (\cref{tab:leon}).
 In the first column we find the source countries and industries while the first row contains the using countries and industries.
 The first element, $28.52$, thus gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the Argentinian Agriculture industry.
-Similarly, the last element of this row, $4.12$, gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the German Transport Equipment industry.
+Similarly, the last element of this row, $4.12$, gives the amount of value added that the Argentinian Agriculture industry has contributed 
+to the exports of the German Transport Equipment industry.
+
+
+\begin{sidewaystable}
+\scriptsize
+
+  \caption{Non-decomposed Values}
+  \label{tab:noleon}
+  \begin{tabular}{lrrrrrrrrr}
+    \hline
+         & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
+          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
+          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+    \hline
+    Argentina.Agriculture & 6.88  & 2.49  & 0.25  & 1.30  & 2.04  & 0.08  & 0.77  & 0.68  & 1.76 \\
+    Argentina.Textile.and.Leather & 1.03  & 3.91  & 0.44  & 0.04  & 1.52  & 0.31  & 0.30  & 0.95  & 4.13 \\
+    Argentina.Transport.Equipment & 0.38  & 0.24  & 0.55  & 0.00  & 0.05  & 0.06  & 0.00  & 0.10  & 0.18 \\
+    Turkey.Agriculture & 0.47  & 0.93  & 0.03  & 7.33  & 6.27  & 1.20  & 2.23  & 0.75  & 3.19 \\
+    Turkey.Textile.and.Leather & 0.13  & 1.37  & 0.01  & 2.48  & 13.35 & 1.24  & 0.52  & 0.61  & 9.19 \\
+    Turkey.Transport.Equipment & 0.00  & 0.05  & 0.04  & 1.67  & 1.52  & 1.75  & 0.05  & 0.00  & 0.65 \\
+    Germany.Agriculture & 0.51  & 2.05  & 0.04  & 1.67  & 0.57  & 0.12  & 7.18  & 4.73  & 6.43 \\
+    Germany.Textile.and.Leather & 0.56  & 0.54  & 0.00  & 1.30  & 2.28  & 0.51  & 1.26  & 7.06  & 8.65 \\
+    Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
+    \hline
+    \end{tabular}
+
+\bigskip \bigskip \bigskip
+
+  \caption{Leontief Decomposition}
+  \label{tab:leon}
+  \begin{tabular}{lrrrrrrrrr}
+    \hline
+          & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
+          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
+          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+    \hline
+    Argentina.Agriculture & 28.52 & 2.79  & 0.36  & 1.81  & 3.12  & 0.36  & 1.24  & 1.30  & 4.12 \\
+    Argentina.Textile.and.Leather & 1.06  & 19.12 & 0.42  & 0.48  & 1.83  & 0.43  & 0.59  & 1.15  & 4.75 \\
+    Argentina.Transport.Equipment & 0.21  & 0.14  & 1.06  & 0.03  & 0.08  & 0.04  & 0.02  & 0.07  & 0.19 \\
+    Turkey.Agriculture & 0.72  & 1.34  & 0.12  & 34.93 & 7.00  & 1.48  & 2.55  & 1.52  & 6.18 \\
+    Turkey.Textile.and.Leather & 0.41  & 1.39  & 0.12  & 2.69  & 40.17 & 1.32  & 1.11  & 1.15  & 9.51 \\
+    Turkey.Transport.Equipment & 0.03  & 0.09  & 0.03  & 0.81  & 0.91  & 3.16  & 0.12  & 0.07  & 0.65 \\
+    Germany.Agriculture & 0.93  & 2.25  & 0.16  & 2.31  & 2.06  & 0.51  & 29.88 & 5.25  & 9.60 \\
+    Germany.Textile.and.Leather & 0.65  & 0.73  & 0.08  & 1.54  & 2.55  & 0.63  & 1.46  & 18.96 & 8.16 \\
+    Germany.Transport.Equipment & 0.67  & 0.65  & 0.26  & 1.29  & 1.49  & 0.57  & 1.73  & 1.51  & 34.74 \\
+    \hline
+    \end{tabular}
+\end{sidewaystable}
+
 
 A key advantage of the decomposition becomes clear when we compare the decomposed values with the intermediate trade
 values of the non-decomposed IO table when multiplied with the exports over output ratio to create
@@ -647,7 +660,12 @@ Research on international trade analysing this development evolves quickly and r
 \textbf{decompr} aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
 The purpose is to accelerate the research and, especially, to make it accesible to a wider audience.
 
-% Baast, enter part on how the package is flexible and can be adapted
+We have designed the package using a modular structure, with an additional user interface function for increased ease of use.
+The modulare structure enables users to break the computationally intensive analysis process down into several steps.
+Furthermore, the modular structure enables user and other developers to build on top of basic data structures which are creaed by the \textbf{load\_tables\_vectors} function when implementing other decompositions or analyses.
+However, a wrapper function (\textbf{decomp}) is also provided, which combines the use of the atomic functions into one.
+Lastly, in addition to the \textbf{decompr} function, we provide a Rcmdr plugin, which allows the user to perform the analytical process using a GUI (Grapical User Interface).
+
 
 Since GVCs constitute a fairly new field of research, there are many ways forward for its analysis. 
 The next central step is to examine both in theory and empirically how GVC participation affects real economic activity. 
@@ -657,6 +675,11 @@ From the standpoint of developing and emerging countries a very interesting ques
 and the formation of comparative advantage 
 while high-income countries might look for an additional push for their stagnating post-crisis economies. 
 We hope that \textbf{decompr} can play a part in this field and promote it.
+
+\vspace{\stretch{1}}
+
+\section*{Colophon}
+This paper was written in a combination of R and LaTeX (LuaLaTeX) using Sweave formatting and combined using knitr. 
 
 \newpage
 \printbibliography
