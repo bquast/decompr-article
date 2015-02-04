@@ -19,6 +19,71 @@
 
 \refsection{0}
   \sortlist{cms}{cms}
+    \entry{fox2005getting}{article}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{1c365202a8e580d17c3fc2d60641bf60}
+      \strng{fullhash}{1c365202a8e580d17c3fc2d60641bf60}
+      \field{sortinit}{F}
+      \field{sortinithash}{9661cce5f16ac30b6b0c804d4583ed99}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Getting started with the R commander: a basic-statistics graphical user interface to R}
+      \field{journaltitle}{Journal of statistical software}
+      \field{number}{9}
+      \field{title}{Getting started with the R commander: a basic-statistics graphical user interface to R}
+      \field{volume}{14}
+      \field{year}{2005}
+      \field{pages}{1\bibrangedash 42}
+    \endentry
+    \entry{fox2007extending}{article}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{1c365202a8e580d17c3fc2d60641bf60}
+      \strng{fullhash}{1c365202a8e580d17c3fc2d60641bf60}
+      \field{sortinit}{F}
+      \field{sortinithash}{9661cce5f16ac30b6b0c804d4583ed99}
+      \field{labelyear}{2007}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Extending the R Commander by “plug in” packages}
+      \field{journaltitle}{R News}
+      \field{number}{3}
+      \field{title}{Extending the R Commander by “plug in” packages}
+      \field{volume}{7}
+      \field{year}{2007}
+      \field{pages}{46\bibrangedash 52}
+    \endentry
+    \entry{fox2012rcmdrplugin}{article}{}
+      \name{labelname}{2}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=c5c2d28f5b40a6a6653cc90eddb34752}{Carvalho}{C\bibinitperiod}{Marilia\bibnamedelima S}{M\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=1c365202a8e580d17c3fc2d60641bf60}{Fox}{F\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=c5c2d28f5b40a6a6653cc90eddb34752}{Carvalho}{C\bibinitperiod}{Marilia\bibnamedelima S}{M\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{6738f46d25eecf20ca01b16d26b78247}
+      \strng{fullhash}{6738f46d25eecf20ca01b16d26b78247}
+      \field{sortinit}{F}
+      \field{sortinithash}{9661cce5f16ac30b6b0c804d4583ed99}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labeltitle}{The RcmdrPlugin. survival package: Extending the R Commander interface to survival analysis}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{7}
+      \field{title}{The RcmdrPlugin. survival package: Extending the R Commander interface to survival analysis}
+      \field{volume}{49}
+      \field{year}{2012}
+      \field{pages}{1\bibrangedash 32}
+    \endentry
     \entry{hagen2005luatex}{article}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=340c04bf0d05579e01e13e7be6554a4e}{Hagen}{H\bibinitperiod}{Hans}{H\bibinitperiod}{}{}{}{}}%

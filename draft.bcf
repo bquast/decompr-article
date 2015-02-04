@@ -2397,13 +2397,16 @@
     <bcf:citekey order="11">dahuetal01</bcf:citekey>
     <bcf:citekey order="12">rojoguno12</bcf:citekey>
     <bcf:citekey order="13">rojoguno12</bcf:citekey>
-    <bcf:citekey order="14">wickham2014advanced</bcf:citekey>
-    <bcf:citekey order="15">core2014r</bcf:citekey>
-    <bcf:citekey order="16">lamport1986document</bcf:citekey>
-    <bcf:citekey order="17">hagen2005luatex</bcf:citekey>
-    <bcf:citekey order="18">lehman2006biblatex</bcf:citekey>
-    <bcf:citekey order="19">leisch2003sweave</bcf:citekey>
-    <bcf:citekey order="20">yihui2013knitr</bcf:citekey>
+    <bcf:citekey order="14">fox2005getting</bcf:citekey>
+    <bcf:citekey order="14">fox2007extending</bcf:citekey>
+    <bcf:citekey order="15">wickham2014advanced</bcf:citekey>
+    <bcf:citekey order="16">fox2012rcmdrplugin</bcf:citekey>
+    <bcf:citekey order="17">core2014r</bcf:citekey>
+    <bcf:citekey order="18">lamport1986document</bcf:citekey>
+    <bcf:citekey order="19">hagen2005luatex</bcf:citekey>
+    <bcf:citekey order="20">lehman2006biblatex</bcf:citekey>
+    <bcf:citekey order="21">leisch2003sweave</bcf:citekey>
+    <bcf:citekey order="22">yihui2013knitr</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="cms" type="entry" sortscheme="cms">
   <bcf:sorting>
