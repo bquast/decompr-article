@@ -4,11 +4,11 @@
   <bcf:options component="biber" type="global">
     <bcf:option type="singlevalued">
       <bcf:key>output_encoding</bcf:key>
-      <bcf:value>latin1</bcf:value>
+      <bcf:value>utf8</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>input_encoding</bcf:key>
-      <bcf:value>latin1</bcf:value>
+      <bcf:value>utf8</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>debug</bcf:key>
@@ -2397,6 +2397,12 @@
     <bcf:citekey order="11">dahuetal01</bcf:citekey>
     <bcf:citekey order="12">rojoguno12</bcf:citekey>
     <bcf:citekey order="13">rojoguno12</bcf:citekey>
+    <bcf:citekey order="14">core2014r</bcf:citekey>
+    <bcf:citekey order="15">lamport1986document</bcf:citekey>
+    <bcf:citekey order="16">hagen2005luatex</bcf:citekey>
+    <bcf:citekey order="17">lehman2006biblatex</bcf:citekey>
+    <bcf:citekey order="18">leisch2003sweave</bcf:citekey>
+    <bcf:citekey order="19">yihui2013knitr</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="cms" type="entry" sortscheme="cms">
   <bcf:sorting>

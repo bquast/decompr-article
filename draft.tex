@@ -49,7 +49,22 @@
 
 \usepackage{alltt}
 
-\usepackage[latin1]{inputenc}
+\usepackage{iftex}
+\ifPDFTeX
+   \usepackage[utf8]{inputenc}
+   \usepackage[T1]{fontenc}
+   \usepackage{lmodern}
+\else
+   \ifXeTeX
+     \usepackage{xltxtra}
+   \else 
+     \usepackage{luatextra}
+   \fi
+   \defaultfontfeatures{Ligatures=TeX}
+\fi
+\usepackage{blindtext}
+
+
 \usepackage{rotating}
 \usepackage{adjustbox}
 \usepackage{mathtools}
@@ -200,7 +215,7 @@ To this end, we construct the elements of the input-output tables such that we h
 In our example the upstream industries are Agriculture and Textiles while the downstream industry in Transport Equipment.
 Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain (see \cref{tab:leather}.
 
-\begin{sidewaystable}
+\begin{sidewaystable}[t!]
 \scriptsize
   \caption{Example Input-Output Table: Leather}
   \label{tab:leather}
@@ -679,7 +694,7 @@ We hope that \textbf{decompr} can play a part in this field and promote it.
 \vspace{\stretch{1}}
 
 \section*{Colophon}
-This paper was written in a combination of R and LaTeX (LuaLaTeX) using Sweave formatting and combined using knitr. 
+This paper was written in a combination of R \parencite{core2014r} and \LaTeX ~\parencite{lamport1986document}, specifically \LuaTeX ~\parencite{hagen2005luatex} with biblatex and biber \parencite{lehman2006biblatex} for citations, using Sweave syntax \parencite{leisch2003sweave} and compiled using knitr \parencite{yihui2013knitr}. 
 
 \newpage
 \printbibliography
