@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.1.16)  4 FEB 2015 10:51
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.1.16)  4 FEB 2015 11:01
  restricted \write18 enabled.
 **draft.tex
 (./draft.tex
@@ -310,7 +310,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.044 seconds
+luaotfload | main : fontloader loaded in 0.045 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1438,17 +1438,17 @@ Overfull \hbox (7.40045pt too wide) in paragraph at lines 207--207
 r.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/generic/fonts/otf/
 lmroman7-regular.luc)
 Package color Info: Redefining color shadecolor on input line 246.
- [4]
+ [4] [5]
 Overfull \hbox (3.94215pt too wide) in paragraph at lines 357--357
 [][] 
  []
 
-[5](compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/otf/lmroman9-italic
+[6](compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/otf/lmroman9-italic
 .luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/generic/fonts/otf/l
 mroman9-italic.luc)
 Package color Info: Redefining color shadecolor on input line 391.
 Package color Info: Redefining color shadecolor on input line 403.
- [6] [7]
+ [7] [8] [9]
 Overfull \hbox (37.78146pt too wide) in paragraph at lines 525--525
 [][] 
  []
@@ -1477,7 +1477,7 @@ Overfull \hbox (13.63324pt too wide) in paragraph at lines 544--545
 2/lmr/bx/n/9 RDV_FIN\EU2/lmr/m/n/9 ,
  []
 
-[8]
+[10]
 Overfull \hbox (1.74426pt too wide) in paragraph at lines 550--551
 [][]\EU2/lmr/m/n/9 For-eign Value added in fi-nal good ex-ports (\EU2/lmr/bx/n/
 9 FVA_FIN\EU2/lmr/m/n/9 , T11/14) 
@@ -1491,9 +1491,9 @@ Overfull \hbox (0.16327pt too wide) in paragraph at lines 555--556
 
 Package color Info: Redefining color shadecolor on input line 582.
 Package color Info: Redefining color shadecolor on input line 592.
-[9] [10] [11](compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/otf/lmmon
-o10-regular.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/generic/
-fonts/otf/lmmono10-regular.luc)
+[11] [12] [13] [14](compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/otf
+/lmmono10-regular.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/ge
+neric/fonts/otf/lmmono10-regular.luc)
 Overfull \hbox (10.53334pt too wide) in paragraph at lines 701--701
 \EU2/lmr/m/n/10 Kurt Hornik, Friedrich Leisch, and Achim Zeileis. ISSN 1609-395
 X.
@@ -1509,7 +1509,7 @@ it/10 WIOD Back-
 lar.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/generic/fonts/ot
 f/lmromancaps10-regular.luc)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 702.
- [12] [13] [14] [15]
+ [15]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 702.
  (./draft.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 702.
@@ -1521,20 +1521,20 @@ Package logreq Info: Writing requests to 'draft.run.xml'.
 
 Here is how much of LuaTeX's memory you used:
  29189 strings out of 494694
- 244487,1144653 words of node,token memory allocated
+ 156469,1144653 words of node,token memory allocated
  8508 words of node memory still in use:
    279 hlist, 21 vlist, 9 rule, 28 math, 171 glue, 178 kern, 447 glyph, 147 attr
 ibute, 139 glue_spec, 147 attribute_list, 2 action, 1 shape, 1 write nodes
-   avail lists: 1:7,2:33495,3:688,4:9237,5:808,6:9519,7:214,8:23,9:1686,10:537
+   avail lists: 1:6,2:23554,3:689,4:5786,5:748,6:6914,7:153,8:19,9:1361,10:405
  32004 multiletter control sequences out of 65536+600000
  64 fonts using 4929663 bytes
  54i,20n,59p,1292b,1365s stack positions out of 5000i,500n,10000p,200000b,100000s
-</usr/share/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/share
-/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/share/texmf
--dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/share/texmf-dist/fonts
-/opentype/public/lm/lmroman10-italic.otf></usr/share/texmf-dist/fonts/opentype/p
-ublic/lm/lmroman6-regular.otf></usr/share/texmf-dist/fonts/opentype/public/lm/lm
-roman9-italic.otf></usr/share/texmf-dist/fonts/opentype/public/lm/lmmono9-regula
+</usr/share/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/
+share/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/share/texmf
+-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/share/texmf-dist/fonts
+/opentype/public/lm/lmroman6-regular.otf></usr/share/texmf-dist/fonts/opentype/p
+ublic/lm/lmroman9-italic.otf></usr/share/texmf-dist/fonts/opentype/public/lm/lmr
+oman7-regular.otf></usr/share/texmf-dist/fonts/opentype/public/lm/lmmono9-regula
 r.otf></usr/share/texmf-dist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/
 share/texmf-dist/fonts/opentype/public/lm/lmmono10-italic.otf></usr/share/texmf-
 dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/share/texmf-dist/fonts/op
@@ -1548,7 +1548,7 @@ ype1/public/amsfonts/cm/cmmi9.pfb><</usr/share/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr6.pfb><</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pf
 b><</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><</usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on draft.pdf (15 pages, 190874 bytes).
+Output written on draft.pdf (15 pages, 190933 bytes).
 
 PDF statistics: 322 PDF objects out of 1000 (max. 8388607)
  250 compressed objects within 3 object streams
