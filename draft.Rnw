@@ -246,7 +246,7 @@ Its dimension is correspondingly 1 x GN, where G is according to the number of c
 \textbf{A} is now of dimension GN x GN and gives the industry flows including cross border relationships.
 Since we are interested in the value added origins of exports we multiply these two matrices with a GN x GN matrix whose diagonal we fill with each industry's exports, $E$, 
 such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$ 
-\footnote{When using the textbf{leontief_output} function, the value added multiplier is instead multiplied with each industry's output.}.
+\footnote{When using the textbf{leontief\_output} function, the value added multiplier is instead multiplied with each industry's output.}
 In a simple example with two countries (\textbf{k} and \textbf{l}) and industries (\textbf{i} and \textbf{j}) we can zoom in to see the matrices' content:
 
 \begin{align}
