@@ -62,7 +62,7 @@ It derives the value added origins of an industry's exports by source country an
 gross trade data.
 The second method is the \textbf{Wang-Wei-Zhu} algorithm which splits bilateral gross exports into 16 value added components. 
 These components can broadly be divided into domestic and foreign value added in exports.
-Using the results of the two decompositions, \textbf{decompr} provides a set of standard Global Value Chain indicators, 
+Using the results of the two decompositions, \textbf{decompr} provides a set of Global Value Chain indicators, 
 such as the now standard Vertical Specialisation ratio.
 This article summarises the methodology of the algorithms, describes the format of the input and output data, 
 and exemplifies the usefulness of the two methods on the basis of a simple example data set.}
