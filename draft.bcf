@@ -2384,31 +2384,29 @@
     <bcf:datasource type="file" datatype="bibtex">bibliography.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">wale36</bcf:citekey>
-    <bcf:citekey order="2">wale36</bcf:citekey>
-    <bcf:citekey order="3">timmer2012world</bcf:citekey>
-    <bcf:citekey order="4">wang2014quantifying</bcf:citekey>
-    <bcf:citekey order="5">wang2014quantifying</bcf:citekey>
-    <bcf:citekey order="6">timmer2012world</bcf:citekey>
-    <bcf:citekey order="7">timmer2012world</bcf:citekey>
-    <bcf:citekey order="8">wale36</bcf:citekey>
-    <bcf:citekey order="9">wale36</bcf:citekey>
-    <bcf:citekey order="10">dahuetal01</bcf:citekey>
-    <bcf:citekey order="11">dahuetal01</bcf:citekey>
-    <bcf:citekey order="12">rojoguno12</bcf:citekey>
-    <bcf:citekey order="13">rojoguno12</bcf:citekey>
-    <bcf:citekey order="14">wang2014quantifying</bcf:citekey>
-    <bcf:citekey order="15">wang2014quantifying</bcf:citekey>
-    <bcf:citekey order="16">fox2005getting</bcf:citekey>
-    <bcf:citekey order="16">fox2007extending</bcf:citekey>
-    <bcf:citekey order="17">wickham2014advanced</bcf:citekey>
-    <bcf:citekey order="18">fox2012rcmdrplugin</bcf:citekey>
-    <bcf:citekey order="19">core2014r</bcf:citekey>
-    <bcf:citekey order="20">lamport1986document</bcf:citekey>
-    <bcf:citekey order="21">hagen2005luatex</bcf:citekey>
-    <bcf:citekey order="22">lehman2006biblatex</bcf:citekey>
-    <bcf:citekey order="23">leisch2003sweave</bcf:citekey>
-    <bcf:citekey order="24">yihui2013knitr</bcf:citekey>
+    <bcf:citekey order="1">timmer2012world</bcf:citekey>
+    <bcf:citekey order="2">wang2014quantifying</bcf:citekey>
+    <bcf:citekey order="3">wang2014quantifying</bcf:citekey>
+    <bcf:citekey order="4">timmer2012world</bcf:citekey>
+    <bcf:citekey order="5">timmer2012world</bcf:citekey>
+    <bcf:citekey order="6">wale36</bcf:citekey>
+    <bcf:citekey order="7">wale36</bcf:citekey>
+    <bcf:citekey order="8">dahuetal01</bcf:citekey>
+    <bcf:citekey order="9">dahuetal01</bcf:citekey>
+    <bcf:citekey order="10">rojoguno12</bcf:citekey>
+    <bcf:citekey order="11">rojoguno12</bcf:citekey>
+    <bcf:citekey order="12">wang2014quantifying</bcf:citekey>
+    <bcf:citekey order="13">wang2014quantifying</bcf:citekey>
+    <bcf:citekey order="14">fox2005getting</bcf:citekey>
+    <bcf:citekey order="14">fox2007extending</bcf:citekey>
+    <bcf:citekey order="15">wickham2014advanced</bcf:citekey>
+    <bcf:citekey order="16">fox2012rcmdrplugin</bcf:citekey>
+    <bcf:citekey order="17">core2014r</bcf:citekey>
+    <bcf:citekey order="18">lamport1986document</bcf:citekey>
+    <bcf:citekey order="19">hagen2005luatex</bcf:citekey>
+    <bcf:citekey order="20">lehman2006biblatex</bcf:citekey>
+    <bcf:citekey order="21">leisch2003sweave</bcf:citekey>
+    <bcf:citekey order="22">yihui2013knitr</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="cms" type="entry" sortscheme="cms">
   <bcf:sorting>
