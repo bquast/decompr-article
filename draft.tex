@@ -72,6 +72,7 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{changepage}
+\usepackage{verbatim}
 \usepackage{epigraph}
 \usepackage{verbatim}
 \usepackage{lscape}
@@ -96,6 +97,25 @@
 \author{Bastiaan Quast and Victor Kummritz}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
+\maketitle
+
+\vspace{\stretch{1}}
+\abstract{Global Value Chains have become a central unit of analysis in research on international trade.
+However, the complex matrix transformations at the basis of most Value Chain indicators still constitute a significant entry barrier to
+the field.
+The R package decompr solves this problem by implementing the algorithms for the analysis of Global Value Chains as R procedures,
+thereby simplifying the decomposition process.
+Two methods for gross export flow decomposition using Inter-Country Input-Output tables are provided.
+The first method concerns a decomposition based on the classical \textcite{wale36} insight.
+It derives the value added origins of an industry's exports by source country and source industry, using easily available
+gross trade data.
+The second method is the Wang-Wei-Zhu algorithm which splits bilateral gross exports into 16 value added components. 
+These components can broadly be divided into domestic and foreign value added in exports.
+Using the results of the two decompositions, decompr provides a set of Global Value Chain indicators, 
+such as the now standard Vertical Specialisation ratio.
+This article summarises the methodology of the algorithms, describes the format of the input and output data, 
+and exemplifies the usefulness of the two methods on the basis of a simple example data set.}
+\pagebreak
 
 \section{Introduction}
 \epigraph{Hello?\\...\\ is it me you're looking for?}{Lionel Richie}
@@ -108,7 +128,7 @@ Both policy makers and academia increasingly value the growth opportunities GVCs
 especially, to developing countries.
 However, analysing this phenomenon empirically requires complex matrix manipulations, 
 since the relevant data is only available in the form of gross flows.
-The \textbf{decompr} package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.
+The decompr package enables researchers with little background in matrix algebra and linear programming to easily derive standard GVC indicators for statistical analysis.
 
 The package uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD and WTO (TiVA), % CITE!! 
 the World Input Output Database \parencite{timmer2012world},  or national statistics bureaus, as input.
@@ -119,9 +139,9 @@ supplies to the German transport equipment industry. The problem of these tables
 is that they do not reveal how much of the value was added in the supplying industry,
 and how much of the value was added in previous stages of production, performed by other industries or even countries.
 
-The \textbf{Leontief} decomposition of gross trade flows solves this problem by reallocating the value of intermediate goods used by industries to the original producers.
+The Leontief decomposition of gross trade flows solves this problem by reallocating the value of intermediate goods used by industries to the original producers.
 In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish leather industry and added to the Argentinian agricultural industry.
-The \textbf{Wang-Wei-Zhu} (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
+The Wang-Wei-Zhu (henceforth WWZ) decomposition goes a step further by not only revealing the source of the value added,
 but also breaking down exports into different categories, according to final usage and destination.
 It implements the theoretical work of \textcite{wang2014quantifying}.
 The main categories in this framework are listed below.
@@ -133,16 +153,16 @@ The main categories in this framework are listed below.
 \end{enumerate}
 
 \subsection{Package Details}
-The \textbf{decompr} package implements the algorithms for these decompositions as R procedures and provides example data sets.
+The decompr package implements the algorithms for these decompositions as R procedures and provides example data sets.
 The R procedures are implemented as functions, the included functions are listed below.
 
 \begin{itemize}
  \item \textbf{load\_tables\_vectors}; transforms the input objects to an object used for the decompositions (class: decompr)
- \item \textbf{leontief}; takes a decompr object and applies the Leontief decomposition
- \item \textbf{wwz}; takes a decompr object and applies the Wang-Wei-Zhu decomposition
+ \item \verb!leontief!; takes a decompr object and applies the Leontief decomposition
+ \item \verb!wwz!; takes a decompr object and applies the Wang-Wei-Zhu decomposition
  \item \textbf{vertical\_specialisation}; takes a decompr object and returns a measure of vertical specialisation (also works with vertical\_specialization)
  \item \textbf{leontief\_output}; takes a decompr object and applies the Leontief decomposition using final output
- \item \textbf{decomp}; a wrapper function which integrates the use of \textbf{load\_tables\_vectors} with the various decompositions, using a argument \textbf{method} to specify the desired decomposition (default \textbf{leontief}) 
+ \item \textbf{decomp}; a wrapper function which integrates the use of \textbf{load\_tables\_vectors} with the various decompositions, using a argument \textbf{method} to specify the desired decomposition (default \verb!leontief!) 
 \end{itemize}
 
 For legacy purposes, several depracated functions / methods are available under their original names.
@@ -159,7 +179,7 @@ As a design decision, the time dimension is therefore not implemented in the pac
 Instead, we provide examples of how the repeated analysis can be easily implemented using decompr.
 
 \Cref{sec:data} introduces the data as it is used by the package, as well as an example data set provided by the WIOD.
-After which \cref{sec:leontief,sec:wwz} summarise the theoretical derivation for the two decompositions, and show how these can be performed in R using \textbf{decompr}.
+After which \cref{sec:leontief,sec:wwz} summarise the theoretical derivation for the two decompositions, and show how these can be performed in R using decompr.
 We conclude with a discussion of potential uses and limitations of this approach.
 
 \section{Data}
@@ -224,7 +244,7 @@ Germany & Transport.Equipment & 2.1 & 1.4 & 3.0 & 4.1 & 3.1 & 3.9 & 11.3 & 8.1 &
 
 \end{sidewaystable}
 
-The first step of the analytic process is to load the input object and create a \textbf{decompr} class object, 
+The first step of the analytic process is to load the input object and create a decompr class object, 
 which contains the data structures for the decompositions.
 This step is not needed when using the \textbf{decomp} wrapper function but more on this later.
 
@@ -252,7 +272,7 @@ This step is not needed when using the \textbf{decomp} wrapper function but more
 \end{kframe}
 \end{knitrout}
 
-As can be seen above, a \textbf{decompr} class object is in fact a list containing thirty different objects.
+As can be seen above, a decompr class object is in fact a list containing thirty different objects.
 For example, \textbf{Eint} is an object that collects the intermediate goods exports of the industries,
 while \textbf{G} refers to the number of countries that are analysed.
 Depending on the choice of the decomposition, all or some of these objects are used.
@@ -260,8 +280,8 @@ Depending on the choice of the decomposition, all or some of these objects are u
 
 \section{Leontief decomposition}
 \label{sec:leontief}
-Let us now turn to the algorithms, starting with the \textbf{Leontief} decomposition. 
-We shortly describe the theoretical derivation of the method to expose the internal steps of the \textbf{decompr} package. 
+Let us now turn to the algorithms, starting with the Leontief decomposition. 
+We shortly describe the theoretical derivation of the method to expose the internal steps of the decompr package. 
 Afterwards, we turn to the technical implementation and, finally, we describe the output.
 
 \subsection{Theoretical derivation}
@@ -292,7 +312,7 @@ industries required for 1\$ of output, and $B = (I-A)^{-1}$ is the so called Leo
 Looking from the perspective of the supplying industries, the matrix gives the value added that they contribute to the using industry's production.
 If we multiply it with a N x N matrix whose diagonal specifies each industry's total output or exports, we get value added origins as absolute values instead of shares.
 
-The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our \textbf{Leontief} decomposition is straightforward.
+The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our Leontief decomposition is straightforward.
 \textbf{V} refers now to a vector of direct value added contribution of all industries across the different countries. 
 Its dimension is correspondingly 1 x GN, where G is according to the number of countries.
 \textbf{A} is now of dimension GN x GN and gives the industry flows including cross border relationships.
@@ -365,7 +385,7 @@ a_{cf}^{su} = \frac{inp_{cf}^{su}}{y_{f}^{u}}  \hspace{2cm} (c,f \in k,l \hspace
 where \(v_{s}^{c}\) gives the share of industry \emph{s}'s value added, \(va_{c}^{s},\) in output, \(y_{s}^{c}\), and \(e_{k}^{i}\) indicates gross exports. Finally, \(a_{su}^{cf}\) denotes the share of inputs, \(inp_{su}^{cf}\), in output.
 The elements of the $V(I-A)^{-1}E$ or $vae$ matrix are our estimates for the country-industry level value added
 origins of each country-industry's exports.
-\textbf{decompr} implements this algorithm into R to automate the process of deriving the matrix. 
+decompr implements this algorithm into R to automate the process of deriving the matrix. 
 Equipped with it, researchers can calculate standard GVC indicators.
 Examples include \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level using the textbf{vertical\_specialisation} function, 
 which sums for each country and industry across the value added of all foreign countries and industries,
@@ -373,7 +393,7 @@ and \citet{rojoguno12}'s so-called VAX ratio.
 Alternatively, the four dimensions of the matrix (source country, source industry, using country, using industry) allow for industry-level gravity-type estimations of value added trade flows.
 
 \subsection{Implentation}
-As described, in \cref{sec:data}, the first step of our analytic process is to construct a \textbf{decompr} object using the \textbf{load\_tables\_vectors} function. After this, we can use the \textbf{leontief} function to apply to Leontief decomposition.
+As described, in \cref{sec:data}, the first step of our analytic process is to construct a decompr object using the \textbf{load\_tables\_vectors} function. After this, we can use the \verb!leontief! function to apply to Leontief decomposition.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -384,7 +404,7 @@ As described, in \cref{sec:data}, the first step of our analytic process is to c
 
 In addition, a wrapper function called \textbf{decomp} is provided which integrates both elements of the workflow into a single function.
 We recomended that the atomic functions be used for large data sets, however, for small data sets this is an easy way to derive the results immediatly.
-The \textbf{decomp} function requires a method to be specified (see \textbf{help("decomp) for details}), is none is provided, the function will default to \textbf{leontief}.
+The \textbf{decomp} function requires a method to be specified (see \textbf{help("decomp) for details}), is none is provided, the function will default to \verb!leontief!.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -568,11 +588,11 @@ The higher resolution of the WWZ decomposition comes at the cost of a lower dime
 This means that the two methods are complementary and imply a trade-off between detail and disaggregation.
 
 \subsection{Implementation}
-As with the \textbf{leontief} function, 
-the \textbf{wwz} function also takes a \textbf{decompr} class object as its input, 
+As with the \verb!leontief! function, 
+the \verb!wwz! function also takes a decompr class object as its input, 
 the procedure for this is described in \cref{sec:data}.
-After having created this \textbf{decompr} object, 
-we can apply the Wang-Wei-Zhu decomposition using the \textbf{wwz} function.
+After having created this decompr object, 
+we can apply the Wang-Wei-Zhu decomposition using the \verb!wwz! function.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -640,17 +660,18 @@ Since they would be part of $MVA$ twice, they are now counted once as double-cou
 Finally, the three checksums give total exports, total final goods exports, and total intermediate exports. 
 The difference between the first and the latter two should be zero.
 
-One interesting application of this decomposition for trade and development uses changes over time in $FVA_FIN$ and $FVA_INT$. 
+One interesting application of this decomposition for trade and development uses changes over time in $FVA\_FIN$ and $FVA\_INT$. 
 When low-wage developing countries enter GVCs, they tend to specialize mainly in assembly but try to gradually move up within the value chain.    
 To illustrate this, we can reuse the example of the iPhone. 
 Most of the value added in the device stems from US design and Japanese technology but it is ultimately assmbled in China.
-This means for China that when it enters this GVC, its $FVA_FIN$ starts to increase since it imports a lot of foreign value added, assembles it, and exports a final good: the Iphone.
+This means for China that when it enters this GVC, its $FVA\_FIN$ starts to increase since it imports a lot of foreign value added, assembles it, and exports a final good: the Iphone.
 However, assembly itself does not contain a lot of value added so that the benefit of China initially is small. 
-When its technology however improves due to its interaction with Japan and the USA, it might be able to produce actual parts of the phone,
-which contain more sophistication, itself and eventually it might even be able to outsource assembly to a cheaper country.
+When its technology improves due to the interaction with Japan and the USA, it might be able to produce actual parts of the phone,
+which contain more value added.
+Eventually it might even be able to outsource assembly to a cheaper country.
 This would imply that it seizes a larger share of the value added, something commonly referred to as upgrading or moving up within the value chain.
-In terms of the WWZ decomposition, we would then observe that China's $FVA_FIN$ first goes up and then starts to decline with
-a simultaneous increase in $FVA_INT$.
+In terms of the WWZ decomposition, we would then observe that China's $FVA\_FIN$ first goes up and then starts to decline with
+a simultaneous increase in $FVA\_INT$.
 
 \begin{sidewaystable}[htbp]\scriptsize
   \centering
@@ -708,15 +729,15 @@ As more and more regional trade agreements come into force,
 which drive down trade costs and harmonize product standards,
 it becomes more and more attractive for firms to outsource certain tasks of their production lines.
 Research on international trade analysing this development evolves quickly and reveals important implications of GVCs for economic growth and competitiveness.  
-\textbf{decompr} aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
+decompr aims at facilitating this reasearch by simplifying the calculation of standard GVC indicators.
 The purpose is to accelerate the research and, especially, to make it accesible to a wider audience.
 
 We have designed the package using a modular structure, with an additional user interface function for increased ease of use.
 The modular structure enables users to break the computationally intensive analysis process down into several steps.
 Furthermore, the modular structure enables users and other developers to build on top of basic data structures which are creaed by the \textbf{load\_tables\_vectors} function when implementing other decompositions or analyses.
 However, a wrapper function (\textbf{decomp}) is also provided, which combines the use of the atomic functions into one.
-Lastly, in addition to the \textbf{decompr} function, we provide a Rcmdr plugin \parencite{fox2005getting, fox2007extending}, which allows the user to perform the analytical process using a GUI (Grapical User Interface).
-All of this, should allow users of the package to adapt the package to their specific needs as the GVC research progresses.
+Lastly, in addition to the decompr function, we provide a Rcmdr plugin \parencite{fox2005getting, fox2007extending}, which allows the user to perform the analytical process using a GUI (Grapical User Interface).
+All of this should allow users of the package to adapt the package to their specific needs as the GVC research progresses.
 
 Since GVCs constitute a fairly new field of research, there are many ways forward for its analysis. 
 The next central step is to examine both in theory and empirically how GVC participation affects real economic activity. 
@@ -725,7 +746,7 @@ employment and economic growth react when countries join GVCs and what the facto
 From the standpoint of developing and emerging countries a very interesting question is if GVCs simplify industrialization 
 and the formation of comparative advantage 
 while high-income countries might look for an additional push for their stagnating post-crisis economies. 
-We hope that \textbf{decompr} can play a part in this field and promote it.
+We hope that decompr can play a part in this field and promote it.
 
 \nocite{wickham2014advanced}
 \nocite{fox2012rcmdrplugin}
