@@ -276,24 +276,24 @@
     \entry{timmer2012world}{article}{}
       \name{labelname}{7}{}{%
         {{uniquename=0,hash=c6aa42844ce79e5698604c7ed234f42d}{Timmer}{T\bibinitperiod}{Marcel}{M\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=75b996426e87a2332cf1a66048be6639}{Erumban}{E\bibinitperiod}{A.\bibnamedelimi A.}{A\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=0e56435b0bc1d8f40c4809413d808df6}{Gouma}{G\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=0cbd438bf32e55a6a5def8ae1457c73f}{Los}{L\bibinitperiod}{B.}{B\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=a663414dd504571cd82ee36a30d761b7}{Temurshoev}{T\bibinitperiod}{U.}{U\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=cb3bc7bc3285894e128c10cec30cf8f9}{Vries}{V\bibinitperiod}{G.\bibnamedelimi J.}{G\bibinitperiod\bibinitdelim J\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
-        {{uniquename=0,hash=d963f3c95339eace4c6e8acb9a245ae0}{Arto}{A\bibinitperiod}{I.}{I\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=1341d791be6a981bc7c233daac12aa85}{Erumban}{E\bibinitperiod}{AA}{A\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=460be7c7d1ee8f91474231369d810a07}{Gouma}{G\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=ec860894b447769af676fe7900f2642e}{Los}{L\bibinitperiod}{B}{B\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5ff532cf3b8f3d2fac9f114377c5a601}{Temurshoev}{T\bibinitperiod}{U}{U\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=4453c0f472bdd91e35ac532f0b3532bd}{Vries}{V\bibinitperiod}{GJ}{G\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{uniquename=0,hash=882d9b2d81afd35ce7ddff97a9659882}{Arto}{A\bibinitperiod}{I}{I\bibinitperiod}{}{}{}{}}%
       }
       \name{author}{7}{}{%
         {{uniquename=0,hash=c6aa42844ce79e5698604c7ed234f42d}{Timmer}{T\bibinitperiod}{Marcel}{M\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=75b996426e87a2332cf1a66048be6639}{Erumban}{E\bibinitperiod}{A.\bibnamedelimi A.}{A\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=0e56435b0bc1d8f40c4809413d808df6}{Gouma}{G\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=0cbd438bf32e55a6a5def8ae1457c73f}{Los}{L\bibinitperiod}{B.}{B\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=a663414dd504571cd82ee36a30d761b7}{Temurshoev}{T\bibinitperiod}{U.}{U\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=cb3bc7bc3285894e128c10cec30cf8f9}{Vries}{V\bibinitperiod}{G.\bibnamedelimi J.}{G\bibinitperiod\bibinitdelim J\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
-        {{uniquename=0,hash=d963f3c95339eace4c6e8acb9a245ae0}{Arto}{A\bibinitperiod}{I.}{I\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=1341d791be6a981bc7c233daac12aa85}{Erumban}{E\bibinitperiod}{AA}{A\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=460be7c7d1ee8f91474231369d810a07}{Gouma}{G\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=ec860894b447769af676fe7900f2642e}{Los}{L\bibinitperiod}{B}{B\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5ff532cf3b8f3d2fac9f114377c5a601}{Temurshoev}{T\bibinitperiod}{U}{U\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=4453c0f472bdd91e35ac532f0b3532bd}{Vries}{V\bibinitperiod}{GJ}{G\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{uniquename=0,hash=882d9b2d81afd35ce7ddff97a9659882}{Arto}{A\bibinitperiod}{I}{I\bibinitperiod}{}{}{}{}}%
       }
       \strng{namehash}{8280d78716d9c388e705d70c5d7c645a}
-      \strng{fullhash}{916b9f493da1db1d8ec8c1c37d1b937c}
+      \strng{fullhash}{0c553611bee18d6d6a96625428125a6d}
       \field{sortinit}{T}
       \field{sortinithash}{9378dd666f3c24d81538df53aa99e23d}
       \field{labelyear}{2012}
@@ -301,6 +301,7 @@
       \field{labeltitle}{The world input-output database (WIOD): contents, sources and methods}
       \field{journaltitle}{WIOD Background document available at www. wiod. org}
       \field{title}{The world input-output database (WIOD): contents, sources and methods}
+      \field{volume}{40}
       \field{year}{2012}
     \endentry
     \entry{wang2014quantifying}{article}{}
