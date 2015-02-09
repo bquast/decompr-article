@@ -57,7 +57,7 @@ the field.
 The R package \textbf{decompr} solves this problem by implementing the algorithms for the analysis of Global Value Chains as R procedures,
 thereby simplifying the decomposition process.
 Two methods for gross export flow decomposition using Inter-Country Input-Output tables are provided.
-The first method concerns a decomposition based on the classical \textbf{\textcite{wale36}} insight.
+The first method concerns a decomposition based on the classical \textcite{wale36} insight.
 It derives the value added origins of an industry's exports by source country and source industry, using easily available
 gross trade data.
 The second method is the \textbf{Wang-Wei-Zhu} algorithm which splits bilateral gross exports into 16 value added components. 
