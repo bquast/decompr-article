@@ -51,7 +51,6 @@
 \begin{document}
 
 \section{Introduction}
-\epigraph{Hello?\\...\\ is it me you're looking for?}{Lionel Richie}
 Global Value Chains (GVCs) refer to the quickly expanding internationalization of production networks.
 Most goods we use nowadays consist of parts that are sourced from different corners of the planet 
 and are assembled across different continents. A popular example of this development is the Iphone,
@@ -93,7 +92,7 @@ The R procedures are implemented as functions, the included functions are listed
  \item \verb!load_tables_vectors!; transforms the input objects to an object used for the decompositions (class: decompr)
  \item \verb!leontief!; takes a decompr object and applies the Leontief decomposition
  \item \verb!wwz!; takes a decompr object and applies the Wang-Wei-Zhu decomposition
- \item \textit{vertical\_specialisation}; takes a decompr object and returns a measure of vertical specialisation (also works with vertical\_specialization)
+ \item \verb!vertical_specialisation!; takes a decompr object and returns a measure of vertical specialisation (also works with \verb!vertical_specialization!)
  \item \verb!leontief_output!; takes a decompr object and applies the Leontief decomposition using final output
  \item \verb!decomp!; a wrapper function which integrates the use of \verb!load_tables_vectors! with the various decompositions, using a argument \textit{method} to specify the desired decomposition (default \verb!leontief!) 
 \end{itemize}
@@ -107,17 +106,17 @@ In addition to this, two example data sets are included.
 \end{itemize}
 
 Trade flow analysis often involves studying the development of a certain variable (set) over time, thus taking the panel form.
-However, no existing trade flow analysis explicitly exploits the time dimension, making the analysis effectively a repeated cross-section.
-As a design decision, the time dimension is therefore not implemented in the package itself.
-Instead, we provide examples of how the repeated analysis can be easily implemented using decompr.
+%However, no existing trade flow analysis explicitly exploits the time dimension, making the analysis effectively a repeated cross-section.
+%As a design decision, the time dimension is therefore not implemented in the package itself.
+Hence, we provide examples of how decompr can create panel data using repeated analysis.
 
-\Cref{sec:data} introduces the data as it is used by the package, as well as an example data set provided by the WIOD.
-After which \cref{sec:leontief,sec:wwz} summarise the theoretical derivation for the two decompositions, and show how these can be performed in R using decompr.
-We conclude with a discussion of potential uses and limitations of this approach.
+\Cref{sec:data} introduces the data as it is used by the package as well as two example data sets,
+after which \cref{sec:leontief,sec:wwz} summarise the theoretical derivations for the two decompositions, and show how these can be performed in R using decompr.
+We conclude with a discussion of potential uses and further developments of GVC research.
 
 \section{Data}
 \label{sec:data}
-Two data sets are included in the package, one real world data set and one minimal data set (fictional) for demonstration purposes.
+Two data sets are included in the package, one real world data set and one minimal data set for demonstration purposes.
 The former is the WIOD regional Inter-Country Input Output tables for the year 2011 \parencite{timmer2012world}. 
 The latter is a fictional 3-country 3-sector data set, which we will use throughout this article to demonstrate the usage and advantages of the decompr package.
 
@@ -184,7 +183,7 @@ ls(decompr_object)
 
 As can be seen above, a decompr class object is in fact a list containing thirty different objects.
 For example, \textit{Eint} is an object that collects the intermediate goods exports of the industries,
-while \textit{G} refers to the number of countries that are analysed.
+while \textit{Y} refers to the final demand that the industries supply.
 Depending on the choice of the decomposition, all or some of these objects are used.
 
 
@@ -223,11 +222,11 @@ Looking from the perspective of the supplying industries, the matrix gives the v
 If we multiply it with a $N x N$ matrix whose diagonal specifies each industry's total output or exports, we get value added origins as absolute values instead of shares.
 
 The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our Leontief decomposition is straightforward.
-\textit{V} refers now to a vector of direct value added contribution of all industries across the different countries. 
+\textit{V} refers now to a vector of direct value added contributions of all industries across the different countries. 
 Its dimension is correspondingly $1 x GN$, where $G$ is according to the number of countries.
 \textit{A} is now of dimension $GN x GN$ and gives the industry flows including cross border relationships.
 Since we are interested in the value added origins of exports we multiply these two matrices with a $GN x GN$ matrix whose diagonal we fill with each industry's exports, $E$, 
-such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$ 
+such that the basic equation behind the source decomposition is given by $V(I-A)^{-1}E$. 
 \footnote{When using the leontief\_output function, the value added multiplier is instead multiplied with each industry's output.}
 In a simple example with two countries (\textit{k} and \textit{l}) and industries (\textit{i} and \textit{j}) we can zoom in to see the matrices' content:
 
