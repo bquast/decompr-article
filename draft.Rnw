@@ -106,9 +106,9 @@ In addition to this, two example data sets are included.
 \end{itemize}
 
 Trade flow analysis often involves studying the development of a certain variable (set) over time, thus taking the panel form.
-%However, no existing trade flow analysis explicitly exploits the time dimension, making the analysis effectively a repeated cross-section.
-%As a design decision, the time dimension is therefore not implemented in the package itself.
-Hence, we provide examples of how decompr can create panel data using repeated analysis.
+However, at the decomposition level, the panel dimension is essentially a repeated cross-section.
+Therefore, as a design decision, the time dimension is not implemented in the package itself.
+Instead, we provide examples of how this repetition can be implemented using a \verb!for-loop!.
 
 \Cref{sec:data} introduces the data as it is used by the package as well as two example data sets,
 after which \cref{sec:leontief,sec:wwz} summarise the theoretical derivations for the two decompositions, and show how these can be performed in R using decompr.
@@ -253,12 +253,7 @@ e_{k}^{i}& 0& 0& 0\\
 0& e_{k}^{j}& 0& 0\\
 0& 0& e_{l}^{i}& 0\\
 0& 0& 0& e_{l}^{j}
-\end{pmatrix}
-\end{split}
-\end{align}
-
-\begin{align*}
-\begin{split}
+\end{pmatrix}\\
 &=
 \begin{pmatrix}
 v_{k}^{i}b_{kk}^{ii}e_{k}^{i}& v_{k}^{i} b_{kk}^{ij}e_{k}^{j}& v_{k}^{i}b_{kl}^{ii}e_{l}^{i}& v_{k}^{i}b_{kl}^{ij}e_{l}^{j}\\
@@ -274,7 +269,7 @@ vae_{lk}^{ii}& vae_{lk}^{ij}& vae_{ll}^{ii}& vae_{ll}^{ij}\\
 vae_{lk}^{ji}& vae_{lk}^{jj}& vae_{ll}^{ji}& vae_{ll}^{jj}
 \end{pmatrix}
 \end{split}
-\end{align*}
+\end{align}
 \begin{align*}
 &v_{c}^{s} = \frac{va_{c}^{s}}{y_{c}^{s}} = 1 - a_{kc}^{is} - a_{kc}^{js} - a_{lc}^{js} - a_{lc}^{is} \hspace{2cm} (c \in k,l \hspace{.5cm} s \in i,j),\\
 &\begin{pmatrix}
@@ -524,52 +519,6 @@ More specifically, the using country can also be the origin of the foreign value
 Therefore we use the terms exporter, exporting industry, and direct importer instead. 
 This becomes much clearer when we take a look at specific examples.
 
-\Cref{tab:wwz} shows the results for the example data. 
-The first column lists exporter, exporting industry, and direct importer. 
-Note that the value added is domestic but not necessarily created in the exporting industry. 
-When exporter and importer are identical, the values are zero since there are no exports. 
-The first row lists the 16 components of bilateral exports at the sector level and three checksums.
-
-The first eight components relate to domestic value added of the exporting country contained in the sectoral exports of the exporting industry to the direct importer. 
-For instance, the first non-zero element in \cref{tab:wwz} refers to $DVA\_FIN$, or domestic value added in final good exports. 
-It shows that there are 5.47 units of domestic value added in the exports of final goods from Argentina's Agriculture industry to Turkey. 
-In the same row the third term,  \textit{DVA\_INTrexI1}, is slightly more complicated. 
-As mentioned above it gives the amount of domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods. 
-In our example this means that there are 1.14 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, 
-that are re-exported by Turkey as intermediates to a third country which produces final goods with it. 
-Terms six to eight concern domestic value added that eventually returns home. 
-\textit{RDV\_FIN2} reveals for example that there are 0.35 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, 
-that Turkey re-exports as intermediates to Argentina for the latter's final good production.
-
-The following four terms apply to foreign value added in exports and separate on the one hand between the origin of the foreign value added ($MVA$ vs $OVA$) and on the other hand between the type of export (intermediate vs final good). 
-$MVA$ describes hereby foreign value added sourced by the exporting country from the direct importer. 
-From the perspective of the latter, these terms are thus part of the $RDV$ (value added returning home) share. 
-$OVA$ in contrast sums over the foreign value added sourced from all other countries. 
-Going back to the example, this means that there 0.21 units of Turkish value added in the final goods exports of Argentina's Agriculture industry to Turkey.
-
-Terms 13 to 16 collect the double counting of gross trade statistics that occurs when goods cross borders multiple times. 
-$DDC$ captures double counting due to domestic value added, 
-which is further classified according to the type of the ultimate export (final vs intermediate good). 
-$MDC$ and $ODC$ on the other hand capture double counting due to foreign value added from either the direct importer or other countries. 
-For the Argentina-Turkey case this implies, for instance, that there are 0.18 units of value added in the intermediate exports of Turkey to Argentina which are re-exported by Argentina's Agriculture industry to Turkey as intermediates and then again re-exported. 
-Since they would be part of $MVA$ twice, they are now counted once as double-counted term.
-
-Finally, the three checksums give total exports, total final goods exports, and total intermediate exports. 
-The difference between the first and the latter two should be zero.
-
-One interesting application of this decomposition for trade and development uses changes over time in $FVA\_FIN$ and $FVA\_INT$. 
-When low-wage developing countries enter GVCs, they tend to specialize mainly in assembly but try to gradually move up within the value chain.    
-To illustrate this, we can reuse the example of the iPhone. 
-Most of the value added in the device stems from US design and Japanese technology but it is ultimately assmbled in China.
-This means for China that when it enters this GVC, its $FVA\_FIN$ starts to increase since it imports a lot of foreign value added, assembles it, and exports a final good: the Iphone.
-However, assembly itself does not contain a lot of value added so that the benefit of China initially is small. 
-When its technology improves due to the interaction with Japan and the USA, it might be able to produce actual parts of the phone,
-which contain more value added.
-Eventually it might even be able to outsource assembly to a cheaper country.
-This would imply that it seizes a larger share of the value added, something commonly referred to as upgrading or moving up within the value chain.
-In terms of the WWZ decomposition, we would then observe that China's $FVA\_FIN$ first goes up and then starts to decline with
-a simultaneous increase in $FVA\_INT$.
-
 \begin{sidewaystable}[htbp]\scriptsize
   \centering
   \caption{WWZ Decomposition}
@@ -617,6 +566,54 @@ a simultaneous increase in $FVA\_INT$.
     \bottomrule
     \end{tabular}
 \end{sidewaystable}
+
+
+\Cref{tab:wwz} shows the results for the example data. 
+The first column lists exporter, exporting industry, and direct importer. 
+Note that the value added is domestic but not necessarily created in the exporting industry. 
+When exporter and importer are identical, the values are zero since there are no exports. 
+The first row lists the 16 components of bilateral exports at the sector level and three checksums.
+
+The first eight components relate to domestic value added of the exporting country contained in the sectoral exports of the exporting industry to the direct importer. 
+For instance, the first non-zero element in \cref{tab:wwz} refers to $DVA\_FIN$, or domestic value added in final good exports. 
+It shows that there are 5.47 units of domestic value added in the exports of final goods from Argentina's Agriculture industry to Turkey. 
+In the same row the third term,  \textit{DVA\_INTrexI1}, is slightly more complicated. 
+As mentioned above it gives the amount of domestic Value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods. 
+In our example this means that there are 1.14 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, 
+that are re-exported by Turkey as intermediates to a third country which produces final goods with it. 
+Terms six to eight concern domestic value added that eventually returns home. 
+\textit{RDV\_FIN2} reveals for example that there are 0.35 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, 
+that Turkey re-exports as intermediates to Argentina for the latter's final good production.
+
+The following four terms apply to foreign value added in exports and separate on the one hand between the origin of the foreign value added ($MVA$ vs $OVA$) and on the other hand between the type of export (intermediate vs final good). 
+$MVA$ describes hereby foreign value added sourced by the exporting country from the direct importer. 
+From the perspective of the latter, these terms are thus part of the $RDV$ (value added returning home) share. 
+$OVA$ in contrast sums over the foreign value added sourced from all other countries. 
+Going back to the example, this means that there 0.21 units of Turkish value added in the final goods exports of Argentina's Agriculture industry to Turkey.
+
+Terms 13 to 16 collect the double counting of gross trade statistics that occurs when goods cross borders multiple times. 
+$DDC$ captures double counting due to domestic value added, 
+which is further classified according to the type of the ultimate export (final vs intermediate good). 
+$MDC$ and $ODC$ on the other hand capture double counting due to foreign value added from either the direct importer or other countries. 
+For the Argentina-Turkey case this implies, for instance, that there are 0.18 units of value added in the intermediate exports of Turkey to Argentina which are re-exported by Argentina's Agriculture industry to Turkey as intermediates and then again re-exported. 
+Since they would be part of $MVA$ twice, they are now counted once as double-counted term.
+
+Finally, the three checksums give total exports, total final goods exports, and total intermediate exports. 
+The difference between the first and the latter two should be zero.
+
+One interesting application of this decomposition for trade and development uses changes over time in $FVA\_FIN$ and $FVA\_INT$. 
+When low-wage developing countries enter GVCs, they tend to specialize mainly in assembly but try to gradually move up within the value chain.    
+To illustrate this, we can reuse the example of the iPhone. 
+Most of the value added in the device stems from US design and Japanese technology but it is ultimately assmbled in China.
+This means for China that when it enters this GVC, its $FVA\_FIN$ starts to increase since it imports a lot of foreign value added, assembles it, and exports a final good: the Iphone.
+However, assembly itself does not contain a lot of value added so that the benefit of China initially is small. 
+When its technology improves due to the interaction with Japan and the USA, it might be able to produce actual parts of the phone,
+which contain more value added.
+Eventually it might even be able to outsource assembly to a cheaper country.
+This would imply that it seizes a larger share of the value added, something commonly referred to as upgrading or moving up within the value chain.
+In terms of the WWZ decomposition, we would then observe that China's $FVA\_FIN$ first goes up and then starts to decline with
+a simultaneous increase in $FVA\_INT$.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
