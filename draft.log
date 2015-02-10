@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.2.5)  10 FEB 2015 11:51
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.2.5)  10 FEB 2015 11:59
  restricted \write18 enabled.
 **draft.tex
 (./draft.tex
@@ -1481,7 +1481,7 @@ Here is how much of LuaTeX's memory you used:
  8935 words of node memory still in use:
    288 hlist, 22 vlist, 11 rule, 36 math, 178 glue, 238 kern, 430 glyph, 162 att
 ribute, 140 glue_spec, 162 attribute_list, 4 action, 1 write nodes
-   avail lists: 1:6,2:23244,3:686,4:6069,5:804,6:6727,7:252,8:26,9:1239,10:412
+   avail lists: 1:6,2:23247,3:686,4:6070,5:804,6:6728,7:229,8:26,9:1239,10:412
  31992 multiletter control sequences out of 65536+600000
  42 fonts using 3238903 bytes
  54i,20n,59p,802b,1365s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1500,7 +1500,7 @@ i7.pfb><</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><</usr/s
 hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><</usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb><</usr/share/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy7.pfb>
-Output written on draft.pdf (15 pages, 169860 bytes).
+Output written on draft.pdf (15 pages, 169843 bytes).
 
 PDF statistics: 299 PDF objects out of 1000 (max. 8388607)
  242 compressed objects within 3 object streams
