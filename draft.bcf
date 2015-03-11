@@ -2409,6 +2409,7 @@
     <bcf:citekey order="22">lehman2006biblatex</bcf:citekey>
     <bcf:citekey order="23">leisch2003sweave</bcf:citekey>
     <bcf:citekey order="24">yihui2013knitr</bcf:citekey>
+    <bcf:citekey order="25">macfarlane2012pandoc</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="cms" type="entry" sortscheme="cms">
   <bcf:sorting>

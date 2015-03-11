@@ -247,6 +247,23 @@
       \field{pages}{105\bibrangedash 125}
       \keyw{Input--output tables}
     \endentry
+    \entry{macfarlane2012pandoc}{misc}{}
+      \name{labelname}{1}{}{%
+        {{uniquename=0,hash=5bf0b7d925a470916ef716a541a4d42b}{MacFarlane}{M\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=5bf0b7d925a470916ef716a541a4d42b}{MacFarlane}{M\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{5bf0b7d925a470916ef716a541a4d42b}
+      \strng{fullhash}{5bf0b7d925a470916ef716a541a4d42b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4203d16473bc940d4ac780773cb7c5dd}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labeltitle}{Pandoc: a universal document converter}
+      \field{title}{Pandoc: a universal document converter}
+      \field{year}{2012}
+    \endentry
     \entry{core2014r}{manual}{}
       \name{labelname}{1}{}{%
         {{uniquename=0,hash=a902f7a1275f47f57554b7ea75ccd0bc}{{R\bibnamedelimb Core\bibnamedelimb Team}}{R\bibinitperiod}{}{}{}{}{}{}}%

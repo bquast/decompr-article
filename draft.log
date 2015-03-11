@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.3.4)  10 MAR 2015 16:16
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/Arch Linux) (rev 4971)  (format=lualatex 2015.3.4)  11 MAR 2015 11:48
  restricted \write18 enabled.
 **draft.tex
 (./draft.tex
@@ -310,7 +310,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.044 seconds
+luaotfload | main : fontloader loaded in 0.042 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1479,7 +1479,7 @@ Package color Info: Redefining color shadecolor on input line 604.
  [12] [13] [14] [15](compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/ot
 f/lmmono10-regular.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/g
 eneric/fonts/otf/lmmono10-regular.luc)
-Overfull \hbox (10.53334pt too wide) in paragraph at lines 761--761
+Overfull \hbox (10.53334pt too wide) in paragraph at lines 763--763
 \EU2/lmr/m/n/10 Kurt Hornik, Friedrich Leisch, and Achim Zeileis. ISSN 1609-395
 X.
  []
@@ -1487,25 +1487,25 @@ X.
 (compiling luc: /var/lib/texmf/luatex-cache/generic/fonts/otf/lmromancaps10-regu
 lar.luc)(load luc: /home/bquast/.texlive/texmf-var/luatex-cache/generic/fonts/ot
 f/lmromancaps10-regular.luc) [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 762.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 764.
  [17]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 762.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 764.
  (./draft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 762.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 762.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 764.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 764.
 Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: 23EDD2003737BCFBFFBE75BC0D968860;692.
 Package logreq Info: Writing requests to 'draft.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 29207 strings out of 494694
+ 29211 strings out of 494694
  156469,1144653 words of node,token memory allocated
  8607 words of node memory still in use:
    288 hlist, 22 vlist, 11 rule, 36 math, 178 glue, 172 kern, 430 glyph, 162 att
 ribute, 141 glue_spec, 162 attribute_list, 2 action, 1 shape, 1 write nodes
-   avail lists: 1:5,2:21549,3:677,4:5881,5:687,6:6185,7:222,8:23,9:1235,10:359
- 32015 multiletter control sequences out of 65536+600000
+   avail lists: 1:5,2:21550,3:677,4:5881,5:687,6:6186,7:222,8:24,9:1235,10:359
+ 32018 multiletter control sequences out of 65536+600000
  64 fonts using 4929663 bytes
  54i,20n,59p,802b,1365s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/share/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/
@@ -1528,10 +1528,10 @@ ts/type1/public/amsfonts/cm/cmmi6.pfb><</usr/share/texmf-dist/fonts/type1/public
 r6.pfb><</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><</usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><</usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on draft.pdf (17 pages, 199715 bytes).
+Output written on draft.pdf (17 pages, 199921 bytes).
 
-PDF statistics: 348 PDF objects out of 1000 (max. 8388607)
- 271 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 131072)
+PDF statistics: 350 PDF objects out of 1000 (max. 8388607)
+ 273 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 131072)
  97 words of extra memory for PDF output out of 10000 (max. 10000000)
 
