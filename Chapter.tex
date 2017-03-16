@@ -1,0 +1,1425 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usepackage{iftex}
+\ifPDFTeX
+   \usepackage[utf8]{inputenc}
+   \usepackage[T1]{fontenc}
+   \usepackage{lmodern}
+\else
+   \ifXeTeX
+     \usepackage{xltxtra}
+   \else 
+     \usepackage{luatextra}
+   \fi
+   \defaultfontfeatures{Ligatures=TeX}
+\fi
+\usepackage{blindtext}
+
+
+\usepackage{rotating}
+\usepackage{adjustbox}
+\usepackage{mathtools}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{changepage}
+\usepackage{verbatim}
+\usepackage{epigraph}
+\usepackage{verbatim}
+\usepackage{lscape}
+\usepackage{pbox}
+\usepackage{array}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{caption}
+\usepackage{setspace}
+
+\newcolumntype{R}[2]{
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}
+    l
+    <{\egroup}
+}
+\newcommand*\rot{\multicolumn{1}{R{45}{1em}}}
+\newcommand*\rotnt{\multicolumn{1}{R{90}{1em}}}
+
+
+\graphicspath{{/Users/VK/Documents/Github/OECD-TiVA-LMIC-GVCs/misc/}}
+
+
+\linespread{1.3}
+
+\begin{document}
+
+\title{{\vspace{-2cm}
+\Huge \textbf{Chapter 1}}\\ From theory to practice: Implementing and applying new methodologies for GVC measurement\footnote{We would like to thank Jean-Louis Arcand, Richard Baldwin and Nicolas Berman for their invaluable advice and support. We are grateful to Aksel Erbahar, Stela Rub\'inov\'a, Daria Taglioni, Deborah Winkler, and Yuan Zi for their helpful comments and suggestions. We also thank seminar and conference participants at the World Investment Forum 2015, the OECD, WTO, and the Graduate Institute Geneva. This paper is written as part of a project supported by the Swiss National Science Foundation.}}
+\author{Victor Kummritz\footnotemark[2] \and Bastiaan Quast\footnotemark[2]\thanks{Graduate Institute of International and Development Studies. E-mail: victor.kummritz@graduateinstitute.ch; bastiaan.quast@graduateinstitute.ch.}}
+
+\maketitle
+
+\begin{abstract}
+\begin{singlespace}
+\noindent Global Value Chains (GVCs) have become a central unit of analysis in research on
+international trade. However, the complex matrix transformations at the basis of most
+GVC indicators still constitute a significant entry barrier to the field. The R
+package \emph{decompr} solves this problem by implementing algorithms for the analysis of GVCs as R procedures, thereby automating the underlying decomposition process. This article summarises the methodology of the algorithms, describes the format of the input and output data, and exemplifies the usefulness of package. Moreover, we apply \emph{decompr} to recent data with extended country coverage to analyse the integration patterns of developing economies. We provide evidence that trends in GVCs are increasingly driven by developing countries. In addition, we show that while per capita GDP does not predict the level of GVC integration, it determines the type of integration. High-income countries mainly export intermediates into GVCs and serve as markets of final demand. In contrast, developing economies join GVCs mostly in the assembly stage. However, there is evidence that these countries have begun to shift their participation from the production of final to intermediate goods, moving upstream in GVCs and out of assembly.
+\end{singlespace}
+\end{abstract}
+\noindent
+{\bf JEL-Classification:} F13, F14, F15, F63\\
+{\bf Keywords:} Global Value Chains, International Trade, Economic Development
+
+
+\cleardoublepage
+
+\section{Introduction}
+Global Value Chains (GVCs) describe the quickly expanding internationalisation of production networks. Most goods we use nowadays consist of parts that are sourced from different corners of the planet and are assembled across different continents. A popular example of this development is the iPhone, which requires inputs from numerous countries before being assembled in China. 
+
+For low- and middle-income countries, this development can offer a new path to industrialisation. As \citet{riba12} phrases it, internationally fragmented production allows these countries to join existing supply chains instead of building them. Connecting with firms from advanced nations allows developing nations to benefit from their counterparts' sophisticated technologies and know-how. In addition, relying on an existing production network frees them from constraints imposed by economies of scale and the increased specialisation that GVCs imply limits the negative impact of unproductive parts of the domestic supply chain. After all, when competition moves from goods to tasks, comparative advantage becomes much finer and does not require a broad range of productive stages domestically.
+
+Prospects like these have made GVCs a central topic in research on trade and development policy. However, analysing this phenomenon empirically requires complex matrix manipulations, since the relevant data is only available in the form of gross flows. In this paper, we present the new R package \textit{decompr} which enables researchers to easily derive standard and advanced GVC indicators for empirical analysis. In addition, we apply the package to a new dataset to get for the first time a deeper understanding of the GVC activities of low- and middle-income countries.
+
+The package uses Inter-Country Input-Output tables (ICIOs), such as those published by the OECD and WTO, the World Input Output Database \citep{mati12},  or national statistics bureaus, as input. These tables state supply and demand relationships in gross terms between industries within and across countries. For instance, ICIOs quantify the gross value of inputs that the Turkish textiles industry supplies to the German transport equipment industry. The problem of these tables is that they do not reveal how much of the value was added in the Turkish supplying industry, and how much of the value was added in previous stages of production performed by other industries or even countries.
+
+\textit{decompr} implements two procedures to solve this problem. Firstly, the Leontief decomposition \citep{wale36} reallocates the value of intermediate goods from the direct supplier to the original producers. In our example, the use of Argentinian agricultural produce (raw hides) is subtracted from the Turkish textile industry and added to the Argentinian agricultural industry. Secondly, the Wang-Wei-Zhu (henceforth WWZ) decomposition, based on the theoretical work of \citet{zhwaetal13}, goes a step further by not only revealing the source of the value added, but also breaking down exports into different categories according to final usage and destination. Thereby, it accounts for the rise in double counting of gross trade statistics that is a consequence of GVCs. This enables \citet{zhwaetal13} to derive measures of GVC length and intensity but also allows to investigate how individual countries are integrated into GVCs.
+
+Thus, we contribute to the recent literature on GVC measurement that has documented the expansion of GVCs. For instance, \citet{dahuetal98, dahuetal01} show in two early seminal contributions that GVCs are responsible for a major share of the total growth in trade among high-income economies from 1970 to 1990. Amongst others, \citet{gudaetal11}, \citet{rojoguno12a}, and \citet{ribajalo15} find that this growth in GVC trade has even accelerated in the recent two decades while \citet{prkoetal15} offer a first glance at the role that developing economies have played. Furthermore, this work has not only revealed the rapid rise in production fragmentation across borders but it has also re-evaluated important indicators of trade, such as bilateral trade imbalances and revealed comparative advantage showing that calculating GVC indicators is central to a better understanding of countries' trade patters and competitiveness.
+
+\citet{zhwaetal13}, jointly with the related work by \citet{rokoetal14}, provide a central step towards a more in-depth analysis of GVCs. However, their work as well as the previous contributions typically have one of two shortcomings. Firstly, most evidence is based on data from high-income countries. The reason is that reliable time-series of both national and international input-output tables have only been available for this subset of countries. Secondly, the evidence is regularly based on a small sample of GVC indicators that hide valuable information stemming from more decomposed and disaggregated indicators. 
+
+In this paper, we address these issues with the help of \textit{decompr} by applying the more detailed WWZ decomposition to a new set of Inter-Country Input-Output tables (ICIOs) with extensive country coverage provided by the OECD. The new ICIOs allow us to calculate new directed variants of GVC indicators and to get a better understanding of the GVC activities of low- and middle-income countries. The new decomposition allows us to zoom in more closely at these activities revealing information not available from the standard GVC indicators used so far.
+
+Our analysis confirms the expansion of GVCs in recent years and presents evidence that GVCs have become longer over time. Interestingly, we find that these developments are increasingly driven by low- and middle-income countries while the integration of high-income countries has begun to even out at a high level. In addition, our new and more disaggregated WWZ indicators reveal central differences in the type of GVC integration of advanced and developing economies. While we confirm previous findings that per capita GDP is not a good predictor for the level of GVC integration, we observe that high-income countries typically are the starting and end points of GVCs. They provide upstream inputs into the GVC and then serve eventually as final demand markets. Low- and middle-income countries, on the other hand, are more specialised in downstream activities such as assembly and export typically less domestic value added. However, we observe that developing economies have begun to move out of pure assembly occupying a wider set of stages. This should allow them to generate more gains from GVC participation as they continue to upgrade along the value chain.
+
+\Cref{sec:data} introduces the package, the data as it is used by the package, and two example data sets, after which \cref{sec:leontief,sec:wwz} summarise the theoretical derivations for the two decompositions, and show how these can be performed in R using \textit{decompr}. \Cref{sec:application} presents the results of the application of \textit{decompr} to the newly available OECD ICIOs. We conclude in \cref{sec:conclusion} with a discussion of potential uses and further developments of GVC research.
+
+\section{Package Details and Data}
+\label{sec:data}
+The \textit{decompr} package implements the algorithms for the Leontief and WWZ decompositions as R procedures and provides example data sets. The R procedures are implemented as functions which are listed below.
+
+\begin{itemize}
+ \item \verb!load_tables_vectors!; transforms the input objects to an object used for the decompositions (class: \textit{decompr})
+ \item \verb!leontief!; takes a \textit{decompr} object and applies the Leontief decomposition using gross exports
+ \item \verb!wwz!; takes a \textit{decompr} object and applies the Wang-Wei-Zhu decomposition
+ \item \verb!leontief_output!; takes a \textit{decompr} object and applies the Leontief decomposition using final output
+ \item \verb!decomp!; a wrapper function which integrates the use of \verb!load_tables_vectors! with the various decompositions, using an argument \textit{method} to specify the desired decomposition (default \verb!leontief!) 
+\end{itemize}
+
+For legacy purposes, several depracated functions / methods are available under their original names.
+In addition to this, two example data sets are included.
+
+\begin{itemize}
+  \item \textit{World Input-Output Database} \citep{mati12}
+  \item \textit{Leather}; a fictional three-country, three-industry data set
+\end{itemize}
+
+Trade flow analysis often involves studying the development of a certain variable (set) over time, thus taking the panel form. However, at the decomposition level, the panel dimension is essentially a repeated cross-section.
+Therefore, as a design decision, the time dimension is not implemented in the package itself. Instead, we provide examples of how this repetition can be implemented using a \verb!for-loop!.
+
+The two data sets included in the package, one real world data set and one minimal data set for demonstration purposes, are the WIOD regional Inter-Country Input Output tables for the year 2011 \citep{mati12} and a fictional 3-country 3-industry data set, which we will use throughout this article to demonstrate the usage and advantages of the \textit{decompr} package. The fictional dataset is based on our example with Argentina, Turkey, and Germany.
+
+This data is set up in order to illustrate the benefits of the decompositions. We do this by following the flows of intermediate goods through this fictional GVC and by showing how the readily available gross trade flows differ from the decomposed value added flows.
+To this end, we construct the elements of the input-output tables such that we have two countries and two industries that focus on upstream tasks,  which means they focus on supplying other industries, and one country and industry that is specialised in downstream tasks, i.e.~it serves mainly final demand. In our example the upstream industries are Agriculture and Textiles while the downstream industry is Transport Equipment.
+Similarly, Argentina and Turkey represent upstream countries with Germany being located downstream within this specific value chain (see \cref{tab:leather}).
+
+\begin{sidewaystable}
+\scriptsize
+  \caption{Example Input-Output Table: "Leather"}
+  \label{tab:leather}
+  \begin{tabular}{llrrrrrrrrrrrrrr}
+  \hline
+         & & \multicolumn{3}{c}{Argentina} & \multicolumn{3}{c}{Turkey} & \multicolumn{3}{c}{Germany} & \multicolumn{3}{c}{Final Demand} & Output \\
+\hline
+Country & Industry & \rotnt{\pbox{4cm}{\vspace{0.2cm}Agriculture}} & \rotnt{\pbox{4cm}{\vspace{-0.1cm}Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{\vspace{0.2cm}Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{\pbox{4cm}{\vspace{0.2cm}Agriculture}} & \rotnt{\pbox{4cm}{Textile and\\ Leather}} & \rotnt{\pbox{4cm}{Transport\\ Equipment}} & \rotnt{Argentina} & \rotnt{Turkey} & \rotnt{Germany} \\
+\hline
+Argentina & Agriculture & 16.1 & 5.1 & 1.8 & 3.2 & 4.3 & 0.4 & 3.1 & 2.8 & 4.9 & 21.5 & 6.1 & 8.4 & 77.7 \\ 
+Argentina & Textile.and.Leather & 2.4 & 8.0 & 3.2 & 0.1 & 3.2 & 1.6 & 1.2 & 3.9 & 11.5 & 16.2 & 1.9 & 5.1 & 58.3 \\ 
+Argentina & Transport.Equipment & 0.9 & 0.5 & 4.0 & 0.0 & 0.1 & 0.3 & 0.0 & 0.4 & 0.5 & 11 & 0.5 & 0.8 & 19.0 \\ 
+Turkey & Agriculture & 1.1 & 1.9 & 0.2 & 18.0 & 13.2 & 6.1 & 9.0 & 3.1 & 8.9 & 7.5 & 29.5 & 14.2 & 112.7 \\ 
+Turkey & Textile.and.Leather & 0.3 & 2.8 & 0.1 & 6.1 & 28.1 & 6.3 & 2.1 & 2.5 & 25.6 & 8.9 & 24.9 & 16.9 & 124.6 \\ 
+Turkey & Transport.Equipment & 0.0 & 0.1 & 0.3 & 4.1 & 3.2 & 8.9 & 0.2 & 0.0 & 1.8 & 1.2 & 18.5 & 4.9 & 43.2 \\ 
+Germany & Agriculture & 1.2 & 4.2 & 0.3 & 4.1 & 1.2 & 0.6 & 29.0 & 19.5 & 17.9 & 9.2 & 17.9 & 51.2 & 156.3 \\ 
+Germany & Textile.and.Leather & 1.3 & 1.1 & 0.0 & 3.2 & 4.8 & 2.6 & 5.1 & 29.1 & 24.1 & 7.9 & 10.1 & 38.5 & 127.8 \\ 
+Germany & Transport.Equipment & 2.1 & 1.4 & 3.0 & 4.1 & 3.1 & 3.9 & 11.3 & 8.1 & 51.3 & 25.1 & 35.2 & 68.4 & 217.0 \\ 
+   \hline
+\end{tabular}
+\end{sidewaystable}
+
+To get started, it is necessary to load the package and import the data.\footnote{We provide throughout the text short examples on how the individual steps that we describe translate into R commands.} To allow for a maximum flexibility of the package, the input-output tables need to be split into five components; a vector with the countries included in the ICIO, a vector with the industries included, a vector with the output values of the country-industry pairs, and two matrices giving the intermediate and final demand flows respectively. The reason behind this is that different ICIOs use slightly different structures which prevent an automated reading of the whole table into R.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# load the package}
+\hlkwd{library}\hlstd{(decompr)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# load the data}
+\hlkwd{data}\hlstd{(leather)}
+
+\hlcom{# list the objects in the data set}
+\hlkwd{ls}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "countries"  "final"      "industries" "inter"      "out"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+The first step of the analytical process is to load the input object and create a \textit{decompr} class object, which contains the data structures for the decompositions. This step is not needed when using the \verb!decomp! wrapper function but more on this later.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# create the \textit{decompr} object}
+\hlstd{decompr_object} \hlkwb{<-} \hlkwd{load_tables_vectors}\hlstd{(} \hlkwc{x} \hlstd{= inter,}
+                                       \hlkwc{y} \hlstd{= final,}
+                                       \hlkwc{k} \hlstd{= countries,}
+                                       \hlkwc{i} \hlstd{= industries,}
+                                       \hlkwc{o} \hlstd{= out        )}
+
+\hlcom{# inspect the content of the \textit{decompr} object}
+\hlkwd{ls}\hlstd{(decompr_object)}
+\end{alltt}
+\begin{verbatim}
+##  [1] "A"         "Ad"        "Am"        "B"         "Bd"       
+##  [6] "bigrownam" "Bm"        "E"         "Efd"       "Eint"     
+## [11] "ESR"       "Exp"       "G"         "GN"        "k"        
+## [16] "L"         "N"         "rownam"    "tot"       "Vc"       
+## [21] "Vhat"      "X"         "Y"         "Yd"        "Ym"       
+## [26] "z"         "z01"       "z02"       "z1"        "z2"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+As can be seen above, a \textit{decompr} class object is in fact a list containing thirty different objects. For example, \textit{Eint} is an object that collects the intermediate goods exports of the industries, while \textit{Y} refers to the final demand that the industries supply. Depending on the choice of the decomposition, all or some of these objects are used. This will become clearer when we discuss the decompositions in the following two sections.
+
+
+\section{Leontief decomposition}
+\label{sec:leontief}
+We now turn to the algorithms, starting with the Leontief decomposition. 
+We shortly describe the theoretical derivation of the method to expose the internal steps of the \textit{decompr} package. 
+Afterwards, we turn to the technical implementation and, finally, we describe the output.
+
+\subsection{Theoretical derivation}
+The tools to derive the Leontief decomposition date back to \citet{wale36} who showed that, with a set of simple transformations, national Input-Output tables based on gross terms give the approximated value added flows between industries. The idea behind this insight is that the production of industry \textit{i}'s output requires three inputs: intermediates of \textit{i}, intermediates of other industries, and \textit{i}'s own value added. The latter is the direct contribution of \textit{i}'s output to domestic value added. The former two refer to the first round of \textit{i}'s indirect contribution to domestic value added since the inputs that \textit{i} requires for its own production trigger the creation of value added in the supplying industries. As supplying industries usually depend on inputs from other industries as well, this sets in motion a second round of indirect value added creation in the supplying industries of the suppliers, which is also caused by \textit{i}'s production. This process continues with each new round creating smaller indirect contributions until eventually all intermediates are fully decomposed and the value added is traced back to the original suppliers. Mathematically, the process can be expressed as: 
+
+\begin{equation}
+VB = V + VA + VAA + VAAA + ... = V (I+A+A^{2}+A^{3}+...),
+\end{equation}
+where \textit{V} is a $N x N$ matrix with the diagonal elements being the direct value added contribution of $N$ industries, \textit{A} is the Input-Output coefficient matrix with dimension $N x N$, i.e. it gives the input flows between industries required for 1\$ of output. Hence, \emph{VA} gives the first round of indirect value contributions and is calculated by pre-multiplying the value of the supplied intermediates with the share of value added in output of the supplying industries. \emph{VAA} then accounts for the value added created by $i$'s output in the industries supplying its suppliers and so on.
+As an infinite geometric series with the elements of $A<1$, this simplifies to
+\begin{equation}
+VB = V (I-A)^{-1},
+\end{equation}
+ where $B = (I-A)^{-1}$ is the so called Leontief inverse. \textit{VB} gives thus a $N x N$ matrix of value added multipliers, which denote the amount of value added that the production of an industry's 1\$ of output or exports brings about in all other industries.
+Similarly, looking from the perspective of the supplying industries, the matrix gives the value added that they contribute to the using industry's production. If we multiply it with a $N x N$ matrix whose diagonal specifies each industry's total output or exports, we get value added origins as absolute values instead of shares.
+
+The application of the Leontief insight to ICIOs as opposed to national Input-Output tables for our Leontief decomposition is straightforward. \textit{V} refers now to a matrix of direct value added contributions of all industries across the different countries.  Its dimension is correspondingly $GN x GN$, where $G$ is the number of countries. \textit{A} is now of dimension $GN x GN$ and gives the industry flows including cross border relationships. Since we are interested in the value added origins of exports we multiply these two matrices with a $GN x GN$ matrix whose diagonal we fill with each industry's exports, $E$, such that the basic equation behind the Leontief decomposition is given by $V(I-A)^{-1}E$. \footnote{When using the leontief\_output function, the value added multiplier is instead multiplied with each industry's output.} In a simple example with two countries (\textit{k} and \textit{l}) and industries (\textit{i} and \textit{j}) we can zoom in to see the matrices' content:
+
+\begin{align}
+\begin{split}
+V (I- A )^{-1} E
+&=
+\begin{pmatrix}
+v_{k}^{i}& 0& 0& 0\\
+0& v_{k}^{j}& 0& 0\\
+0& 0& v_{l}^{i}& 0\\
+0& 0& 0& v_{l}^{j}
+\end{pmatrix}
+*
+\begin{pmatrix}
+b_{kk}^{ii}& b_{kk}^{ij}& b_{kl}^{ii}& b_{kl}^{ij}\\
+b_{kk}^{ji}& b_{kk}^{jj}& b_{kl}^{ji}& b_{kl}^{jj}\\
+b_{lk}^{ii}& b_{lk}^{ij}& b_{ll}^{ii}& b_{ll}^{ij}\\
+b_{lk}^{ji}& b_{lk}^{jj}& b_{ll}^{ji}& b_{ll}^{jj}
+\end{pmatrix}\\
+&*
+\begin{pmatrix}
+e_{k}^{i}& 0& 0& 0\\
+0& e_{k}^{j}& 0& 0\\
+0& 0& e_{l}^{i}& 0\\
+0& 0& 0& e_{l}^{j}
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+v_{k}^{i}b_{kk}^{ii}e_{k}^{i}& v_{k}^{i} b_{kk}^{ij}e_{k}^{j}& v_{k}^{i}b_{kl}^{ii}e_{l}^{i}& v_{k}^{i}b_{kl}^{ij}e_{l}^{j}\\
+v_{k}^{j}b_{kk}^{ji}e_{k}^{i}& v_{k}^{j}b_{kk}^{jj}e_{k}^{j}& v_{k}^{j}b_{kl}^{ji}e_{l}^{i}& v_{k}^{j}b_{kl}^{jj}e_{l}^{j}\\
+v_{l}^{i}b_{lk}^{ii}e_{k}^{i}& v_{l}^{i}b_{lk}^{ij}e_{k}^{j}& v_{l}^{i}b_{ll}^{ii}e_{l}^{i}& v_{l}^{i}b_{ll}^{ij}e_{l}^{j}\\
+v_{l}^{j}b_{lk}^{ji}e_{k}^{i}& v_{l}^{j}b_{lk}^{jj}e_{k}^{j}& v_{l}^{j}b_{ll}^{ji}e_{l}^{i}& v_{l}^{j}b_{ll}^{jj}e_{l}^{j}
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+vae_{kk}^{ii}& vae_{kk}^{ij}& vae_{kl}^{ii}& vae_{kl}^{ij}\\
+vae_{kk}^{ji}& vae_{kk}^{jj}& vae_{kl}^{ji}& vae_{kl}^{jj}\\
+vae_{lk}^{ii}& vae_{lk}^{ij}& vae_{ll}^{ii}& vae_{ll}^{ij}\\
+vae_{lk}^{ji}& vae_{lk}^{jj}& vae_{ll}^{ji}& vae_{ll}^{jj}
+\end{pmatrix}
+\end{split}
+\end{align}
+\begin{align*}
+&v_{c}^{s} = \frac{va_{c}^{s}}{y_{c}^{s}} = 1 - a_{kc}^{is} - a_{kc}^{js} - a_{lc}^{js} - a_{lc}^{is} \hspace{2cm} (c \in k,l \hspace{.5cm} s \in i,j),\\
+&\begin{pmatrix}
+b_{kk}^{ii}& b_{kk}^{ij}& b_{kl}^{ii}& b_{kl}^{ij}\\
+b_{kk}^{ji}& b_{kk}^{jj}& b_{kl}^{ji}& b_{kl}^{jj}\\
+b_{lk}^{ii}& b_{lk}^{ij}& b_{ll}^{ii}& b_{ll}^{ij}\\
+b_{lk}^{ji}& b_{lk}^{jj}& b_{ll}^{ji}& b_{ll}^{jj}
+\end{pmatrix}
+=
+\begin{pmatrix}
+1-a_{kk}^{ii}& -a_{kk}^{ij}& -a_{kl}^{ii}& -a_{kl}^{ij}\\
+-a_{kk}^{ji}& 1-a_{kk}^{jj}& -a_{kl}^{ji}& -a_{kl}^{jj}\\
+-a_{lk}^{ii}& -a_{lk}^{ij}& 1-a_{ll}^{ii}& -a_{ll}^{ij}\\
+-a_{lk}^{ji}& -a_{lk}^{jj}& -a_{ll}^{ji}& 1-a_{ll}^{jj}
+\end{pmatrix}^{-1},
+\end{align*}
+and
+\begin{equation*}
+a_{cf}^{su} = \frac{inp_{cf}^{su}}{y_{f}^{u}}  \hspace{2cm} (c,f \in k,l \hspace{.5cm} s,u \in i,j),
+\end{equation*}
+where \(v_{s}^{c}\) gives the share of industry \emph{s}'s value added, \(va_{s}^{c},\) in output, \(y_{s}^{c}\), and \(e_{k}^{i}\) indicates gross exports. Finally, \(a_{su}^{cf}\) denotes the share of inputs, \(inp_{su}^{cf}\), in output.
+The elements of the $V(I-A)^{-1}E$ or $vae$ matrix are our estimates for the country-industry level value added
+origins of each country-industry's exports.
+\textit{decompr} implements this algorithm into R to automate the process of deriving the matrix. 
+Equipped with it, researchers can calculate standard GVC indicators.
+Examples include \citet{rojoguno12b}'s so-called VAX ratio and \citet{dahuetal01}'s Vertical Specialisation ratio at the industry-level using the \verb!vertical_specialisation! function, 
+which sums for each country and industry across the value added of all foreign countries and industries. For section \ref{sec:application} we calculate, for instance, a novel directed variant of this measure that uses only foreign value added supplied by developing economies, thus making use of the extended country coverage of the OECD ICIOs.
+Alternatively, the four dimensions of the matrix (source country, source industry, using country, using industry) allow for industry-level gravity-type estimations of value added trade flows.
+
+\subsection{Implentation}
+As described, in \cref{sec:data}, the first step of our analytical process is to construct a \textit{decompr} object using the \verb!load_tables_vectors! function. After this, we can use the \verb!leontief! function to apply the Leontief decomposition.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lt} \hlkwb{<-} \hlkwd{leontief}\hlstd{( \textit{decompr}_object )}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+In addition, a wrapper function called \verb!decomp! is provided which integrates both elements of the workflow into a single function. We recommend that the atomic functions be used for large data sets, however, for small data sets this is an easy way to derive the results immediately. The \verb!decomp! function requires a method to be specified (see \verb!help("decomp")! for details), if none is provided, the function will default to \verb!leontief!.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lt2} \hlkwb{<-} \hlkwd{decomp}\hlstd{(} \hlkwc{x} \hlstd{= inter,}
+               \hlkwc{y} \hlstd{= final,}
+               \hlkwc{k} \hlstd{= countries,}
+               \hlkwc{i} \hlstd{= industries,}
+               \hlkwc{o} \hlstd{= out,}
+               \hlkwc{method} \hlstd{=} \hlstr{"leontief"} \hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Note that the output produced by these two different processes is identical.
+
+\subsection{Output}
+We can now analyse the output of the Leontief decomposition, which consists of a $GNxGN$ matrix that gives for each country and industry the
+value added origins of its exports by country and industry.
+To this end, we look at the results of the Leontief decomposition for our example data set (\Cref{tab:leon}).
+In the first column we find the source countries and industries while the first row contains the using countries and industries. Therefore, the first element, $28.52$, gives the amount of value added that the Argentinian Agriculture industry has contributed to the exports of the Argentinian Agriculture industry. Similarly, the last element of this row, $4.12$, gives the amount of value added that the Argentinian Agriculture industry has contributed 
+to the exports of the German Transport Equipment industry.
+
+\begin{sidewaystable}
+\scriptsize
+
+  \caption{Non-decomposed Values}
+  \label{tab:noleon}
+  \begin{tabular}{lrrrrrrrrr}
+    \hline
+         & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
+          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
+          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+    \hline
+    Argentina.Agriculture & 6.88  & 2.49  & 0.25  & 1.30  & 2.04  & 0.08  & 0.77  & 0.68  & 1.76 \\
+    Argentina.Textile.and.Leather & 1.03  & 3.91  & 0.44  & 0.04  & 1.52  & 0.31  & 0.30  & 0.95  & 4.13 \\
+    Argentina.Transport.Equipment & 0.38  & 0.24  & 0.55  & 0.00  & 0.05  & 0.06  & 0.00  & 0.10  & 0.18 \\
+    Turkey.Agriculture & 0.47  & 0.93  & 0.03  & 7.33  & 6.27  & 1.20  & 2.23  & 0.75  & 3.19 \\
+    Turkey.Textile.and.Leather & 0.13  & 1.37  & 0.01  & 2.48  & 13.35 & 1.24  & 0.52  & 0.61  & 9.19 \\
+    Turkey.Transport.Equipment & 0.00  & 0.05  & 0.04  & 1.67  & 1.52  & 1.75  & 0.05  & 0.00  & 0.65 \\
+    Germany.Agriculture & 0.51  & 2.05  & 0.04  & 1.67  & 0.57  & 0.12  & 7.18  & 4.73  & 6.43 \\
+    Germany.Textile.and.Leather & 0.56  & 0.54  & 0.00  & 1.30  & 2.28  & 0.51  & 1.26  & 7.06  & 8.65 \\
+    Germany.Transport.Equipment & 0.90  & 0.68  & 0.41  & 1.67  & 1.47  & 0.77  & 2.80  & 1.96  & 18.42 \\
+    \hline
+    \end{tabular}
+
+\bigskip \bigskip \bigskip
+
+  \caption{Leontief Decomposition}
+  \label{tab:leon}
+  \begin{tabular}{lrrrrrrrrr}
+    \hline
+          & Argentina. & Argentina. & Argentina. & Turkey. & Turkey. & Turkey. & Germany. & Germany. & Germany.\\
+          & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport. & Agriculture & Textile.and. & Transport.\\
+          & & Leather & Equipment & & Leather & Equipment & & Leather & Equipment\\
+    \hline
+    Argentina.Agriculture & 28.52 & 2.79  & 0.36  & 1.81  & 3.12  & 0.36  & 1.24  & 1.30  & 4.12 \\
+    Argentina.Textile.and.Leather & 1.06  & 19.12 & 0.42  & 0.48  & 1.83  & 0.43  & 0.59  & 1.15  & 4.75 \\
+    Argentina.Transport.Equipment & 0.21  & 0.14  & 1.06  & 0.03  & 0.08  & 0.04  & 0.02  & 0.07  & 0.19 \\
+    Turkey.Agriculture & 0.72  & 1.34  & 0.12  & 34.93 & 7.00  & 1.48  & 2.55  & 1.52  & 6.18 \\
+    Turkey.Textile.and.Leather & 0.41  & 1.39  & 0.12  & 2.69  & 40.17 & 1.32  & 1.11  & 1.15  & 9.51 \\
+    Turkey.Transport.Equipment & 0.03  & 0.09  & 0.03  & 0.81  & 0.91  & 3.16  & 0.12  & 0.07  & 0.65 \\
+    Germany.Agriculture & 0.93  & 2.25  & 0.16  & 2.31  & 2.06  & 0.51  & 29.88 & 5.25  & 9.60 \\
+    Germany.Textile.and.Leather & 0.65  & 0.73  & 0.08  & 1.54  & 2.55  & 0.63  & 1.46  & 18.96 & 8.16 \\
+    Germany.Transport.Equipment & 0.67  & 0.65  & 0.26  & 1.29  & 1.49  & 0.57  & 1.73  & 1.51  & 34.74 \\
+    \hline
+    \end{tabular}
+\end{sidewaystable}
+
+
+A key advantage of the decomposition becomes clear when we compare the decomposed values with the intermediate trade values of the non-decomposed IO table when multiplied with the exports over output ratio to create comparability (\Cref{tab:noleon}).
+We see for instance that Argentina's Agriculture industry contributes significantly more value added to the German Transport Equipment industry than suggested by the non-decomposed IO table. The reason is that Argentina's Agriculture industry is an important supplier to Turkey's Textile and Leather industry which is in turn an important supplier for the German Transport Equipment industry. The decomposition thus allows us to see how the value added flows along this Global Value Chain and correctly identifies cross-country linkages.
+
+We can also take a look at specific industries. For instance, we find that the non-decomposed values of the Transport Equipment industry are for many elements larger than the value added elements while the opposite holds for Agriculture. This emphasises the fact that Transport Equipment is a downstream industry that produces mostly final goods. Agriculture, on the other hand, qualifies as an upstream industry that produces many intermediate goods so that its value added in other industries is typically large.
+
+Finally let's consider the countries of our specific example. We see that Germany has more instances in which the non-decomposed values are above the value added flows than Argentina and Turkey combined.
+Along the lines of the industry analysis, this shows that Germany focuses within this GVC on downstream tasks producing mostly final goods that contain value added from countries located more upstream. In our example these are Turkey and Argentina.
+
+
+\section{Wang-Wei-Zhu decomposition}
+\label{sec:wwz}
+The Wang-Wei-Zhu decomposition builds upon the Leontief insight but uses, in addition, further valuable information provided in ICIOs.
+More specifically, the Leontief decomposition traces the value added back to where it originates but ICIOs also contain data on how the value added is subsequently used.
+This information is extracted by the Wang-Wei-Zhu decomposition, 
+which thereby allows a much more detailed look at the structures of international production networks and the respective positions of countries and industries within them.
+
+\subsection{Theoretical derivation}
+
+The derivation of the Wang-Wei-Zhu decomposition is significantly more technical than the Leontief decomposition since it splits gross exports up more finely. This is why we present here only the final equation for a two country one industry model (equation 22 in WWZ) and refer the interested reader to the original paper by \citet{zhwaetal13}. The key idea is to use the Leontief insight and extend it using additional information from ICIOs on the final usage and destination of the exports (e.g. re-imported vs. absorbed abroad). Equation 22 is given by:
+\begin{align}
+\label{eq:wwz}
+\begin{split}
+E^{kl}
+= &\left(V^k B^{kk} \right)^T * F^{kl} 
++ \left(V^k L^{kk} \right)^T * \left(A^{kl} B^{ll} F^{ll} \right)\\
++& \left(V^k L^{kk} \right)^T * (A^{kl} \sum_{t \neq k,l}^G  B^{lt} F^{tt} )
++ \left(V^k L^{kk} \right)^T *  (A^{kl} B^{ll} \sum_{t \neq k,l}^G  F^{lt} )\\ 
++&  \left(V^k L^{kk} \right)^T * (A^{kl} \sum_{t \neq k}^G \sum_{l,u \neq k,t}^G B^{lt} F^{tu} )
++ \left(V^k L^{kk} \right)^T * \left(A^{kl} B^{ll} F^{lk} \right)\\
++& \left(V^k L^{kk} \right)^T * (A^{kl} \sum_{t \neq k,l}^G  B^{lt} F^{tk} )
++ \left(V^k L^{kk} \right)^T * \left(A^{kl} B^{lk} F^{kk} \right) \\
++& \left(V^k L^{kk} \right)^T * (A^{kl} \sum_{t \neq k}^G  B^{lk} F^{kt} )
++ \left(V^k B^{kk} -  V^k L^{kk} \right)^T * \left(A^{kl} X^{l}  \right)\\
++& \left(V^l B^{lk} \right)^T * F^{kl}
++ \left(V^l B^{lk} \right)^T *  \left(A^{kl} L^{ll} F^{ll} \right)
++ \left(V^l B^{lk} \right)^T \\
+*&  \left(A^{kl} L^{ll} E^{l*} \right) + (\sum_{t \neq k,l}^G  V^{t} B^{tk} )^{T} * F^{kl}
++ (\sum_{t \neq k,l}^G  V^{t} B^{tk} )^{T}\\
+*&   \left(A^{kl} L^{ll} F^{ll} \right) + (\sum_{t \neq k,l}^G  V^{t} B^{tk} )^{T} *  \left(A^{kl} L^{ll} E^{l*} \right) ,
+\end{split}
+\end{align}
+where $F^{kl}$ is the final demand in $l$ for goods of $k$, $L^{ll}$ refers to the national Leontief inverse as opposed to the Inter-Country inverse $B$, and \textit{T} indicates a matrix transpose operation. As can be seen from equation (\ref{eq:wwz}), the Wang-Wei-Zhu decomposition splits gross exports into 16 linear terms with four main categories which are further divided according to their final destination. The final decomposition is given by:
+\begin{itemize}
+\item Domestic value added absorbed abroad (\textit{vax\_g}, T1-5)
+\begin{itemize}
+\item Domestic value added in final exports (\textit{dva\_fin}, T1)
+\item Domestic value added in intermediate exports (\textit{dva\_intt}, T2-5)
+\begin{itemize}
+\item Domestic value added in intermediate exports absorbed by direct importers (\textit{dva\_int}, T2)
+\item Domestic value added in intermediate exports re-exported to third countries (\textit{dva\_intrex}, T3-5)
+\begin{itemize}
+\item Domestic value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods (\textit{dva\_intrexi1}, T3)
+\item Domestic value added in intermediate exports re-exported to third countries as  final goods (\textit{dva\_intrexf}, T4)
+\item Domestic value added in intermediate exports re-exported to third countries as intermediate goods to produce exports (\textit{dva\_intrexi2}, T5)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\item Domestic value added returning home (\textit{rdv}, T6-8)
+\begin{itemize}
+\item Domestic value added returning home as final goods (\textit{rdv\_fin}, T6)
+\item Domestic value added returning home as final goods through third countries (\textit{rdv\_fin2}, T7)
+\item Domestic value added returning home as intermediate goods (\textit{rdv\_int}, T8)
+\end{itemize}
+\item Foreign value added (\textit{fva}, T11-12/14-15 )
+\begin{itemize}
+\item Foreign value added in final good exports (\textit{fva\_fin}, T11/14)
+\begin{itemize}
+\item Foreign value added in final good exports sourced from direct importer (\textit{mva\_fin}, T11)
+\item Foreign value added in final good exports sourced from other countries (\textit{ova\_fin}, T14)
+\end{itemize}
+\item Foreign value added in intermediate good exports (\textit{fva\_int}, T12/15)
+\begin{itemize}
+\item Foreign value added in intermediate good exports sourced from direct importer (\textit{mva\_int}, T12)
+\item Foreign value added in intermediate good exports sourced from other countries(\textit{ova\_int}, T15)
+\end{itemize}
+\end{itemize}
+\item Pure double counting (\textit{pdc}, T9-10/13/16)
+\begin{itemize}
+\item Pure double counting from domestic source (\textit{ddc}, T9-10)
+\begin{itemize}
+\item Due to final goods exports production (\textit{ddf}, T9)
+\item Due to intermediate goods exports production (\textit{ddi}, T10)
+\end{itemize}
+\item Pure double counting from foreign source (\textit{fdc}, T13/16)
+\begin{itemize}
+\item Due to direct importer exports production (\textit{fdf}, T13)
+\item Due to other countries' exports production (\textit{fdi}, T16)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+The higher resolution of the WWZ decomposition comes at the cost of a lower dimension (source country, using country, using industry) since the current, highly aggregated, ICIOs render a four-dimensional decomposition unfeasible.
+This means that the two methods are complementary and imply a trade-off between detail and disaggregation.
+
+\subsection{Implementation}
+As with the \verb!leontief! function, 
+the \verb!wwz! function also takes a \textit{decompr} class object as its input, 
+the procedure for this is described in \cref{sec:data}.
+After having created this \textit{decompr} object, 
+we can apply the Wang-Wei-Zhu decomposition using the \verb!wwz! function.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{w} \hlkwb{<-} \hlkwd{wwz}\hlstd{(decompr_object)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Furthermore, it is also possible to derive the results of the Wang-Wei-Zhu decomposition directly, using the \verb!decomp! function.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{w2} \hlkwb{<-}  \hlkwd{decomp}\hlstd{(} \hlkwc{x} \hlstd{= inter,}
+               \hlkwc{y} \hlstd{= final,}
+               \hlkwc{k} \hlstd{= countries,}
+               \hlkwc{i} \hlstd{= industries,}
+               \hlkwc{o} \hlstd{= out,}
+               \hlkwc{method} \hlstd{=} \hlstr{"wwz"} \hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Both these processes will yield the same results.
+
+\subsection{Output}
+The output when using the WWZ algorithm is a matrix with dimensions $GNGx19$, 
+whereby 19 consists of the 16 objects the WWZ algorithm decomposes exports into, plus three checksums. 
+$GNG$ represents source country, source industry and using country whereas these terms are slightly ambiguous here due to the complex nature of the decomposition. 
+More specifically, the using country can also be the origin of the foreign value added in the exports of the source country to the using country (see for example T11 and T12). 
+Therefore we use the terms exporter, exporting industry, and importer instead. 
+This becomes much clearer when we take a look at specific examples.
+
+\begin{sidewaystable}[htbp]\scriptsize
+  \centering
+  \caption{WWZ Decomposition}
+    \label{tab:wwz}
+    \begin{tabular}{lrrrrrrrrrrrrrrrr}
+    \toprule
+    exporter.exportingind.importer & \rot{dva\_fin} & \rot{dva\_int} & \rot{dva\_intrexI1} & \rot{dva\_intrexF} & \rot{dva\_intrexI2} & \rot{rdv\_int} & \rot{rdv\_fin} & \rot{rdv\_fin2} & \rot{ova\_fin} & \rot{mva\_fin} & \rot{ova\_int} & \rot{mva\_int} & \rot{ddc\_fin} & \rot{ddc\_int} & \rot{odc} & \rot{mdc}\\
+    \midrule
+  Argentina.Agriculture.Argentina & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Argentina.Agriculture.Turkey & 5.47  & 2.68  & 1.14  & 1.41  & 0.50  & 0.17  & 0.71  & 0.35  & 0.41  & 0.21  & 0.20  & 0.10  & 0.06  & 0.07  & 0.34  & 0.18 \\
+    Argentina.Agriculture.Germany & 7.54  & 5.11  & 0.41  & 2.07  & 0.18  & 0.24  & 1.41  & 0.08  & 0.30  & 0.57  & 0.19  & 0.37  & 0.09  & 0.10  & 0.18  & 0.35 \\
+    sub.TOTAL & 13.01 & 7.79  & 1.55  & 3.48  & 0.69  & 0.41  & 2.11  & 0.43  & 0.71  & 0.78  & 0.39  & 0.48  & 0.15  & 0.17  & 0.52  & 0.53 \\
+    Argentina.Textile.and.Leather.Argentina & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Argentina.Textile.and.Leather.Turkey & 1.47  & 1.61  & 0.52  & 0.74  & 0.24  & 0.08  & 0.33  & 0.17  & 0.24  & 0.19  & 0.26  & 0.20  & 0.03  & 0.08  & 0.36  & 0.28 \\
+    Argentina.Textile.and.Leather.Germany & 3.95  & 6.45  & 0.54  & 2.82  & 0.24  & 0.32  & 1.98  & 0.11  & 0.50  & 0.65  & 0.81  & 1.05  & 0.11  & 0.28  & 0.83  & 1.07 \\
+    sub.TOTAL & 5.42  & 8.06  & 1.06  & 3.56  & 0.48  & 0.40  & 2.32  & 0.27  & 0.75  & 0.84  & 1.07  & 1.25  & 0.13  & 0.37  & 1.19  & 1.35 \\
+    Argentina.Transport.Equipment.Argentina & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Argentina.Transport.Equipment.Turkey & 0.35  & 0.15  & 0.03  & 0.05  & 0.01  & 0.00  & 0.02  & 0.01  & 0.10  & 0.05  & 0.04  & 0.02  & 0.00  & 0.01  & 0.04  & 0.02 \\
+    Argentina.Transport.Equipment.Germany & 0.57  & 0.32  & 0.03  & 0.13  & 0.01  & 0.01  & 0.09  & 0.01  & 0.08  & 0.15  & 0.05  & 0.09  & 0.01  & 0.03  & 0.04  & 0.09 \\
+    sub.TOTAL & 0.92  & 0.47  & 0.05  & 0.18  & 0.02  & 0.02  & 0.11  & 0.01  & 0.18  & 0.20  & 0.09  & 0.11  & 0.01  & 0.04  & 0.08  & 0.10 \\
+    Turkey.Agriculture.Argentina & 6.28  & 1.12  & 0.42  & 0.32  & 0.13  & 0.15  & 0.17  & 0.18  & 0.84  & 0.38  & 0.15  & 0.07  & 0.11  & 0.07  & 0.21  & 0.09 \\
+    Turkey.Agriculture.Turkey & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Turkey.Agriculture.Germany & 11.89 & 9.19  & 0.44  & 2.46  & 0.10  & 0.69  & 3.74  & 0.06  & 0.72  & 1.59  & 0.55  & 1.22  & 0.45  & 0.44  & 0.51  & 1.14 \\
+    sub.TOTAL & 18.17 & 10.31 & 0.87  & 2.79  & 0.23  & 0.85  & 3.91  & 0.24  & 1.56  & 1.97  & 0.70  & 1.28  & 0.56  & 0.51  & 0.72  & 1.23 \\
+    Turkey.Textile.and.Leather.Argentina & 7.23  & 1.05  & 0.46  & 0.30  & 0.14  & 0.15  & 0.13  & 0.20  & 0.92  & 0.76  & 0.13  & 0.11  & 0.10  & 0.07  & 0.20  & 0.16 \\
+    Turkey.Textile.and.Leather.Turkey & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Turkey.Textile.and.Leather.Germany & 13.72 & 12.01 & 0.63  & 3.91  & 0.13  & 0.95  & 5.58  & 0.07  & 1.44  & 1.74  & 1.25  & 1.51  & 0.60  & 0.66  & 1.32  & 1.60 \\
+    sub.TOTAL & 20.95 & 13.05 & 1.09  & 4.20  & 0.27  & 1.10  & 5.71  & 0.28  & 2.35  & 2.50  & 1.38  & 1.62  & 0.70  & 0.72  & 1.51  & 1.76 \\
+    Turkey.Transport.Equipment.Argentina & 0.84  & 0.18  & 0.02  & 0.02  & 0.01  & 0.01  & 0.01  & 0.01  & 0.24  & 0.12  & 0.05  & 0.03  & 0.01  & 0.02  & 0.03  & 0.01 \\
+    Turkey.Transport.Equipment.Turkey & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Turkey.Transport.Equipment.Germany & 3.43  & 0.65  & 0.04  & 0.22  & 0.01  & 0.05  & 0.31  & 0.00  & 0.48  & 0.99  & 0.09  & 0.20  & 0.03  & 0.09  & 0.10  & 0.21 \\
+    sub.TOTAL & 4.27  & 0.83  & 0.06  & 0.24  & 0.01  & 0.06  & 0.32  & 0.01  & 0.72  & 1.11  & 0.15  & 0.22  & 0.04  & 0.11  & 0.13  & 0.22 \\
+    Germany.Agriculture.Argentina & 7.86  & 2.02  & 0.28  & 0.28  & 0.06  & 0.82  & 0.57  & 0.13  & 0.90  & 0.44  & 0.23  & 0.11  & 0.61  & 0.10  & 0.33  & 0.16 \\
+    Germany.Agriculture.Turkey & 15.29 & 2.06  & 0.12  & 0.48  & 0.02  & 0.74  & 0.97  & 0.03  & 0.86  & 1.75  & 0.11  & 0.23  & 0.53  & 0.10  & 0.17  & 0.34 \\
+    Germany.Agriculture.Germany & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    sub.TOTAL & 23.16 & 4.08  & 0.40  & 0.76  & 0.08  & 1.56  & 1.54  & 0.16  & 1.76  & 2.19  & 0.34  & 0.35  & 1.14  & 0.20  & 0.50  & 0.50 \\
+    Germany.Textile.and.Leather.Argentina & 6.55  & 0.79  & 0.12  & 0.15  & 0.03  & 0.31  & 0.26  & 0.06  & 0.70  & 0.65  & 0.08  & 0.08  & 0.22  & 0.05  & 0.13  & 0.12 \\
+    Germany.Textile.and.Leather.Turkey & 8.38  & 3.69  & 0.19  & 0.79  & 0.02  & 1.22  & 1.70  & 0.05  & 0.82  & 0.90  & 0.36  & 0.39  & 0.92  & 0.22  & 0.50  & 0.55 \\
+    Germany.Textile.and.Leather.Germany & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    sub.TOTAL & 14.93 & 4.48  & 0.31  & 0.94  & 0.05  & 1.53  & 1.96  & 0.10  & 1.53  & 1.54  & 0.45  & 0.47  & 1.15  & 0.27  & 0.63  & 0.67 \\
+    Germany.Transport.Equipment.Argentina & 16.92 & 2.37  & 0.18  & 0.26  & 0.04  & 0.44  & 0.43  & 0.08  & 5.26  & 2.92  & 0.78  & 0.43  & 0.31  & 0.26  & 0.59  & 0.33 \\
+    Germany.Transport.Equipment.Turkey & 23.72 & 3.27  & 0.15  & 0.61  & 0.02  & 0.91  & 1.37  & 0.04  & 4.10  & 7.38  & 0.59  & 1.06  & 0.67  & 0.45  & 0.71  & 1.27 \\
+    Germany.Transport.Equipment.Germany & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    sub.TOTAL & 40.64 & 5.64  & 0.33  & 0.87  & 0.06  & 1.34  & 1.80  & 0.12  & 9.36  & 10.30 & 1.36  & 1.49  & 0.99  & 0.71  & 1.29  & 1.60 \\
+   \bottomrule
+    \end{tabular}
+\end{sidewaystable}
+
+
+\Cref{tab:wwz} shows the results for the example data. 
+The first column lists exporter, exporting industry, and importer. Note that the value added is domestic but not necessarily created in the exporting industry. When exporter and importer are identical, the values are zero since there are no exports. The first row lists the 16 components of bilateral exports at the industry level and three checksums, which are suppressed in \Cref{tab:wwz} for convenience.
+
+The first eight components relate to domestic value added of the exporting country contained in the exports of the exporting industry to the direct importer. For instance, the first non-zero element in \Cref{tab:wwz} refers to $dva\_fin$, or domestic value added in final good exports. It shows that there are 5.47 units of domestic value added in the exports of final goods from Argentina's Agriculture industry to Turkey. The third term in the same row,  \textit{dva\_intrexI1}, is slightly more complicated. As mentioned above, it gives the amount of domestic value added in intermediate exports re-exported to third countries as intermediate goods to produce domestic final goods. In our example this means that there are 1.14 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, that are re-exported by Turkey as intermediates to a third country which produces final goods with it. Terms six to eight concern domestic value added that eventually returns home. \textit{rdv\_fin2} reveals for example that there are 0.35 units of domestic value added in the intermediate exports of Argentina's Agriculture industry to Turkey, 
+that Turkey re-exports as intermediates to Argentina for the latter's final good production.
+
+The following four terms apply to foreign value added in exports and separate on the one hand between the origin of the foreign value added ($mva$ vs $ova$) and on the other hand between the type of export (intermediate vs final good). $mva$ describes hereby foreign value added sourced by the exporting country from the importer. From the perspective of the latter, these terms are thus part of the $rdv$ (value added returning home) share. $ova$ in contrast sums over the foreign value added sourced from all other countries. Going back to the example, this means that there are 0.21 units of Turkish value added in the final goods exports of Argentina's Agriculture industry to Turkey.
+
+Terms 13 to 16 collect the double counting of gross trade statistics that occurs when goods cross borders multiple times. $ddc$ captures double counting due to domestic value added, which is further classified according to the type of the ultimate export (final vs intermediate good). $mdc$ and $odc$, on the other hand, capture double counting due to foreign value added from either the direct importer or other countries. For the Argentina-Turkey case this implies, for instance, that there are 0.18 units of value added in the intermediate exports of Turkey to Argentina which are re-exported by Argentina's Agriculture industry to Turkey as intermediates and then again re-exported. Since they would be part of $mva$ twice, they are now counted once as double-counted term.
+
+Finally, the three checksums give total exports, total final goods exports, and total intermediate exports. The difference between the first and the latter two should be zero.
+
+One interesting application of this decomposition for trade and development uses changes over time in $fva\_fin$ and $fva\_int$. When low-wage developing countries enter GVCs, they tend to specialise mainly in assembly but try to gradually move up within the value chain.    
+To illustrate this, we can reuse the example of the iPhone. Most of the value added in the device stems from US design and Japanese technology but it is ultimately assembled in China. This means for China that when it enters this GVC, its $fva\_fin$ starts to increase since it imports a lot of foreign value added, assembles it, and exports a final good: the iPhone. However, assembly itself does not generate a lot of value added per unit of output so that the benefit of China initially is small. 
+When its technology improves due to the interaction with Japan and the USA, it might be able to produce actual parts of the phone, which contain more value added. Eventually it might even be able to outsource assembly to a cheaper country. This would imply that it seizes a larger share of the value added, something commonly referred to as upgrading or moving up within the value chain. In terms of the WWZ decomposition, we would then observe that China's $fva\_fin$ starts to decline with a simultaneous increase in $fva\_int$. We will use this approach in the next section when we examine actual data using \textit{decompr}.
+
+\section{An application: The GVC integration of developing economies}
+\label{sec:application}
+
+As discussed in the introduction, in this section we apply the package to a new ICIO dataset provided by the OECD to address two shortcomings in the literature on GVCs which tends to either focus on advanced economies or uses a limited set of GVC indicators. By applying, with the help of \textit{decompr}, the insights of both the Leontief and the WWZ decomposition to the extensive OECD ICIOs, we can examine the integration patterns of developing economies in a more detailed way.
+
+\subsection{OECD ICIOs}\label{sub:icios}
+We use the new OECD ICIOs as our data source for this section. The OECD ICIOs constitute the most recent and most advanced release of Inter-Country Input-Output tables. The new version of the database provides tables covering 61 countries and 34 industries for the years 1995, 2000, 2005, and 2008 to 2011.\footnote{Countries and industries are listed in the Appendix.}\textsuperscript{,}\footnote{Note that in the analysis 2009 and 2010 are excluded due to the global crisis and to keep intervals of comparable length.} This extensive country coverage is crucial for analysing how countries at different stages of development are integrated into GVCs and how their integration has developed over time, a feature that has not been possible due to limited data availability in previous databases. The empirical literature discussed above shows that especially the extended coverage of Asia is important. 
+
+To create ICIOs, the OECD combines national IO tables with international trade and national accounts data. As OECD countries have a harmonised construction methodology, potential discrepancies between national IO tables should be minor. Furthermore, the advanced harmonisation across countries reduces the use of proportionality assumptions to derive the ratio of imported intermediates in an industry's demand to a minimum. In addition, the OECD has used elaborate techniques to deal with China's and Mexico's processing trade. Due to the outstanding role that these two countries play in GVCs and processing trade, this implies a significant improvement for the quality of the database.\footnote{See \citet{rokoetal12} for an analysis of China's processing trade.}
+
+\subsection{Results}\label{sub:results}
+For the analysis, we start by employing the Leontief decomposition since it allows for the calculation of two informative standard GVC participation measures. Firstly, a backward linkage indicator that is given by the import content of exports, $fvax$, (a variant of \citet{dahuetal01}`s Vertical Specialisation measure) and calculated as follows:
+\begin{equation}
+fvax_{ik} = \frac{\sum_{l}{\sum_{j}vae_{jlik}}}{exports_{ik}} ,
+\end{equation}
+Secondly, a forward linkage indicator - \emph{dvar} (domestic content in foreign (re-)exports, a variant of \citet{dahuetal01}`s Vertical Specialisation 1 measure) - which is given by:
+\begin{equation}\label{eq:dvar}
+{dvar}_{ik} = \frac{\sum_{l}{\sum_{j} vae_{ikjl}}}{exports_{ik}} ,
+\end{equation}
+where \(l\  \neq k\).
+
+These indicators can tell us how much a country is integrated into GVCs and if it acts mainly as a supplier or a user of foreign value added. We additionally calculate novel variants of these indicators taking only value added sourced from sold to developing economies into account. 
+
+As mentioned before, the WWZ decomposition extends the Leontief decomposition and thereby extracts more insights from ICIOs. We use $dva\_fin$, $fva\_fin$, $rdv$, $pdc$ and the two aggregate measures $dva\_inter$ combining $dva\_intt$ and $ddc$ as well as $fva\_inter$ combining $fva\_int$ and $fdc$. This collapses the indicators to an intuitive and manageable amount. $fva\_inter$ and $dva\_inter$ measure respectively the foreign and domestic content of intermediate exports.
+
+\subsubsection{What we know: Old facts with new data}\label{sec:basics}
+
+In this section we reassess with our extensive OECD ICIO dataset stylised facts on GVC integration that are typically based on smaller samples. We start by examining the development of our most basic measure of GVC integration, namely the amount of foreign value added in exports.\footnote{Note that at the aggregate level forward ($dvar$) and backward ($fvax$) linkages are identical. Therefore, we only look at one of the two measures.} It captures backward linkages into value chains and shows the well-known increase in GVC integration from 1995 to 2011. As illustrated in Figure \ref{fig:fvax_t}, the value of $fvax$ has grown by approximately 350\% and by 35\% as a share of total exports from around 17\% to over 23\%. Thus, countries rely for their export production increasingly on inputs produced abroad. The numbers are in line with similar findings by \citet{rojoguno12a} but their sample ends in 2009. It is then interesting to see that after the slump during the financial crises in 2009, GVCs have quickly recovered and already have started to exceed their pre-crisis levels in 2011.
+
+Another way to examine the expansion of GVCs from 1995 to 2011 is to look at their length instead of their trade volume. WWZ propose to use the amount of double counted trade, $pdc$, as a proxy for GVC length since its value goes up the more back-and-forth trade occurs, which is equivalent to an increase in the number of production stages. They show that its value has increased for 40 selected countries. In Figure \ref{fig:pdc_t}, we observe in our larger sample similarly that $pdc$ as a share of total exports has increased over the examined period by 73\% and thus more than $fvax$. Therefore, GVCs do not only channel more trade but also have become longer over time.
+
+\begin{figure}
+\centering
+\begin{minipage}{0.49\textwidth}
+\vspace{0.8cm}
+\centering
+\includegraphics[width=\textwidth]{i2epercentage.png}
+\caption{The development of GVC integration over time}
+\label{fig:fvax_t}
+\end{minipage}\hfill
+\begin{minipage}{0.49\textwidth}
+\vspace{0.8cm}
+\centering
+\includegraphics[width=\textwidth]{pdcII.png}
+\caption{The development of double counted trade over time}
+\label{fig:pdc_t}
+\end{minipage}
+\end{figure}
+
+Turning from the development over time to sectoral differences in GVC integration, Figure \ref{fig:fvax_s} reveals in line with \citet{rojoguno12b} that the industries exhibiting the highest degree of international fragmentation in terms of $fvax$ shares are heavy manufactures such as motor vehicles (MTR), other transport equipment (TRQ) and the metal industry (MET) as well as computers and electronics (CEQ and ELQ). In particular, the transport equipment and electronics industry are strongly engaged in GVCs having highly international production networks. For instance, Apple's iPhone contains inputs from 9 to 10 countries while the Boeing 787 production spans more than 5 countries. The industries can be characterised as being close to final demand and producing complex differentiated goods which could explain these observed differences in GVC integration.
+
+\begin{figure}[b!]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{industries_i2e_top6.png}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{industries_i2e_bottom6.png}
+\end{minipage}
+\caption{industry-level $fvax$ shares - Top and bottom 6.}
+\label{fig:fvax_s}
+\end{figure}
+
+The bottom 6 industries in terms of $fvax$ shares are primary and services industries such as agriculture (AGR), mining (MIN), R\&D and business services (BZS), or wholesale and retail trade (WRT). These industries are typically located upstream in the supply chain, have high value added to output ratios, and do not serve final demand directly.
+
+Naturally then, things are reversed when we look at the corresponding forward linkage GVC measure, $dvar$. It captures the amount of domestic value added in foreign exports and thus quantifies how important domestic industries are for foreign export production. Here, Figure \ref{fig:dvar_s} depicts that this indicator is dominated by the same upstream industries that are at the bottom of the $fvax$ ranking such as mining or business and telecommunication services (PTL). This shows that these industries are also strongly engaged in GVCs but their participation is of a different type. They primarily supply important inputs but do not depend on high levels of foreign value added. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{industries_e2r_top6.png}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{industries_e2r_bottom6.png}
+\end{minipage}
+\caption{industry-level $dvar$ shares - Top and bottom 6.}
+\label{fig:dvar_s}
+\end{figure}
+
+With respect to services, it is also indicative of the servicification of manufacturing as described by \citet{ribaetal15}. This means that an increasing share of manufacturing gross exports is actually value added generated in services industries and then embedded in the intermediate goods exports of manufacturers. This importance of services industries for exports cannot be seen from standard gross trade statistics and thus constitutes a major advantage of trade in value added measures. 
+
+In addition, it provides evidence for a growing internationalisation of services industries. More and more, services are being off-shored and sourced from abroad. In that respect, it is also interesting to note that despite the low absolute $fvax$ shares, it is in services where a lot of the growth in $fvax$ has taken place. Five out of the six industries with the highest growth in $fvax$ shares are services industries.
+
+Finally, when we turn to differences in GVC integration by country we can confirm the findings by \citet{ribajalo15}. Figure \ref{fig:fvax_k} shows that small countries close to the major GVC hubs in Asia, Europe, and North America have the highest average $fvax$ shares. Examples include Malaysia and Slovakia. Countries specialised in the primary sector or assembly on the other hand have very low values. Correspondingly, Latin American countries with their structural focus on agriculture and mining have very weak backward linkages into GVCs. However, the development over time shows that some of the countries with relatively low GVC integration have begun to catch up. For instance, Argentina, India and Turkey are in the top 6 when it comes to the growth of $fvax$ shares from 1995 to 2011.
+
+Driven by the industry-level statistics, we then find again that for $dvar$ depicted in Figure \ref{fig:dvar_k} the picture is reversed with raw material exporters on top. If we abstract from these countries, we find technologically advanced countries such as Switzerland and the main GVC hubs Japan, USA, and Germany to exhibit strong forward linkages into GVCs. In particular low and middle-income countries without raw materials such as Cambodia, Mexico, or Turkey have in contrast very weak linkages and have not been able to strengthen them significantly between 1995 and 2011.\footnote{The full set of results for $fvax$ and $dvar$ by country, and industry can be found in the Appendix. Since the results of the WWZ decomposition are much more detailed, the results not presented here are only available from the authors upon request.}
+
+\begin{figure}
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{country_i2e_top_6.png}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{countries_i2e_bottom_6.png}
+\end{minipage}
+\caption{Countries' $fvax$ shares - Top and bottom 6.}
+\label{fig:fvax_k}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{countries_e2r_top_6.png}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{countries_e2r_bottom_6.png}
+\end{minipage}
+\caption{Countries' $dvar$ shares - Top and bottom 6.}
+\label{fig:dvar_k}
+\end{figure}
+
+
+
+\subsubsection{The role of developing economies: New trends and patterns in GVCs}\label{sec:news}
+
+The central advantage of our application is that we have new indicators for a new set of countries. This means we can not only confirm previous findings with a more representative sample but also provide several new insights. In particular, the OECD ICIO database extends the available list of countries in ICIOs by the following 21 regions: Argentina, Brunei Darussalam, Cambodia, Chile, Colombia, Costa Rica, Croatia, Hong Kong, Iceland, Israel, Malaysia, Norway, New Zealand, Philippines, Saudi Arabia, Singapore, Thailand, Tunisia, Vietnam, South Africa, and Switzerland. This means that the coverage of low and middle income countries has increased considerably which allows us to analyse the GVC integration of developing economies in a much more detailed fashion than before.
+
+
+We start by examining general trends in the GVC participation of developing economies. To that effect, \citet{rojoguno12b} have observed that per capita income is only a weak predictor for GVC integration due to the heterogeneity of economies in terms of size, industrial structure and location. In Table \ref{tab:gvc} we see that the average integration measured by either $fvax$ or $dvar$ does not vary strongly between income groups defined by the World Bank classification at the beginning of the sample period in 1995.\footnote{Note that in this section indicators are based only on manufacturing and services industries to avoid spurious results stemming from the primary sector that is for technological reasons less integrated into GVCs.}
+High-income economies have slightly stronger forward linkages but lower backward linkages which implies that their exports contain more domestic value added. Developing economies could thus try to upgrade their GVC integration by increasing domestic content in exports.\\
+
+\begin{table}[htbp]\small
+  \centering
+  \caption{GVC integration by income group}
+    \begin{tabular}{lrrrr}
+    \toprule
+    Country group & \multicolumn{2}{c}{\textit{fvax}} & \multicolumn{2}{c}{\textit{dvar}} \\
+          & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+              \midrule
+    Low/Lower middle & 23.46\% & 48.22\% & 20.35\% & 38.58\% \\
+    High & 22.64\% & 41.84\% & 21.85\% & 29.50\% \\
+    \bottomrule
+    \end{tabular}
+  \label{tab:gvc}
+    \caption*{\textit{Notes}: Data is averaged across countries, industries and years. $\Delta$ 95-11 refers to the growth of the \textit{fvax} and \textit{dvar} values from 1995 to 2011.}
+\end{table}
+
+Looking at the development over time, it is striking that the rise of GVC integration is increasingly driven by developing countries. The growth of both $fvax$ or $dvar$ has been much more pronounced in these economies as can be seen in Table \ref{tab:gvc}. In relative terms this means that the $fvax$ share of countries classified as low- or lower middle-income in total $fvax$ has increased from 9\% in 1995 to 24\% in 2011. Similarly, the $dvar$ share has increased from 9\% to 23\%.
+
+Moreover, low- and lower middle-income countries do not only sell and source more from GVCs but they are also increasingly on the other side of the transaction. Figure \ref{fig:llmpartner} shows that the share of $fvax$ sourced from low- and lower middle-income countries has risen from 17\% to 33\% and the share of $dvar$ re-exported from them has expanded from 15\% to 28\%. Thus, developing countries have a large stake in GVCs and have moved from the periphery into the centre of these production networks.\footnote{However, we will see that GVC integration differs significantly among developing countries.}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{e2r-i2e.png}
+\caption{Share of value added sourced from (fvax) or sold to (dvar) low- and lower-middle income economies for export production.}
+\label{fig:llmpartner}
+\end{figure}
+
+In a next step we zoom in and analyse the GVC participation of developing economies more closely with the help of the WWZ decomposition. As described in \cref{sec:wwz}, WWZ show how the structure and changes in the structure of domestic and foreign content in exports inform us on a country's movement along the value chain. In particular, $fvax$ consists of foreign value added in final goods exports ($fva\_fin$), intermediate goods exports ($fva\_int$), and double counting ($fdc$). Table \ref{tab:wwz} shows that on average low- and lower middle-income countries have a higher share of $fva\_fin$ in $fvax$ (42\%) than high-income economies (39\%). This is in line with a specialisation of developing economies in downstream assembly tasks.
+
+\begin{table}[t!]\small
+  \centering
+  \caption{WWZ decomposition results by income}
+    \begin{tabular}{lrrrrr}
+    \toprule
+    Country group & \multicolumn{1}{c}{\textit{fva\_fin}} & \multicolumn{1}{c}{\textit{fva\_inter}} & \multicolumn{1}{c}{\textit{dva\_fin}} & \multicolumn{1}{c}{\textit{dva\_inter}} & \multicolumn{1}{c}{\textit{rdv}} \\
+    \midrule
+    Low/Lower middle & 42.07\% & 57.93\% & 44.09\% & 54.73\% & 1.18\% \\
+    High  & 39.38\% & 60.62\% & 40.73\% & 56.85\% & 2.42\% \\
+    \bottomrule
+    \end{tabular}
+  \label{tab:wwz}
+  \caption*{\textit{Notes}: Data is averaged across countries, industries and years. $fva$ variables are expressed as \% of $fvax$, $dva$ and $rdv$ variables as \% of domestic value added in total exports.}
+\end{table}
+
+However, a shift from foreign content in final goods to intermediate goods and double counted trade value would be indicative of moving up the value chain. For low- and lower middle-income countries, we indeed find as shown by Figure \ref{fig:llmwwz} that the share of $fva\_fin$ in $fvax$ has fallen by about 4\%. This gain accrues to the double counting part which goes up by 6\%. This means that production has become more fragmented and that developing economies increasingly occupy more upstream stages.
+
+A similar exercise can be done for the domestic value added embodied in exports. The exported domestic value added of high-income countries tends to be dominated by intermediate goods (57\%) while low- and lower middle-income countries only achieve a value of 55\%. We obtain the same information when we look at the share of domestic value added that eventually returns home. Here, the value for high-income countries (2.42\%) is more than twice as high than its low- and lower-middle income counterpart (1.18\%), which indicates that high-income countries are located upstream in the value chain using developing economies for assembly. While these numbers might seem small, note that for some industries in GVC hubs such as Germany or the USA the $rdv$ share can go as high as 30\% and that the exclusion of the upstream industries Agriculture and Mining downward biases its value. However, the data in Figure \ref{fig:llmwwz} shows here as well that developing economies have improved their position over time. The amount of domestic value added returning home has tripled from 1995 to 2011 and the share of final goods has decreased by more than 5\%. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{fva-dva-fin-inter.png}
+\caption{Development of developing economies' WWZ decomposition indicators over time.}
+\label{fig:llmwwz}
+\end{figure}
+
+Thus, overall we get a clear picture that while developing economies are still positioned relatively more downstream in the value chain, they have succeeded to move up over the past two decades.
+
+The patterns described in the previous section inform us on the average performance of developing countries but they might hide considerable heterogeneity among these countries. Therefore, we will merge a subset of the newly available countries into the three regions Central and South America (CSA), South East Asia (SEA), and Africa (AFR) and analyse the development of their GVC participation country by country. CSA covers Argentina, Chile, Colombia, and Costa Rica; SEA covers Cambodia, Malaysia, Philippines, Thailand, and Vietnam; while AFR covers South Africa and Tunisia.\\\
+
+\textit{South East Asia}\\
+The SEA economies for which data is newly available are Cambodia, Hong Kong, Malaysia, Philippines, Singapore, Thailand, and Vietnam. Since Singapore and Hong Kong are special cases due to their per capita income and size, we focus on Cambodia, Malaysia, Philippines, Thailand, and Vietnam. 
+
+The two basic indicators of these countries, $fvax$ and $dvar$, presented in Table \ref{tab:seagvc} show that all five countries are primarily integrated into GVCs through backward linkages but in particular the Philippines have increased their forward linkages over the past two decades considerably. It also stands out that Cambodia and Vietnam have very low $dvar$ values suggesting a strong specialisation in low value added tasks located downstream in the chain. To obtain more detailed information on how these countries engage in GVCs we need however more disaggregated indicators.
+
+\begin{table}\small
+  \centering
+  \caption{GVC integration of SEA countries}
+    \begin{tabular}{lrrrr}
+    \toprule
+    Country & \multicolumn{2}{c}{{$fvax$}} & \multicolumn{2}{c}{{$dvar$}} \\
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+    \midrule
+    Cambodia & 39.4\% & 90.7\% & 8.4\% & -11.9\% \\
+    Malaysia & 44.3\% & 37.1\% & 13.9\% & 10.2\% \\
+    Philippines & 29.6\% & -20.7\% & 22.6\% & 105.0\% \\
+    Thailand & 36.9\% & 64.3\% & 13.1\% & 20.2\% \\
+    Vietnam & 38.3\% & 66.1\% & 10.6\% & 5.3\% \\
+    \bottomrule
+    \end{tabular}
+  \label{tab:seagvc}
+  \caption*{\textit{Notes}: Data is averaged across industries and years. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+\end{table}
+
+The WWZ decomposition provides us with the necessary tools. We can see in Table \ref{tab:seawwz} that according to their high $fva\_fin$ values Cambodia and to a lesser extent Vietnam indeed perform mostly downstream tasks with typically low value added whereas Malaysia, Thailand, and the Philippines are positioned higher in the value chain exhibiting much lower $fva\_fin$ and $dva\_fin$ but higher $rdv$ values. Comparing these results to the analysis by WWZ, we find that the latter set of countries have a similar GVC integration structure to Indonesia but still are behind more advanced nations such as Korea and Taiwan. 
+
+When we look at the change over time from 1995 to 2011, we see that Cambodia has actually moved into assembly with an increase of $fva\_fin$ of 35.2\%. This is in stark contrast to the remaining SEA countries which all achieved to move up the value chain. In particular, Vietnam with the highest decline of $fva\_fin$ is transforming its participation rapidly and might soon catch up with its local competitors regarding its position in GVCs. For Cambodia, on the other hand, this means that GVCs offer a major untapped potential for future growth. If the country manages to introduce more GVC-friendly policies it can leverage its location close to the GVC hubs China and Japan to continue on its successful growth path.
+
+\begin{table}[!h]\small
+  \centering
+  \caption{WWZ decomposition results for SEA countries}
+  \hspace*{-2.9cm}
+    \begin{tabular}{lrrrrrrrrrr} 
+    \toprule
+    \multicolumn{1}{l}{{Country}} & \multicolumn{2}{c}{$fva\_fin$} & \multicolumn{2}{c}{$fva\_inter$} & \multicolumn{2}{c}{$dva\_fin$} & \multicolumn{2}{c}{$dva\_inter$} & \multicolumn{2}{c}{$rdv$} \\
+    \multicolumn{1}{l}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} &
+\multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+  \midrule
+    Cambodia & 68.1\% & 35.2\% & 31.9\% & -35.7\% & 64.5\% & 26.8\% & 35.5\% & -27.5\% & 0.0\% & -29.7\% \\
+    Malaysia & 39.3\% & -9.0\% & 60.7\% & 6.3\% & 40.8\% & -4.5\% & 58.9\% & 3.4\% & 0.4\% & -21.5\% \\
+    Philippines & 35.5\% & -21.7\% & 64.5\% & 16.0\% & 38.9\% & -19.1\% & 60.9\% & 16.0\% & 0.2\% & 18.2\% \\
+    Thailand & 41.4\% & -12.9\% & 58.6\% & 11.3\% & 47.4\% & -14.6\% & 52.3\% & 17.7\% & 0.3\% & 20.0\% \\
+    Vietnam & 47.1\% & -22.6\% & 52.9\% & 30.0\% & 55.0\% & -9.0\% & 44.8\% & 12.7\% & 0.1\% & 103.4\% \\
+    \bottomrule
+    \end{tabular}
+  \label{tab:seawwz}
+   \caption*{\textit{Notes}: Data is averaged across industries and years. $fva$ variables are expressed as \% of $fvax$, $dva$ and $rdv$ variables as \% of domestic value added in total exports. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+\end{table}
+
+
+\textit{Central and South America}\\
+The newly available CSA economies comprise Argentina, Chile, Colombia, and Costa Rica compared to previously only Mexico and Brazil. What stands out from looking at the standard GVC indicators presented in Table \ref{tab:csagvc} is that CSA is on average less integrated into GVCs than SEA and other developing regions. In particular, Argentina and Colombia have both very low backward and forward linkages highlighting the role of remoteness and sound policies as drivers of GVC integration. This is also mirrored in the fact that Chile and Costa Rica exhibit much higher GVC participation rates; albeit still below the SEA countries. These countries perform relatively well in several measures capturing a country's policy environment such as the World Bank's Doing Business Indicators or World Governance Indicators and, in the case of Costa Rica, are relatively closer to the North American GVC centre encompassing the USA, Canada, and Mexico. 
+
+Focusing therefore on Costa Rica and Chile, we observe in Table \ref{tab:csawwz} that Chile's GVC integration structure starts to resembles the structure of high income countries. The major part of the country's integration is through intermediates as shown by the high $fva\_inter$ and $dva\_inter$ shares (78\% and 75\% respectively). However, the share of returned domestic value ($rdv$) is still much lower than the high-income average of 2.4\% and thus indicates that Chile is still in the process of catching up.
+
+Costa Rica on the other hand possesses the typical GVC integration structure of lower middle-income economies with high $fva\_fin$ and $dva\_fin$ shares and a very small $rdv$ value of 0.02\%. Comparing the country to SEA, its structure resembles most closely the GVC integration of Vietnam. This comparison holds also when we look at Costa Rica's development over time, where we see a rapid expansion of $fva\_inter$, $dva\_inter$, and $rdv$ shares. The country is thus successfully moving up the value chain.\\
+
+\begin{table}[htbp]\small
+  \centering
+  \caption{GVC integration of CSA countries}
+    \begin{tabular}{lrrrr}
+    \toprule
+    Country & \multicolumn{2}{c}{{$fvax$}} & \multicolumn{2}{c}{{$dvar$}} \\
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+    \midrule
+    Argentina & 13.4\% & 154.9\% & 13.4\% & 19.4\% \\
+    Chile & 20.0\% & 44.8\% & 26.4\% & 35.4\% \\
+    Colombia & 13.2\% & 15.2\% & 17.0\% & 45.5\% \\
+    Costa Rica & 29.0\% & 21.1\% & 16.0\% & 60.8\% \\
+    \bottomrule
+\end{tabular}
+  \label{tab:csagvc}
+     \caption*{\textit{Notes}: Data is averaged across industries and years. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+
+\end{table}
+
+\begin{table}[htbp]\small
+  \centering
+  \caption{WWZ decomposition results for CSA countries}
+  \hspace*{-2.9cm}
+    \begin{tabular}{lrrrrrrrrrr} 
+    \toprule
+    \multicolumn{1}{l}{{Country}} & \multicolumn{2}{c}{$fva\_fin$} & \multicolumn{2}{c}{$fva\_inter$} & \multicolumn{2}{c}{$dva\_fin$} & \multicolumn{2}{c}{$dva\_inter$} & \multicolumn{2}{c}{$rdv$} \\
+    \multicolumn{1}{l}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} &
+\multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+  \midrule
+    Argentina & 51.15\% & -6.33\% & 48.85\% & 7.95\% & 51.92\% & -5.71\% & 47.90\% & 7.01\% & 0.18\% & 49.61\% \\
+    Chile & 22.23\% & -22.29\% & 77.77\% & 8.54\% & 24.61\% & -23.44\% & 75.25\% & 10.03\% & 0.14\% & 81.25\% \\
+    Colombia & 39.41\% & -19.09\% & 60.59\% & 15.30\% & 39.32\% & -33.76\% & 60.55\% & 32.06\% & 0.12\% & 25.56\% \\
+    Costa Rica & 45.99\% & -11.17\% & 54.01\% & 11.29\% & 50.97\% & -17.88\% & 49.01\% & 24.97\% & 0.02\% & 43.05\% \\
+   \bottomrule
+    \end{tabular}
+  \label{tab:csawwz}
+     \caption*{\textit{Notes}: Data is averaged across industries and years. $fva$ variables are expressed as \% of $fvax$, $dva$ and $rdv$ variables as \% of domestic value added in total exports. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+\end{table}
+
+\textit{Africa}\\
+To conclude, we turn to Africa. GVC data on Africa is scarce and typically it is assumed that integration levels are low. However, the newly available OECD data comprises with Tunisia and South Africa two interesting and unique cases. Tunisia and South Africa offer relatively stable political environments and a relatively high degree of industrialisation which makes them two optimal case studies. Unlike many other African they do thus fulfil the basic requirements for GVC integration.
+
+In line with this, Tables \ref{tab:afrgvc} and \ref{tab:afrwwz} show that in fact Tunisia has relatively high integration levels. Its integration pattern is very similar in both intensity, structure, and trend to Costa Rica and Vietnam. This means that Tunisia is mainly integrated through backward linkages and assembly tasks but is moving up the value chain. This is evidence that especially North Africa with its proximity to the European GVC hub can link into and benefit from GVCs.
+
+South Africa is a different case since it is located far from most production networks and focuses primarily on raw materials. As a result, the country's integration levels are fairly low and more similar to Argentina and Colombia. Nevertheless, it is likely that it has benefitted from the boom in commodities caused by the rise of GVCs and the subsequent boost in global demand.\\
+
+\begin{table}[htbp]\small
+  \centering
+  \caption{GVC integration of AFR countries}
+    \begin{tabular}{lrrrr}
+    \toprule
+    Country & \multicolumn{2}{c}{{$fvax$}} & \multicolumn{2}{c}{{$dvar$}} \\
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+    \midrule
+    South Africa & 21.3\% & 61.4\% & 19.9\% & 16.4\% \\
+    Tunisia & 32.1\% & 35.6\% & 13.2\% & 33.1\% \\
+\bottomrule
+\end{tabular}
+  \label{tab:afrgvc}
+     \caption*{\textit{Notes}: Data is averaged across industries and years. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+\end{table}
+\vspace{-1.2cm}
+
+\vspace{1cm}
+
+\begin{table}[h!]\small
+  \centering
+  \caption{WWZ decomposition results for AFR countries}
+  \hspace*{-2.7cm}
+    \begin{tabular}{lrrrrrrrrrr} 
+    \toprule
+    \multicolumn{1}{l}{{Country}} & \multicolumn{2}{c}{$fva\_fin$} & \multicolumn{2}{c}{$fva\_inter$} & \multicolumn{2}{c}{$dva\_fin$} & \multicolumn{2}{c}{$dva\_inter$} & \multicolumn{2}{c}{$rdv$} \\
+    \multicolumn{1}{l}{} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} &
+\multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} & \multicolumn{1}{c}{Average} & \multicolumn{1}{c}{$\Delta$ 95-11} \\
+  \midrule
+South Africa & 48.76\% & -11.76\% & 51.24\% & 13.56\% & 54.43\% & -14.60\% & 45.49\% & 21.41\% & 0.08\% & 7.07\% \\
+    Tunisia & 45.09\% & -14.97\% & 54.91\% & 15.19\% & 56.62\% & -4.47\% & 43.10\% & 5.56\% & 0.28\% & 147.59\% \\
+\bottomrule
+    \end{tabular}
+  \label{tab:afrwwz}
+     \caption*{\textit{Notes}: Data is averaged across industries and years. $fva$ variables are expressed as \% of $fvax$, $dva$ and $rdv$ variables as \% of domestic value added in total exports. $\Delta$ 95-11 refers to growth from 1995 to 2011.}
+\end{table}
+
+\pagebreak
+
+\section{Conclusion}\label{sec:conclusion}
+
+GVCs describe the increasingly international organisation of production structures.
+As more and more deep regional trade agreements come into force, which drive down trade costs and harmonise product standards, it becomes more and more attractive for firms to outsource certain tasks of their production lines. Research on international trade analysing this development evolves quickly and reveals important implications of GVCs for economic growth and competitiveness. The R package \textit{decompr} aims at facilitating this research by simplifying the calculation of standard and advanced GVC indicators on the basis of the Leontief and WWZ decomposition. The purpose is to accelerate the research and, especially, to make it accessible to a wider audience.
+
+We have designed the package using a modular structure, with an additional user interface function for increased ease of use. The modular structure enables users to break the computationally intensive analysis process down into several steps. Furthermore, the modular structure enables users and other developers to build on top of basic data structures which are created by the \verb!load_tables_vectors! function when implementing other decompositions or analyses. However, a wrapper function (\verb!decomp!) is also provided, which combines the use of the atomic functions into one. Lastly, in addition to the \textit{decompr} function, we provide a Rcmdr plugin \citep{fox2005getting, fox2007extending}, which allows the user to perform the analytical process using a GUI (Grapical User Interface). All of this should allow users of the package to adapt the package to their specific needs as the GVC research progresses.
+
+We present a first application of the package by decomposing the new ICIOs of the OECD which have a wider country coverage than comparable databases. This allows us in particular to examine the GVC integration patterns by developing economies more closely. We find that many ideas based on previous anecdotal evidence can be confirmed by the data. In particular, there is a central difference in the structure of high-income economies' integration into GVCs compared to developing economies when it comes to the position in GVCs. If we abstract from the primary sector, high-income economies are typically positioned more upstream in the value chain which can be seen from the concentration of their value added in intermediate goods exports. In addition, they also serve as market of final demand which can be seen from their relatively high share of exported domestic value added returning home eventually for final consumption.
+
+Developing economies, on the other hand, tend to be positioned more downstream which can be deduced from the concentration of their GVC participation in final goods exports and the fact that their forward linkages and returning domestic value added tend to be low. These two stylised facts suggest that high-income economies use GVCs to outsource low value added downstream production stages and eventually reimport the final goods. However, when looking at the development over time it emerges strongly that many developing economies have succeeded in moving up the value chain and that the general trend points to a more even distribution of value added across the different countries.
+
+Finally, we use the new data to look at selected low- and middle income economies in three different regions, namely South-East Asia, Latin America and the Caribbean, and Africa. South-East Asia has as expected the highest levels of GVC integration while we observe more heterogeneity in Latin America and the Caribbean where especially Chile and Costa Rica perform well. In Africa, we find that Tunisia has developed backward linkages into GVCs, which shows that Northern Africa has the potential to become part of the European GVC network.
+
+Overall, we show that low- and middle-income countries have become an integral part of GVCs and are increasingly the driver of their expansion. In addition, they increasingly succeed in moving into higher value added stages of the production networks. While the exact implications of integration into GVCs are still being researched, it is clear that they offer significant potential for industrialisation and growth and therefore countries like the Philippines, Costa Rica, or Tunisia are in a good position and can serve as examples for comparable countries.
+
+The next central step for future research is to examine both in theory and empirically how GVC participation affects real economic activity. More specifically, it is very relevant to look at how, for instance, employment, GDP, and productivity react when countries join GVCs and what the factors are that determine a successful relationship. 
+From the standpoint of developing and emerging countries a very interesting question is if GVCs simplify industrialisation and the formation of comparative advantage while high-income countries might look for an additional push for their stagnating post-crisis economies. We hope that \textit{decompr} can play a part in this field and promote it.
+
+
+\vspace{\stretch{1}}
+
+\newpage
+
+\bibliographystyle{chicago}
+\bibliography{bibliography}
+
+\clearpage
+
+ \appendix
+ 
+\section{Appendix}
+\subsection{Indicators based on Leontief decomposition}
+
+\begin{table}[h]\small
+  \centering
+       \caption{Leontief-decompostion based GVC indicators by country.}
+           \hspace*{-1.1cm}
+    \begin{tabular}{lrrrrrr}
+    \toprule
+    \multicolumn{1}{l}{\textit{ISO3}} & \multicolumn{1}{c}{\textit{fvax value}} & \multicolumn{1}{c}{\textit{dvar value}} & \multicolumn{1}{c}{\textit{fvax share}} & \multicolumn{1}{c}{\textit{dvar share}} & \multicolumn{1}{c}{\textit{$\Delta$ 95-11 (fvax)}} & \multicolumn{1}{c}{\textit{$\Delta$ 95-11  (dvar)}} \\
+    \midrule
+    ARG   & 52,790 & 66,036 & 12.51\% & 15.65\% & 145.93\% & 30.04\% \\    AUS   & 178,117 & 343,084 & 13.35\% & 25.71\% & 18.21\% & 59.23\% \\    AUT   & 250,022 & 214,630 & 25.87\% & 22.21\% & 29.59\% & 39.90\% \\    BEL   & 437,578 & 285,355 & 32.53\% & 21.22\% & 10.66\% & 30.78\% \\    BGR   & 51,393 & 19,864 & 38.01\% & 14.69\% & 32.70\% & 12.35\% \\    BRA   & 129,301 & 245,839 & 10.95\% & 20.83\% & 37.97\% & 57.77\% \\    BRN   & 2,412 & 20,438 & 4.51\% & 38.23\% & -41.34\% & 103.27\% \\    CAN   & 647,662 & 407,957 & 23.54\% & 14.83\% & -3.54\% & 70.21\% \\    CHE   & 334,258 & 343,657 & 21.84\% & 22.45\% & 23.45\% & 37.02\% \\    CHL   & 77,961 & 103,023 & 19.70\% & 26.03\% & 41.95\% & 42.06\% \\    CHN   & 1,831,434 & 1,293,766 & 24.07\% & 17.00\% & 62.57\% & 37.17\% \\    COL   & 21,746 & 57,971 & 9.12\% & 24.31\% & -9.63\% & 93.42\% \\    CRI   & 21,400 & 11,671 & 28.07\% & 15.31\% & 25.42\% & 48.66\% \\    CYP   & 12,327 & 8,448 & 22.01\% & 15.09\% & 0.27\% & 53.75\% \\    CZE   & 290,027 & 129,166 & 41.96\% & 18.69\% & 48.79\% & 11.22\% \\    DEU   & 1,640,838 & 1,628,409 & 22.51\% & 22.34\% & 71.81\% & 13.06\% \\    DNK   & 224,697 & 165,653 & 29.42\% & 21.69\% & 38.07\% & 43.47\% \\    ESP   & 546,406 & 383,881 & 25.13\% & 17.66\% & 39.96\% & 35.86\% \\    EST   & 21,777 & 11,992 & 34.90\% & 19.22\% & -3.58\% & 44.23\% \\    FIN   & 182,478 & 125,397 & 31.43\% & 21.60\% & 44.07\% & 6.99\% \\    FRA   & 888,006 & 773,925 & 23.01\% & 20.05\% & 44.76\% & 19.68\% \\    GBR   & 766,576 & 909,659 & 19.52\% & 23.17\% & 25.71\% & 27.55\% \\    GRC   & 81,945 & 60,159 & 22.43\% & 16.47\% & 52.51\% & 51.65\% \\    HKG   & 115,876 & 121,589 & 18.98\% & 19.92\% & -7.57\% & 53.77\% \\    HRV   & 20,725 & 13,277 & 20.09\% & 12.87\% & -3.24\% & -4.93\% \\    HUN   & 236,208 & 78,585 & 46.20\% & 15.37\% & 59.55\% & 23.83\% \\    IDN   & 116,161 & 238,302 & 12.97\% & 26.61\% & -4.24\% & 96.09\% \\    IND   & 356,692 & 298,471 & 21.34\% & 17.86\% & 178.40\% & 42.28\% \\    IRL   & 472,729 & 162,263 & 41.96\% & 14.40\% & 11.87\% & 19.69\% \\    ISL   & 11,301 & 8,977 & 29.32\% & 23.29\% & 84.40\% & 71.61\% \\    \end{tabular}
+\end{table}
+
+\newpage
+
+\vspace*{\fill}
+\begin{table}[h]\small
+  \centering
+    \hspace*{-1.1cm}
+    \begin{tabular}{lrrrrrr}
+    \multicolumn{1}{l}{\phantom{ISO3}} & \multicolumn{1}{c}{\phantom{fvax value}} & \multicolumn{1}{c}{\phantom{dvar value}} & \multicolumn{1}{c}{\phantom{fvax share}} & \multicolumn{1}{c}{\phantom{dvar share}} & \multicolumn{1}{c}{\phantom{$\Delta$ 95-11 (fvax)}} & \multicolumn{1}{c}{\phantom{$\Delta$ 95-11  (dvar)}} \\
+    ISR   & 105,427 & 75,275 & 23.86\% & 17.04\% & 11.05\% & 53.19\% \\    ITA   & 778,367 & 641,040 & 23.21\% & 19.12\% & 53.48\% & 35.00\% \\    JPN   & 582,907 & 1,388,524 & 11.95\% & 28.47\% & 164.46\% & 32.58\% \\    KHM   & 11,889 & 3,224 & 37.65\% & 10.21\% & 186.29\% & -36.76\% \\    KOR   & 1,034,054 & 521,202 & 37.70\% & 19.00\% & 88.43\% & 18.61\% \\    LTU   & 16,707 & 15,497 & 22.83\% & 21.17\% & -4.03\% & 42.99\% \\    LUX   & 237,935 & 51,509 & 53.11\% & 11.50\% & 40.29\% & -15.58\% \\    LVA   & 14,530 & 13,063 & 25.95\% & 23.33\% & 25.01\% & 34.38\% \\    MEX   & 479,806 & 214,457 & 28.82\% & 12.88\% & 20.84\% & 31.28\% \\    MLT   & 14,762 & 4,931 & 43.26\% & 14.45\% & -27.41\% & 108.31\% \\    MYS   & 517,084 & 215,738 & 41.45\% & 17.29\% & 33.36\% & 23.93\% \\    NLD   & 306,010 & 390,300 & 19.50\% & 24.87\% & -14.29\% & 51.12\% \\    NOR   & 163,813 & 351,592 & 16.78\% & 36.01\% & -13.46\% & 57.48\% \\    NZL   & 39,712 & 33,912 & 17.08\% & 14.59\% & -0.73\% & 48.61\% \\    PHL   & 103,838 & 82,783 & 29.04\% & 23.15\% & -20.59\% & 101.26\% \\    POL   & 273,027 & 198,877 & 29.34\% & 21.37\% & 99.99\% & 15.65\% \\    PRT   & 125,283 & 64,391 & 30.77\% & 15.81\% & 18.69\% & 37.51\% \\    ROU   & 59,385 & 54,956 & 24.23\% & 22.42\% & 14.95\% & 45.54\% \\    RUS   & 317,701 & 837,747 & 13.51\% & 35.62\% & 3.61\% & 56.47\% \\    SAU   & 57,392 & 547,987 & 3.95\% & 37.73\% & -15.39\% & 56.02\% \\    SGP   & 548,286 & 219,149 & 46.08\% & 18.42\% & 12.95\% & 61.94\% \\    SVK   & 140,548 & 61,023 & 44.95\% & 19.52\% & 47.60\% & 7.80\% \\    SVN   & 51,465 & 29,065 & 34.78\% & 19.64\% & 11.26\% & 58.26\% \\    SWE   & 355,353 & 262,980 & 29.09\% & 21.52\% & 8.68\% & 29.44\% \\    THA   & 391,773 & 156,527 & 36.05\% & 14.40\% & 61.19\% & 23.84\% \\    TUN   & 35,124 & 18,724 & 30.17\% & 16.08\% & 30.65\% & 48.33\% \\    TUR   & 180,927 & 113,136 & 22.30\% & 13.95\% & 195.25\% & 12.71\% \\    TWN   & 649,797 & 353,241 & 39.52\% & 21.48\% & 41.83\% & 60.53\% \\    USA   & 1,318,846 & 2,248,028 & 13.52\% & 23.04\% & 30.75\% & 26.87\% \\    VNM   & 119,821 & 57,005 & 33.76\% & 16.06\% & 72.69\% & 19.95\% \\    ZAF   & 102,394 & 122,842 & 19.31\% & 23.16\% & 47.60\% & 24.98\% \\    \bottomrule
+    \end{tabular}
+      \caption*{\textit{Notes}: Data aggregated across industries and averaged over the years 1995, 2000, 2005, 2008, and 2011. Values in current USD millions. $\Delta$ gives the growth of the variable in shares.}
+  \label{tab:gvc_k}
+\end{table}
+\vspace*{\fill}
+
+\newpage
+
+\vspace*{\fill}
+
+\begin{table}[h]\small
+  \centering
+         \caption{Leontief-decompostion based GVC indicators by industry.}
+    \hspace*{-2.8cm}
+    \begin{tabular}{llrrrrrr}
+    \toprule
+   \multicolumn{1}{l}{\textit{ISIC Rev.3}} &  \multicolumn{1}{l}{\textit{Industry code}} & \multicolumn{1}{c}{\textit{fvax value}} & \multicolumn{1}{c}{\textit{dvar value}} & \multicolumn{1}{c}{\textit{fvax share}} & \multicolumn{1}{c}{\textit{dvar share}} & \multicolumn{1}{c}{\textit{$\Delta$ 95-11 (fvax)}} & \multicolumn{1}{c}{\textit{$\Delta$ 95-11  (dvar)}} \\
+    \midrule
+   01T05 & AGR   & 227,969 & 364,681 & 13.00\% & 20.79\% & 36.13\% & 27.51\% \\
+    10T14 & MIN   & 435,816 & 3,324,446 & 5.82\% & 44.38\% & -4.51\% & 55.66\% \\
+    15T16 & FOD   & 675,902 & 146,824 & 19.58\% & 4.25\% & 23.04\% & 32.73\% \\
+    17T19 & TEX   & 679,185 & 174,555 & 23.30\% & 5.99\% & 9.49\% & 2.72\% \\
+    20    & WOD   & 105,771 & 80,461 & 20.56\% & 15.64\% & 30.59\% & 63.12\% \\
+    21T22 & PAP   & 302,255 & 344,112 & 19.23\% & 21.89\% & 27.63\% & 7.10\% \\
+    23    & PET   & 1,285,522 & 356,703 & 39.53\% & 10.97\% & 65.81\% & -8.04\% \\
+    24    & CHM   & 1,762,631 & 925,255 & 28.18\% & 14.79\% & 52.19\% & -2.18\% \\
+    25    & RBP   & 446,528 & 309,253 & 27.89\% & 19.32\% & 38.26\% & 3.06\% \\
+    26    & NMM   & 161,574 & 126,800 & 22.09\% & 17.34\% & 41.44\% & 17.72\% \\
+    27    & MET   & 1,340,507 & 868,120 & 31.03\% & 20.10\% & 36.53\% & -11.26\% \\
+    28    & FBM   & 481,732 & 441,396 & 27.53\% & 25.23\% & 38.11\% & 6.86\% \\
+    29    & MEQ   & 1,398,864 & 570,006 & 26.50\% & 10.80\% & 39.73\% & 30.96\% \\
+    30,32,33 & CEQ   & 3,162,705 & 1,062,750 & 38.63\% & 12.98\% & 45.28\% & 18.74\% \\
+    31    & ELQ   & 713,928 & 301,827 & 30.71\% & 12.98\% & 37.32\% & -3.42\% \\
+    34    & MTR   & 1,827,519 & 340,198 & 34.53\% & 6.43\% & 33.39\% & 7.25\% \\
+    35    & TRQ   & 745,063 & 203,834 & 30.54\% & 8.35\% & 40.89\% & 10.73\% \\
+    36T37 & OTM   & 429,561 & 156,828 & 23.49\% & 8.58\% & 14.69\% & 66.57\% \\
+    50T52 & WRT   & 923,756 & 3,002,076 & 9.15\% & 29.75\% & 35.67\% & 33.76\% \\
+    60T63 & TRN   & 1,293,729 & 1,507,876 & 17.88\% & 20.84\% & 60.51\% & 33.82\% \\
+    64    & PTL   & 81,529 & 322,823 & 12.39\% & 49.07\% & 85.71\% & -7.06\% \\
+    65T67 & FIN   & 371,026 & 992,980 & 13.51\% & 36.17\% & 85.73\% & -8.65\% \\
+    71    & RMQ   & 67,266 & 215,714 & 11.59\% & 37.18\% & 89.87\% & 13.54\% \\
+    72    & ITS   & 144,310 & 286,414 & 16.55\% & 32.86\% & 73.87\% & -1.85\% \\
+    73T74 & BZS   & 386,997 & 1,922,031 & 11.27\% & 55.99\% & 44.41\% & 17.81\% \\
+    \bottomrule
+    \end{tabular}
+      \caption*{\textit{Notes}: Data aggregated across countries and averaged over the years 1995, 2000, 2005, 2008, and 2011. Values in current USD millions. $\Delta$ gives the growth of the variable in shares.}
+  \label{tab:gvc_s}
+\end{table}
+
+\vspace*{\fill}
+
+\newpage
+
+\subsection{Indicators based on WWZ decomposition}
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decompostion based GVC indicators by country - Values.}
+    \begin{tabular}{lrrrrrrr}
+    \toprule
+        \textit{ISO3} & \textit{dva\_fin} & \textit{dva\_int} & \textit{rdv} & \textit{ddc} & \textit{fva\_fin} & \textit{fva\_int} & \textit{fdc} \\
+    \midrule    
+    ARG   & 19838.8 & 3019.5 & 2134.3 & 795.6 & 74.6  & 18306.0 & 13.9 \\
+    AUS   & 37114.0 & 5946.6 & 6877.4 & 3830.9 & 687.4 & 52416.8 & 108.9 \\
+    AUT   & 39965.8 & 13391.6 & 11514.8 & 9122.6 & 502.1 & 53113.6 & 215.4 \\
+    BEL   & 42701.4 & 22763.0 & 22380.5 & 16157.7 & 765.9 & 75098.3 & 410.7 \\
+    BGR   & 4313.0 & 2390.9 & 2606.3 & 1531.6 & 8.6   & 4964.5 & 4.8 \\
+    BRA   & 45882.4 & 6194.1 & 5823.9 & 2552.5 & 624.6 & 61479.9 & 67.5 \\
+    BRN   & 363.5 & 104.7 & 34.2  & 16.6  & 0.1   & 325.4 & 0.0 \\
+    CAN   & 89576.5 & 35718.4 & 36794.7 & 12266.8 & 2798.7 & 134766.3 & 1425.9 \\
+    CHE   & 62587.7 & 18138.8 & 15776.5 & 10185.5 & 812.6 & 89437.5 & 339.0 \\
+    CHL   & 8044.8 & 1912.9 & 4220.3 & 2271.3 & 42.7  & 23146.8 & 10.7 \\
+    CHN   & 325759.4 & 103655.8 & 76786.8 & 46651.3 & 13161.1 & 345583.6 & 6951.9 \\
+    COL   & 6116.3 & 942.1 & 1080.0 & 379.7 & 19.6  & 9297.4 & 3.0 \\
+    CRI   & 3235.5 & 1208.6 & 829.9 & 551.1 & 1.3   & 2969.4 & 0.5 \\
+    CYP   & 3061.8 & 919.6 & 485.5 & 256.0 & 2.8   & 2623.6 & 0.7 \\
+    CZE   & 20707.6 & 15189.6 & 11452.4 & 10001.2 & 224.3 & 27977.6 & 200.1 \\
+    DEU   & 302445.6 & 89081.9 & 76861.5 & 54544.4 & 21159.0 & 416856.4 & 8677.6 \\
+    DNK   & 26592.7 & 11435.4 & 10703.8 & 7199.3 & 281.3 & 38875.3 & 179.4 \\
+    ESP   & 100137.5 & 35015.9 & 23763.1 & 14870.9 & 2131.5 & 100824.5 & 652.3 \\
+    EST   & 2118.8 & 1254.1 & 1027.2 & 741.3 & 8.8   & 2917.3 & 5.2 \\
+    FIN   & 18480.7 & 8523.8 & 9829.4 & 6853.4 & 219.4 & 34484.1 & 111.6 \\
+    FRA   & 175742.9 & 54104.6 & 40096.0 & 26786.5 & 6824.1 & 207603.2 & 1989.4 \\
+    GBR   & 155095.5 & 40961.5 & 36781.1 & 23194.3 & 6821.0 & 238094.8 & 1624.1 \\
+    GRC   & 18763.1 & 4607.0 & 4120.7 & 2376.0 & 86.4  & 16677.0 & 15.4 \\
+    HKG   & 26909.9 & 6293.1 & 5773.8 & 3291.7 & 157.9 & 35734.8 & 43.9 \\
+    HRV   & 6825.7 & 1601.8 & 692.3 & 428.1 & 15.4  & 3525.6 & 3.1 \\
+    HUN   & 15096.3 & 13809.5 & 9307.1 & 7385.2 & 72.7  & 18454.3 & 72.0 \\
+    IDN   & 29608.4 & 5567.8 & 5699.8 & 3382.3 & 370.4 & 40022.9 & 94.3 \\
+    IND   & 65809.6 & 15914.8 & 17456.7 & 9018.5 & 755.4 & 81789.1 & 147.2 \\
+    IRL   & 31689.0 & 23905.0 & 23537.1 & 12587.4 & 147.0 & 48289.1 & 147.2 \\
+    ISL   & 1493.2 & 439.2 & 488.6 & 506.6 & 0.9   & 1973.3 & 0.5 \\
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+    \begin{tabular}{lrrrrrrr}
+        \phantom{ISO3} & \phantom{dva\_fin} & \phantom{dva\_int} & \phantom{rdv} & \phantom{ddc} & \phantom{fva\_fin} & \phantom{fva\_int} & \phantom{fdc} \\
+     ISR   & 19266.5 & 6529.1 & 5052.7 & 2279.0 & 36.8  & 22807.7 & 12.2 \\
+    ITA   & 163047.3 & 45955.3 & 37467.0 & 23623.4 & 4187.6 & 178892.1 & 1231.1 \\
+    JPN   & 229080.9 & 28253.0 & 30186.8 & 22415.9 & 11935.0 & 350923.6 & 2122.7 \\
+    KHM   & 1488.4 & 1068.7 & 337.2 & 159.9 & 0.3   & 817.4 & 0.2 \\
+    KOR   & 85107.5 & 44940.2 & 54746.8 & 34043.8 & 1396.3 & 136694.9 & 1024.4 \\
+    LTU   & 2876.1 & 865.1 & 700.7 & 412.2 & 19.6  & 3708.9 & 5.2 \\
+    LUX   & 8929.9 & 10407.7 & 13220.1 & 7047.7 & 21.3  & 14796.7 & 59.8 \\
+    LVA   & 1647.3 & 623.2 & 758.2 & 470.7 & 17.7  & 3201.0 & 5.3 \\
+    MEX   & 61209.8 & 29830.0 & 24416.4 & 8613.8 & 1226.1 & 70200.1 & 530.6 \\
+    MLT   & 1167.6 & 903.8 & 624.2 & 480.1 & 0.3   & 1248.6 & 0.3 \\
+    MYS   & 33587.2 & 26694.3 & 23656.6 & 17092.0 & 299.1 & 47790.5 & 430.6 \\
+    NLD   & 62358.6 & 16870.1 & 14709.4 & 9782.7 & 785.6 & 93041.4 & 269.2 \\
+    NOR   & 17364.7 & 5455.2 & 7194.4 & 5524.7 & 350.3 & 37426.6 & 253.5 \\
+    NZL   & 11694.3 & 2444.2 & 1827.2 & 726.5 & 32.6  & 10686.0 & 6.9 \\
+    PHL   & 12382.9 & 5075.6 & 4651.6 & 4166.7 & 43.7  & 18218.2 & 27.0 \\
+    POL   & 34680.9 & 14502.7 & 10711.8 & 8654.6 & 396.1 & 42711.2 & 189.5 \\
+    PRT   & 17694.2 & 8009.0 & 5627.6 & 3371.4 & 134.4 & 18067.0 & 45.3 \\
+    ROU   & 8808.7 & 2638.8 & 3068.1 & 2080.4 & 66.4  & 13302.9 & 15.5 \\
+    RUS   & 43896.7 & 8546.8 & 17508.7 & 10257.6 & 1502.6 & 138325.2 & 652.7 \\
+    SAU   & 13246.5 & 2345.6 & 2907.3 & 1262.6 & 120.6 & 25347.7 & 37.1 \\
+    SGP   & 32914.6 & 25379.9 & 28659.2 & 18071.6 & 248.9 & 56845.6 & 319.9 \\
+    SVK   & 8238.3 & 7018.0 & 5634.2 & 5241.5 & 74.2  & 12464.0 & 63.3 \\
+    SVN   & 5274.0 & 2966.8 & 2455.7 & 1783.1 & 19.3  & 7186.0 & 10.0 \\
+    SWE   & 42912.0 & 19209.2 & 17756.6 & 11998.5 & 779.5 & 70798.1 & 445.0 \\
+    THA   & 40433.8 & 21041.3 & 18179.8 & 10940.3 & 232.2 & 43013.7 & 149.4 \\
+    TUN   & 4984.5 & 2135.4 & 1435.8 & 822.5 & 7.0   & 4209.8 & 3.6 \\
+    TUR   & 44589.2 & 10550.7 & 8371.9 & 4370.7 & 229.4 & 33257.8 & 63.4 \\
+    TWN   & 46911.1 & 27000.1 & 34820.0 & 25695.5 & 649.0 & 85483.7 & 620.6 \\
+    USA   & 462934.0 & 78038.6 & 58144.3 & 42318.6 & 77983.3 & 530392.3 & 9580.6 \\
+    VNM   & 11703.1 & 6383.7 & 4471.5 & 2614.0 & 26.8  & 9415.1 & 20.9 \\
+    ZAF   & 15664.0 & 3922.8 & 5434.9 & 2525.0 & 56.7  & 25960.1 & 13.0 \\
+    \bottomrule
+\end{tabular}
+          \caption*{\textit{Notes}: Data aggregated across industries and averaged over the years 1995, 2000, 2005, 2008, and 2011. Values in current USD millions.}
+\end{table}
+
+
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decompostion based GVC indicators by country - Share of gross exports.}
+    \begin{tabular}{lrrrrrrr}
+    \toprule
+        \textit{ISO3} & \textit{dva\_fin} & \textit{dva\_int} & \textit{rdv} & \textit{ddc} & \textit{fva\_fin} & \textit{fva\_int} & \textit{fdc} \\
+    \midrule
+    ARG   & 46.18\% & 41.98\% & 0.17\% & 0.03\% & 5.90\% & 4.20\% & 1.54\% \\
+    AUS   & 35.35\% & 48.74\% & 0.61\% & 0.10\% & 5.62\% & 6.23\% & 3.35\% \\
+    AUT   & 32.09\% & 41.47\% & 0.40\% & 0.16\% & 10.40\% & 8.79\% & 6.69\% \\
+    BEL   & 24.29\% & 41.43\% & 0.43\% & 0.23\% & 12.82\% & 12.22\% & 8.58\% \\
+    BGR   & 28.53\% & 33.88\% & 0.05\% & 0.02\% & 14.14\% & 14.97\% & 8.40\% \\
+    BRA   & 38.45\% & 49.72\% & 0.42\% & 0.05\% & 4.90\% & 4.57\% & 1.90\% \\
+    BRN   & 42.20\% & 39.53\% & 0.01\% & 0.00\% & 12.07\% & 4.15\% & 2.03\% \\
+    CAN   & 28.80\% & 42.89\% & 0.87\% & 0.46\% & 11.52\% & 11.73\% & 3.74\% \\
+    CHE   & 32.43\% & 45.06\% & 0.39\% & 0.16\% & 9.17\% & 7.89\% & 4.91\% \\
+    CHL   & 21.97\% & 57.77\% & 0.09\% & 0.02\% & 4.74\% & 10.12\% & 5.28\% \\
+    CHN   & 38.03\% & 37.75\% & 1.08\% & 0.53\% & 10.60\% & 7.67\% & 4.34\% \\
+    COL   & 36.86\% & 49.90\% & 0.11\% & 0.01\% & 5.33\% & 5.80\% & 1.99\% \\
+    CRI   & 38.35\% & 33.08\% & 0.01\% & 0.01\% & 13.55\% & 9.26\% & 5.73\% \\
+    CYP   & 42.56\% & 35.04\% & 0.03\% & 0.01\% & 12.69\% & 6.39\% & 3.28\% \\
+    CZE   & 25.37\% & 33.90\% & 0.30\% & 0.23\% & 16.77\% & 12.93\% & 10.51\% \\
+    DEU   & 32.30\% & 43.22\% & 2.28\% & 0.83\% & 8.80\% & 7.41\% & 5.16\% \\
+    DNK   & 29.33\% & 40.83\% & 0.30\% & 0.18\% & 11.78\% & 10.65\% & 6.94\% \\
+    ESP   & 37.57\% & 35.89\% & 0.73\% & 0.22\% & 12.47\% & 8.10\% & 5.00\% \\
+    EST   & 26.65\% & 34.49\% & 0.09\% & 0.06\% & 16.64\% & 12.77\% & 9.30\% \\
+    FIN   & 23.99\% & 44.57\% & 0.28\% & 0.14\% & 10.62\% & 12.10\% & 8.30\% \\
+    FRA   & 34.77\% & 40.62\% & 1.34\% & 0.39\% & 10.31\% & 7.59\% & 4.99\% \\
+    GBR   & 31.62\% & 47.02\% & 1.38\% & 0.32\% & 8.13\% & 7.10\% & 4.42\% \\
+    GRC   & 42.40\% & 34.57\% & 0.17\% & 0.03\% & 9.93\% & 8.30\% & 4.60\% \\
+    HKG   & 34.92\% & 45.53\% & 0.21\% & 0.06\% & 8.01\% & 7.26\% & 4.00\% \\
+    HRV   & 50.37\% & 28.71\% & 0.15\% & 0.03\% & 11.76\% & 5.56\% & 3.42\% \\
+    HUN   & 25.74\% & 28.55\% & 0.10\% & 0.10\% & 20.90\% & 13.99\% & 10.62\% \\
+    IDN   & 35.41\% & 46.56\% & 0.37\% & 0.10\% & 6.78\% & 6.90\% & 3.89\% \\
+    IND   & 39.24\% & 42.84\% & 0.28\% & 0.05\% & 6.92\% & 7.14\% & 3.53\% \\
+    IRL   & 23.33\% & 34.35\% & 0.10\% & 0.10\% & 17.18\% & 16.30\% & 8.63\% \\
+    ISL   & 33.00\% & 39.88\% & 0.02\% & 0.01\% & 9.00\% & 9.28\% & 8.82\% \\
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+    \begin{tabular}{lrrrrrrr}
+        \phantom{ISO3} & \phantom{dva\_fin} & \phantom{dva\_int} & \phantom{rdv} & \phantom{ddc} & \phantom{fva\_fin} & \phantom{fva\_int} & \phantom{fdc} \\
+    ISR   & 35.46\% & 40.22\% & 0.07\% & 0.02\% & 11.59\% & 8.81\% & 3.83\% \\
+    ITA   & 37.04\% & 39.35\% & 0.92\% & 0.26\% & 9.84\% & 7.80\% & 4.79\% \\
+    JPN   & 34.83\% & 52.04\% & 1.83\% & 0.30\% & 3.91\% & 4.10\% & 2.99\% \\
+    KHM   & 38.84\% & 24.51\% & 0.01\% & 0.00\% & 24.22\% & 8.66\% & 3.75\% \\
+    KOR   & 26.21\% & 39.27\% & 0.39\% & 0.25\% & 11.88\% & 13.73\% & 8.26\% \\
+    LTU   & 34.75\% & 42.15\% & 0.16\% & 0.04\% & 10.42\% & 7.91\% & 4.56\% \\
+    LUX   & 17.58\% & 28.95\% & 0.05\% & 0.10\% & 18.10\% & 23.31\% & 11.93\% \\
+    LVA   & 25.32\% & 47.81\% & 0.19\% & 0.06\% & 9.18\% & 10.94\% & 6.50\% \\
+    MEX   & 31.78\% & 36.16\% & 0.59\% & 0.26\% & 14.59\% & 12.34\% & 4.29\% \\
+    MLT   & 26.80\% & 26.82\% & 0.01\% & 0.01\% & 21.24\% & 14.15\% & 10.98\% \\
+    MYS   & 22.99\% & 32.50\% & 0.22\% & 0.28\% & 17.61\% & 15.51\% & 10.89\% \\
+    NLD   & 31.70\% & 46.47\% & 0.41\% & 0.14\% & 8.77\% & 7.59\% & 4.91\% \\
+    NOR   & 23.96\% & 50.60\% & 0.46\% & 0.31\% & 7.53\% & 9.84\% & 7.30\% \\
+    NZL   & 42.41\% & 38.96\% & 0.12\% & 0.03\% & 9.03\% & 6.84\% & 2.62\% \\
+    PHL   & 28.60\% & 39.18\% & 0.09\% & 0.06\% & 12.22\% & 10.71\% & 9.14\% \\
+    POL   & 33.68\% & 39.06\% & 0.31\% & 0.13\% & 11.77\% & 8.49\% & 6.55\% \\
+    PRT   & 34.52\% & 33.80\% & 0.25\% & 0.08\% & 15.07\% & 10.23\% & 6.05\% \\
+    ROU   & 30.29\% & 44.46\% & 0.17\% & 0.04\% & 8.71\% & 10.00\% & 6.34\% \\
+    RUS   & 20.97\% & 61.93\% & 0.58\% & 0.26\% & 4.02\% & 7.83\% & 4.41\% \\
+    SAU   & 28.93\% & 57.22\% & 0.24\% & 0.07\% & 4.70\% & 6.20\% & 2.64\% \\
+    SGP   & 20.98\% & 34.34\% & 0.17\% & 0.22\% & 15.99\% & 17.37\% & 10.94\% \\
+    SVK   & 22.42\% & 33.51\% & 0.22\% & 0.17\% & 17.00\% & 14.17\% & 12.51\% \\
+    SVN   & 27.83\% & 35.79\% & 0.11\% & 0.05\% & 15.35\% & 12.28\% & 8.59\% \\
+    SWE   & 26.62\% & 43.22\% & 0.48\% & 0.27\% & 11.70\% & 10.68\% & 7.03\% \\
+    THA   & 32.21\% & 32.54\% & 0.17\% & 0.10\% & 14.95\% & 12.59\% & 7.44\% \\
+    TUN   & 38.59\% & 30.81\% & 0.05\% & 0.03\% & 15.16\% & 9.79\% & 5.56\% \\
+    TUR   & 46.99\% & 33.44\% & 0.20\% & 0.05\% & 9.10\% & 6.72\% & 3.51\% \\
+    TWN   & 22.82\% & 38.88\% & 0.30\% & 0.26\% & 12.26\% & 14.99\% & 10.49\% \\
+    USA   & 37.48\% & 41.60\% & 6.43\% & 0.78\% & 6.07\% & 4.40\% & 3.24\% \\
+    VNM   & 37.04\% & 28.00\% & 0.07\% & 0.05\% & 17.78\% & 10.80\% & 6.25\% \\
+    ZAF   & 29.60\% & 49.51\% & 0.10\% & 0.02\% & 6.92\% & 9.48\% & 4.36\% \\
+\bottomrule
+ \end{tabular}
+          \caption*{\textit{Notes}: Data aggregated across industries and averaged over the years 1995, 2000, 2005, 2008, and 2011.}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decomposition based GVC indicators by country - Share of \emph{fvax}/domestic value added in exports.}
+    \begin{tabular}{lrrrrr}
+    \toprule
+        \textit{ISO3} & \textit{dva\_fin} & \textit{dva\_inter} & \textit{rdv} & \textit{fva\_fin} & \textit{fva\_inter}  \\
+    \midrule
+     ARG   & 52.19\% & 47.61\% & 0.19\% & 51.63\% & 48.37\% \\
+    AUS   & 41.68\% & 57.60\% & 0.72\% & 37.26\% & 62.74\% \\
+    AUT   & 43.23\% & 56.23\% & 0.54\% & 40.43\% & 59.57\% \\
+    BEL   & 36.55\% & 62.81\% & 0.64\% & 38.28\% & 61.72\% \\
+    BGR   & 45.82\% & 54.10\% & 0.08\% & 37.98\% & 62.02\% \\
+    BRA   & 43.39\% & 56.14\% & 0.47\% & 42.90\% & 57.10\% \\
+    BRN   & 51.63\% & 48.35\% & 0.02\% & 66.12\% & 33.88\% \\
+    CAN   & 39.46\% & 59.35\% & 1.19\% & 42.67\% & 57.33\% \\
+    CHE   & 41.53\% & 57.96\% & 0.51\% & 41.97\% & 58.03\% \\
+    CHL   & 27.45\% & 72.43\% & 0.12\% & 23.88\% & 76.12\% \\
+    CHN   & 49.02\% & 49.56\% & 1.42\% & 47.28\% & 52.72\% \\
+    COL   & 42.41\% & 57.47\% & 0.12\% & 40.74\% & 59.26\% \\
+    CRI   & 53.58\% & 46.40\% & 0.02\% & 47.63\% & 52.37\% \\
+    CYP   & 54.80\% & 45.16\% & 0.04\% & 56.89\% & 43.11\% \\
+    CZE   & 42.40\% & 57.11\% & 0.49\% & 41.76\% & 58.24\% \\
+    DEU   & 41.00\% & 56.12\% & 2.89\% & 41.55\% & 58.45\% \\
+    DNK   & 41.33\% & 58.25\% & 0.42\% & 40.62\% & 59.38\% \\
+    ESP   & 50.39\% & 48.62\% & 0.99\% & 49.07\% & 50.93\% \\
+    EST   & 43.49\% & 56.36\% & 0.15\% & 42.96\% & 57.04\% \\
+    FIN   & 34.76\% & 64.83\% & 0.41\% & 34.38\% & 65.62\% \\
+    FRA   & 45.06\% & 53.20\% & 1.74\% & 45.14\% & 54.86\% \\
+    GBR   & 39.32\% & 58.96\% & 1.72\% & 41.51\% & 58.49\% \\
+    GRC   & 54.79\% & 44.99\% & 0.22\% & 44.13\% & 55.87\% \\
+    HKG   & 43.29\% & 56.45\% & 0.26\% & 41.46\% & 58.54\% \\
+    HRV   & 63.55\% & 36.26\% & 0.19\% & 56.70\% & 43.30\% \\
+    HUN   & 46.93\% & 52.87\% & 0.19\% & 46.04\% & 53.96\% \\
+    IDN   & 42.96\% & 56.59\% & 0.44\% & 38.65\% & 61.35\% \\
+    IND   & 47.28\% & 52.36\% & 0.36\% & 40.76\% & 59.24\% \\
+    IRL   & 40.24\% & 59.58\% & 0.18\% & 40.89\% & 59.11\% \\
+    ISL   & 44.91\% & 55.06\% & 0.03\% & 34.57\% & 65.43\% \\
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+    \begin{tabular}{lrrrrr}
+        \phantom{ISO3} & \phantom{dva\_fin} & \phantom{dva\_inter} & \phantom{rdv} & \phantom{fva\_fin} & \phantom{fva\_inter} \\
+    ISR   & 46.75\% & 53.17\% & 0.09\% & 47.98\% & 52.02\% \\
+    ITA   & 47.64\% & 51.17\% & 1.19\% & 44.36\% & 55.64\% \\
+    JPN   & 39.04\% & 58.92\% & 2.04\% & 36.67\% & 63.33\% \\
+    KHM   & 62.06\% & 37.92\% & 0.01\% & 64.49\% & 35.51\% \\
+    KOR   & 39.27\% & 60.13\% & 0.60\% & 35.86\% & 64.14\% \\
+    LTU   & 45.06\% & 54.73\% & 0.21\% & 45.57\% & 54.43\% \\
+    LUX   & 37.62\% & 62.28\% & 0.10\% & 33.87\% & 66.13\% \\
+    LVA   & 34.44\% & 65.30\% & 0.26\% & 34.72\% & 65.28\% \\
+    MEX   & 46.20\% & 52.93\% & 0.87\% & 46.52\% & 53.48\% \\
+    MLT   & 50.39\% & 49.60\% & 0.01\% & 45.70\% & 54.30\% \\
+    MYS   & 41.01\% & 58.61\% & 0.38\% & 40.06\% & 59.94\% \\
+    NLD   & 40.31\% & 59.17\% & 0.52\% & 41.08\% & 58.92\% \\
+    NOR   & 31.80\% & 67.59\% & 0.61\% & 30.54\% & 69.46\% \\
+    NZL   & 52.00\% & 47.85\% & 0.15\% & 48.99\% & 51.01\% \\
+    PHL   & 42.26\% & 57.60\% & 0.14\% & 37.92\% & 62.08\% \\
+    POL   & 45.88\% & 53.69\% & 0.43\% & 44.21\% & 55.79\% \\
+    PRT   & 50.20\% & 49.44\% & 0.36\% & 48.27\% & 51.73\% \\
+    ROU   & 40.37\% & 59.41\% & 0.22\% & 34.98\% & 65.02\% \\
+    RUS   & 25.01\% & 74.30\% & 0.69\% & 24.96\% & 75.04\% \\
+    SAU   & 33.53\% & 66.20\% & 0.27\% & 34.43\% & 65.57\% \\
+    SGP   & 37.56\% & 62.14\% & 0.30\% & 36.21\% & 63.79\% \\
+    SVK   & 39.71\% & 59.90\% & 0.39\% & 38.85\% & 61.15\% \\
+    SVN   & 43.57\% & 56.26\% & 0.17\% & 42.49\% & 57.51\% \\
+    SWE   & 37.70\% & 61.62\% & 0.67\% & 39.83\% & 60.17\% \\
+    THA   & 49.25\% & 50.49\% & 0.26\% & 43.13\% & 56.87\% \\
+    TUN   & 55.33\% & 44.59\% & 0.08\% & 50.08\% & 49.92\% \\
+    TUR   & 58.10\% & 41.65\% & 0.26\% & 48.44\% & 51.56\% \\
+    TWN   & 36.24\% & 63.28\% & 0.48\% & 33.28\% & 66.72\% \\
+    USA   & 43.40\% & 49.16\% & 7.44\% & 44.46\% & 55.54\% \\
+    VNM   & 56.70\% & 43.19\% & 0.11\% & 51.83\% & 48.17\% \\
+    ZAF   & 37.39\% & 62.48\% & 0.13\% & 33.43\% & 66.57\% \\
+     \bottomrule
+ \end{tabular}
+          \caption*{\textit{Notes}: Data aggregated across industries and averaged over the years 1995, 2000, 2005, 2008, and 2011.}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decompostion based GVC indicators by industry - Values.}
+           \hspace*{-1.9cm}
+    \begin{tabular}{llrrrrrrr}
+    \toprule
+    \textit{ISIC Rev.3} & \textit{Industry code} & \textit{dva\_fin} & \textit{dva\_int} & \textit{rdv} & \textit{ddc} & \textit{fva\_fin} & \textit{fva\_int} & \textit{fdc} \\
+    \midrule
+    01T05 & AGR   & 62481.0 & 100868.1 & 2115.3 & 343.9 & 10351.6 & 12881.9 & 4044.1 \\
+    10T14 & MIN   & 28663.9 & 551833.4 & 7701.4 & 1196.9 & 2706.7 & 27574.0 & 15419.6 \\
+    15T16 & FOD   & 217380.7 & 112131.5 & 1969.5 & 439.1 & 55417.2 & 22849.1 & 6737.7 \\
+    17T19 & TEX   & 182795.7 & 82260.9 & 2860.5 & 643.0 & 57340.9 & 16597.0 & 10460.5 \\
+    20    & WOD   & 5506.6 & 48095.0 & 838.1 & 231.9 & 1582.3 & 10092.3 & 2724.2 \\
+    21T22 & PAP   & 39149.3 & 124640.9 & 5567.4 & 929.7 & 9616.6 & 21484.1 & 9351.7 \\
+    23    & PET   & 71397.0 & 125944.9 & 3749.5 & 982.0 & 58077.0 & 72023.2 & 38835.1 \\
+    24    & CHM   & 152653.4 & 393982.5 & 14883.4 & 3836.4 & 60492.1 & 103699.7 & 63490.6 \\
+    25    & RBP   & 23880.2 & 118592.3 & 5489.2 & 1285.9 & 9388.0 & 31630.4 & 17666.7 \\
+    26    & NMM   & 8175.5 & 62563.7 & 1230.1 & 337.5 & 2473.3 & 15414.6 & 3627.4 \\
+    27    & MET   & 12027.9 & 321478.5 & 11770.0 & 4092.9 & 6151.6 & 91145.9 & 74661.6 \\
+    28    & FBM   & 30340.9 & 127922.1 & 5296.4 & 1426.4 & 11434.0 & 34111.7 & 17691.0 \\
+    29    & MEQ   & 247136.0 & 258439.5 & 9139.6 & 3029.1 & 86589.5 & 62415.1 & 34220.0 \\
+    30,32,33 & CEQ   & 298464.5 & 350246.2 & 19216.4 & 8096.8 & 187442.2 & 121610.8 & 110486.4 \\
+    31    & ELQ   & 76709.1 & 122727.7 & 5793.8 & 1804.7 & 34214.0 & 35807.7 & 22098.7 \\
+    34    & MTR   & 284865.8 & 175984.5 & 15862.9 & 4447.8 & 149120.7 & 58978.7 & 44806.7 \\
+    35    & TRQ   & 112550.6 & 95108.4 & 3290.0 & 1372.1 & 47980.9 & 26260.1 & 15712.1 \\
+    36T37 & OTM   & 111848.6 & 59867.6 & 2444.9 & 513.2 & 34983.9 & 13405.3 & 6331.7 \\
+    50T52 & WRT   & 481530.6 & 594617.3 & 19517.6 & 2995.5 & 48716.4 & 40975.0 & 24521.5 \\
+    60T63 & TRN   & 318900.5 & 383291.7 & 10429.0 & 1959.6 & 66939.9 & 55554.2 & 36713.7 \\
+    64    & PTL   & 22411.4 & 38783.1 & 1126.0 & 190.3 & 3529.5 & 4177.5 & 2073.3 \\
+    65T67 & FIN   & 92501.1 & 179967.9 & 5127.0 & 603.5 & 15619.8 & 21882.3 & 9305.2 \\
+    71    & RMQ   & 17940.9 & 41511.9 & 1630.4 & 174.7 & 2128.3 & 3555.2 & 1755.1 \\
+    72    & ITS   & 30247.3 & 54073.0 & 1216.1 & 215.0 & 6225.9 & 7395.6 & 3381.0 \\
+    73T74 & BZS   & 24828.2 & 327323.0 & 9948.7 & 1491.2 & 3242.1 & 27352.3 & 15696.8 \\
+    \bottomrule
+   \end{tabular}
+         \caption*{\textit{Notes}: Data aggregated across countries and averaged over the years 1995, 2000, 2005, 2008, and 2011. Values in current USD millions. $\Delta$ gives the growth of the variable in shares.}
+\end{table}
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decompostion based GVC indicators by industry - Share of gross exports.}
+           \hspace*{-1.5cm}
+    \begin{tabular}{llrrrrrrr}
+    \toprule
+    \textit{ISIC Rev.3} & \textit{Industry code} & \textit{dva\_fin} & \textit{dva\_int} & \textit{rdv} & \textit{ddc} & \textit{fva\_fin} & \textit{fva\_int} & \textit{fdc} \\
+    \midrule
+     01T05 & AGR   & 32.57\% & 52.68\% & 1.14\% & 0.17\% & 5.08\% & 6.41\% & 1.95\% \\
+    10T14 & MIN   & 4.24\% & 87.19\% & 1.12\% & 0.18\% & 0.41\% & 4.56\% & 2.31\% \\
+    15T16 & FOD   & 53.12\% & 26.60\% & 0.48\% & 0.10\% & 12.95\% & 5.23\% & 1.51\% \\
+    17T19 & TEX   & 51.55\% & 23.77\% & 0.85\% & 0.18\% & 15.97\% & 4.75\% & 2.93\% \\
+    20    & WOD   & 7.91\% & 70.06\% & 1.23\% & 0.33\% & 2.22\% & 14.43\% & 3.82\% \\
+    21T22 & PAP   & 18.61\% & 59.49\% & 2.69\% & 0.44\% & 4.45\% & 10.02\% & 4.30\% \\
+    23    & PET   & 21.04\% & 35.40\% & 1.03\% & 0.25\% & 14.92\% & 18.04\% & 9.31\% \\
+    24    & CHM   & 19.84\% & 50.89\% & 2.00\% & 0.46\% & 7.20\% & 12.29\% & 7.31\% \\
+    25    & RBP   & 11.90\% & 57.72\% & 2.89\% & 0.60\% & 4.38\% & 14.56\% & 7.96\% \\
+    26    & NMM   & 8.95\% & 67.27\% & 1.37\% & 0.34\% & 2.57\% & 15.87\% & 3.62\% \\
+    27    & MET   & 2.26\% & 63.56\% & 2.48\% & 0.77\% & 1.06\% & 16.62\% & 13.26\% \\
+    28    & FBM   & 14.00\% & 56.59\% & 2.50\% & 0.60\% & 4.88\% & 14.24\% & 7.19\% \\
+    29    & MEQ   & 36.50\% & 36.85\% & 1.36\% & 0.41\% & 11.94\% & 8.47\% & 4.47\% \\
+    30,32,33 & CEQ   & 28.22\% & 32.44\% & 1.83\% & 0.70\% & 16.55\% & 10.78\% & 9.48\% \\
+    31    & ELQ   & 26.04\% & 41.59\% & 2.14\% & 0.59\% & 10.94\% & 11.68\% & 7.02\% \\
+    34    & MTR   & 39.70\% & 23.94\% & 2.47\% & 0.62\% & 19.72\% & 7.77\% & 5.79\% \\
+    35    & TRQ   & 37.96\% & 31.94\% & 1.18\% & 0.45\% & 15.21\% & 8.32\% & 4.94\% \\
+    36T37 & OTM   & 50.35\% & 25.19\% & 0.98\% & 0.20\% & 15.23\% & 5.61\% & 2.44\% \\
+    50T52 & WRT   & 40.62\% & 48.50\% & 1.67\% & 0.24\% & 3.91\% & 3.20\% & 1.86\% \\
+    60T63 & TRN   & 37.67\% & 43.72\% & 1.24\% & 0.22\% & 7.35\% & 5.97\% & 3.84\% \\
+    64    & PTL   & 31.51\% & 54.25\% & 1.59\% & 0.25\% & 4.49\% & 5.41\% & 2.50\% \\
+    65T67 & FIN   & 28.62\% & 56.44\% & 1.66\% & 0.18\% & 4.38\% & 6.23\% & 2.50\% \\
+    71    & RMQ   & 29.09\% & 58.89\% & 2.30\% & 0.24\% & 2.99\% & 4.42\% & 2.07\% \\
+    72    & ITS   & 31.05\% & 52.68\% & 1.30\% & 0.20\% & 5.53\% & 6.50\% & 2.73\% \\
+    73T74 & BZS   & 6.18\% & 80.35\% & 2.48\% & 0.35\% & 0.76\% & 6.39\% & 3.49\% \\
+   \bottomrule
+   \end{tabular}
+         \caption*{\textit{Notes}: Data aggregated across countries and averaged over the years 1995, 2000, 2005, 2008, and 2011.}
+\end{table}
+
+
+\begin{table}[h]\small
+  \centering
+       \caption{WWZ-decompostion based GVC indicators by industry - Share of \emph{fvax}/domestic value added in exports.}
+    \begin{tabular}{llrrrrr}
+    \toprule
+    \textit{ISIC Rev.3} & \textit{Industry code} & \textit{dva\_fin} & \textit{dva\_inter} & \textit{rdv} & \textit{fva\_fin} & \textit{fva\_inter} \\
+    \midrule
+     01T05 & AGR   & 37.64\% & 61.05\% & 1.31\% & 37.72\% & 62.28\% \\
+    10T14 & MIN   & 4.57\% & 94.22\% & 1.20\% & 5.67\% & 94.33\% \\
+    15T16 & FOD   & 66.12\% & 33.29\% & 0.59\% & 65.88\% & 34.12\% \\
+    17T19 & TEX   & 67.54\% & 31.34\% & 1.12\% & 67.47\% & 32.53\% \\
+    20    & WOD   & 9.96\% & 88.49\% & 1.55\% & 10.78\% & 89.22\% \\
+    21T22 & PAP   & 22.92\% & 73.77\% & 3.31\% & 23.67\% & 76.33\% \\
+    23    & PET   & 36.35\% & 61.85\% & 1.80\% & 35.40\% & 64.60\% \\
+    24    & CHM   & 27.10\% & 70.18\% & 2.72\% & 26.95\% & 73.05\% \\
+    25    & RBP   & 16.24\% & 79.84\% & 3.92\% & 16.37\% & 83.63\% \\
+    26    & NMM   & 11.47\% & 86.78\% & 1.75\% & 11.69\% & 88.31\% \\
+    27    & MET   & 3.28\% & 93.15\% & 3.57\% & 3.39\% & 96.61\% \\
+    28    & FBM   & 18.93\% & 77.69\% & 3.37\% & 18.71\% & 81.29\% \\
+    29    & MEQ   & 48.51\% & 49.68\% & 1.81\% & 48.24\% & 51.76\% \\
+    30,32,33 & CEQ   & 44.54\% & 52.56\% & 2.90\% & 45.09\% & 54.91\% \\
+    31    & ELQ   & 36.99\% & 59.99\% & 3.03\% & 36.90\% & 63.10\% \\
+    34    & MTR   & 59.44\% & 36.90\% & 3.65\% & 59.37\% & 40.63\% \\
+    35    & TRQ   & 53.05\% & 45.30\% & 1.65\% & 53.46\% & 46.54\% \\
+    36T37 & OTM   & 65.56\% & 33.16\% & 1.28\% & 65.62\% & 34.38\% \\
+    50T52 & WRT   & 44.60\% & 53.57\% & 1.83\% & 43.86\% & 56.14\% \\
+    60T63 & TRN   & 45.39\% & 53.12\% & 1.49\% & 43.32\% & 56.68\% \\
+    64    & PTL   & 35.96\% & 62.23\% & 1.81\% & 36.40\% & 63.60\% \\
+    65T67 & FIN   & 32.95\% & 65.14\% & 1.91\% & 33.42\% & 66.58\% \\
+    71    & RMQ   & 31.98\% & 65.47\% & 2.55\% & 33.46\% & 66.54\% \\
+    72    & ITS   & 36.36\% & 62.11\% & 1.52\% & 37.78\% & 62.22\% \\
+    73T74 & BZS   & 6.91\% & 90.32\% & 2.77\% & 7.15\% & 92.85\% \\
+  \bottomrule
+   \end{tabular}
+         \caption*{\textit{Notes}: Data aggregated across countries and averaged over the years 1995, 2000, 2005, 2008, and 2011.}
+\end{table}
+
+\end{document}
