@@ -27,6 +27,9 @@
 \end_preamble
 \options article
 \use_default_options false
+\begin_modules
+knitr
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -47,7 +50,7 @@
 \graphics default
 \default_output_format pdf2
 \output_sync 0
-\bibtex_command biber
+\bibtex_command bibtex8
 \index_command default
 \paperfontsize default
 \spacing single
@@ -64,9 +67,9 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
-\biblio_style chicago
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -300,6 +303,303 @@ Global Value Chains (GVCs) refer to the quickly expanding internationalization
  The decompr package enables researchers with little background in matrix
  algebra and linear programming to easily derive standard GVC indicators
  for statistical analysis.
+\end_layout
+
+\begin_layout Standard
+The package uses Inter-Country Input-Output tables (ICIOs), such as those
+ published by the OECD and WTO (TiVA)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+CITE!
+\end_layout
+
+\end_inset
+
+, the World Input Output Database 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "timmer2012world"
+literal "true"
+
+\end_inset
+
+, or national statistics bureaus, as input.
+ These tables state supply and demand relationships in gross terms between
+ industries within and across countries.
+ For instance, let us look at the example of the leather used in German
+ manufactured car seats.
+ The ICIOs quantify the value of inputs that the Turkish leather and textiles
+ industry supplies to the German transport equipment industry.
+ The problem of these tables measuring gross trade flows, is that they do
+ not reveal how much of the value was added in the supplying industry, and
+ how much of the value was added in previous stages of production, performed
+ by other industries or even countries.
+\end_layout
+
+\begin_layout Standard
+The Leontief decomposition of gross trade flows solves this problem by reallocat
+ing the value of intermediate goods used by industries to the original producers.
+ In our example, the use of Argentinian agricultural produce (raw hides)
+ is subtracted from the Turkish leather industry and added to the Argentinian
+ agricultural industry.
+ The Wang-Wei-Zhu (henceforth WWZ) decomposition goes a step further by
+ not only revealing the source of the value added, but also breaking down
+ exports into different categories, according to final usage and destination.
+ It implements the theoretical work of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wang2014quantifying"
+literal "true"
+
+\end_inset
+
+.
+ The main categories in this framework are listed below.
+\end_layout
+
+\begin_layout Enumerate
+domestic value added in exports 
+\end_layout
+
+\begin_layout Enumerate
+foreign value added in exports 
+\end_layout
+
+\begin_layout Enumerate
+pure double counted terms 
+\end_layout
+
+\begin_layout Subsection
+Package Details
+\end_layout
+
+\begin_layout Standard
+The decompr package implements the algorithms for these decompositions as
+ R procedures and provides example data sets.
+ We start by loading the package and listing the functions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+library, message=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# load package
+\end_layout
+
+\begin_layout Plain Layout
+
+library(decompr)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# list functions in package
+\end_layout
+
+\begin_layout Plain Layout
+
+ls('package:decompr')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R procedures are implemented as functions, the included functions are
+ listed below.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+load_tables_vectors()
+\end_layout
+
+\end_inset
+
+; transforms the input objects to an object used for the decompositions
+ (class: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+decompr
+\end_layout
+
+\end_inset
+
+) 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+leontief()
+\end_layout
+
+\end_inset
+
+; takes a decompr object and applies the Leontief decomposition 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+wwz()
+\end_layout
+
+\end_inset
+
+; takes a decompr object and applies the Wang-Wei-Zhu decomposition 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+decomp()
+\end_layout
+
+\end_inset
+
+; a wrapper function which integrates the use of load_tables_vectors with
+ the various decompositions, using an argument 
+\shape italic
+method
+\shape default
+ to specify the desired decomposition (default leontief) 
+\end_layout
+
+\begin_layout Standard
+For legacy purposes, one depracated function is also available under their
+ original names (
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+load_tables()
+\end_layout
+
+\end_inset
+
+).
+ In addition to this, one example data sets is included.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+
+\shape italic
+\emph on
+leather
+\end_layout
+
+\end_inset
+
+; a fictional three-country, three-sector data set 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+load using: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+data(leather)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Trade flow analysis often involves studying the development of a certain
+ variable (set) over time, thus taking the panel form.
+ However, at the decomposition level, the panel dimension is essentially
+ a repeated cross-section.
+ Therefore, as a design decision, the time dimension is not implemented
+ in the package itself.
+ Instead, we provide examples of how this repetition can be implemented
+ using a 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+for-loop
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:data"
+
+\end_inset
+
+ introduces the data as it is used by the package as well as two example
+ data sets, after which 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:leontief"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:wwz"
+
+\end_inset
+
+ summarise the theoretical derivations for the two decompositions, and show
+ how these can be performed in R using decompr.
+ We conclude with a discussion of potential uses and further developments
+ of GVC research.
 \end_layout
 
 \begin_layout Section*
