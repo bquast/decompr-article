@@ -137,6 +137,17 @@ And
 \end_inset
 
 Victor Kummritz
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The views expressed in this paper are those of the authors and do not necessaril
+y represent the World Trade Organisation
+\end_layout
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -6094,8 +6105,17 @@ Theoretical derivation
 The derivation of the Wang-Wei-Zhu decomposition is significantly more technical
  than the source decomposition since it splits gross exports up more finely.
  This is why we present here only the final equation for a two country one
- industry model (equation 22 in WWZ) and refer the interested reader to
- the original paper by 
+ industry model (equation 22 in WWZ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+update?
+\end_layout
+
+\end_inset
+
+) and refer the interested reader to the original paper by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wang2014quantifying"
@@ -6638,25 +6658,11 @@ status open
 \begin_inset Float table
 wide false
 sideways true
-status collapsed
+status open
 
 \begin_layout Plain Layout
-[htbp]
+
 \size scriptsize
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
- 
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -14047,6 +14053,17 @@ Since GVCs constitute a fairly new field of research, there are many ways
  advantage while high-income countries might look for an additional push
  for their stagnating post-crisis economies.
  We hope that decompr can play a part in this field and promote it.
+\end_layout
+
+\begin_layout Subsection*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+We would like to thank Jean-Louis Arcand, Richard Baldwin, and Nicolas Berman
+ for their support and advice.
+ This paper and the decompr package are produced as part of projects supported
+ by the Swiss National Science Foundation.
 \end_layout
 
 \begin_layout Standard
